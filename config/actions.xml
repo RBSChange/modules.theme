@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+	<action name="createFolder">
+		<parameter name="listWidget" />
+		<body><![CDATA[
+			this.createDocumentEditor('modules_theme_folder', listWidget.getSelectedItems()[0].id);
+		]]></body>
+	</action>
+	
+	<action name="importTheme">
+		<parameter name="listWidget" />
+		<body><![CDATA[
+			try
+			{
+				this.getController().openModalDialog(this, 'ImportTheme', {folderId: listWidget.getSelectedItems()[0].id, module: this});
+			}
+			catch (e)
+			{
+				wCore.error('importTheme', [], e);
+			}
+		]]></body>
+	</action>
+	
+	<action name="uninstallTheme">
+		<parameter name="listWidget" />
+		<body><![CDATA[
+			this.executeJSON('UninstallTheme', 
+				{cmpref: listWidget.getSelectedItems()[0].id, lang: this.getContextLang(null)});
+		]]></body>
+	</action>
+</actions>

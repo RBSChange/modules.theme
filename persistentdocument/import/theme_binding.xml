@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+  <binding fileName="modules/generic/persistentdocument/import/generic_binding.xml"/>
+  <binding name="theme" className="theme_ThemeScriptDocumentElement"/>
+  <binding name="pagetemplate" className="theme_PagetemplateScriptDocumentElement"/>
+  <binding name="css" className="theme_CssScriptDocumentElement"/>
+  <binding name="image" className="theme_ImageScriptDocumentElement"/>
+  <binding name="javascript" className="theme_JavascriptScriptDocumentElement"/>
+</script>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+  <entity id="document-name">
+    <locale lang="fr">thème</locale>
+    <locale lang="en">theme</locale>
+  </entity>
+  <entity id="label">
+    <locale lang="fr">libellé</locale>
+    <locale lang="en">label</locale>
+  </entity>
+  <entity id="label-help">
+    <locale lang="fr">libellé</locale>
+    <locale lang="en">label</locale>
+  </entity>
+  <entity id="description">
+    <locale lang="fr">déscription</locale>
+    <locale lang="en">description</locale>
+  </entity>
+  <entity id="description-help">
+    <locale lang="fr">déscription</locale>
+    <locale lang="en">description</locale>
+  </entity>
+  
+   <entity id="resume.codename">
+    <locale lang="fr">code</locale>
+    <locale lang="en">code</locale>
+  </entity> 
+  
+    <entity id="resume.nbtemplate">
+    <locale lang="fr">Nombre de gabarit</locale>
+  </entity> 
+</localization>

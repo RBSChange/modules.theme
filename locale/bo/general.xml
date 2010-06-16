@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localization>
+	<entity id="module-name">
+		<locale lang="fr">theme</locale>
+		<locale lang="en">theme</locale>
+	</entity>
+	<entity id="tree-root-name">
+		<locale lang="fr">theme</locale>
+		<locale lang="en">theme</locale>
+	</entity>
+	<entity id="system-folder-name">
+		<locale lang="fr">theme</locale>
+		<locale lang="en">theme</locale>
+	</entity>
+	
+	<entity id="uninstall-succes">
+		<locale lang="fr">le thème {codeName} à été desinstallé avec succés.</locale>
+	</entity>
+	
+	<entity id="import-title">
+		<locale lang="fr">installer un thème</locale>
+		<locale lang="en">install theme</locale>
+	</entity>	
+	<entity id="import-file">
+		<locale lang="fr">sélectionner votre fichier zip à installer</locale>
+		<locale lang="en">select your zip file to install</locale>
+	</entity>
+	<entity id="import-import">
+		<locale lang="fr">installer !</locale>
+		<locale lang="en">install !</locale>
+	</entity>
+	<entity id="importing">
+		<locale lang="fr">installation en cours...</locale>
+	</entity>	
+
+	<entity id="import-succes">
+		<locale lang="fr">le thème {label} ({codename}) à été installé avec succés.</locale>
+	</entity>
+</localization>

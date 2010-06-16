@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/list/persistentdocument/import/list_binding.xml" />
+	<binding fileName="modules/theme/persistentdocument/import/theme_binding.xml" />
+		
+	<systemfolder module="list" relatedmodule="theme">
+		<staticlist listid="modules_theme/doctype"
+			label="Doctype des pages">
+				<staticitem label="XHMTL 1.0 Transitional" value="XHMTL-1.0-Transitional"/>
+				<staticitem label="XHTML 1.0 Strict" value="XHTML-1.0-Strict"/>
+		</staticlist>
+	</systemfolder>
+</script>
