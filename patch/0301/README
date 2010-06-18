@@ -1,24 +1,3 @@
 Version: 3.0.3
 
-Explain here the function of your patch.
-
-removed function:
-
-website_TemplateService::getInstance()->getContent
-website_TemplateService::getInstance()->getChangeContentIds
-website_PageRessourceService::getInstance()->getTemplateDefinitionsByParentId
-
-
-website_TemplateService::getInstance()->getStaticTemplates
-website_TemplateService::getInstance()->isDynamicTemplate
-
-website_TemplateService::getInstance()->getDynamicTemplates
-
-website_TemplateService::getInstance()->getDynamicTemplate
-website_TemplateService::getInstance()->initializeEmptyFreeBlocks
-
-
-website_PageRessourceService::getInstance():
-getGlobalScreenStylesheetInLine
-getGlobalScreenStylesheetInclusion
-getGlobalPrintStylesheetInclusion
+Installation du theme project

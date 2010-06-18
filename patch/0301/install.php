@@ -12,13 +12,13 @@ class theme_patch_0301 extends patch_BasePatch
 	 */
 	public function execute()
 	{
-		//$this->clearAllDocuments();
-		
 		if (!PatchService::getInstance()->isInstalled('website', '0315'))
 		{
 			throw new Exception('Execute: change.php apply-patch website 0315 before this patch');
 		}
 
+		$this->createThemeTables();
+		
 		$installPath = f_util_FileUtils::buildWebeditPath('themes', $this->themecodename, 'install.xml');
 		if (!file_exists($installPath))
 		{
@@ -73,6 +73,20 @@ class theme_patch_0301 extends patch_BasePatch
 	private function clearAllDocuments()
 	{
 		theme_ThemeService::getInstance()->createQuery()->delete();		
+	}
+	
+	
+	private function createThemeTables()
+	{
+		$sqlPath = f_util_FileUtils::buildChangeBuildPath('modules', 'theme', 'dataobject');
+		foreach (f_util_FileUtils::getDirFiles($sqlPath) as $script)
+		{
+			if (f_util_StringUtils::endsWith($script, '.mysql.sql'))
+			{
+				$sql = file_get_contents($script);
+				$this->executeSQLQuery($sql);
+			}
+		}
 	}
 
 	/**

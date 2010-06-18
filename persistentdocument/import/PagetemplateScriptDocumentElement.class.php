@@ -30,4 +30,34 @@ class theme_PagetemplateScriptDocumentElement extends import_ScriptDocumentEleme
 	{
 		return null;
 	}
+	
+
+	/**
+	 * @return theme_persistentdocument_theme
+	 */
+	private function getTheme()
+	{
+		$doc = $this->getParentDocument();
+		if ($doc && $doc->getPersistentDocument() instanceof theme_persistentdocument_theme)
+		{
+			return $doc->getPersistentDocument();
+		}
+		return null;
+	}
+	
+	/**
+	 * @see import_ScriptDocumentElement::getDocumentProperties()
+	 *
+	 * @return array
+	 */
+	protected function getDocumentProperties()
+	{
+		$properties = parent::getDocumentProperties();
+		$theme = $this->getTheme();
+		if ($theme && !isset($properties['label']))
+		{
+			$properties['label'] = '&themes.'.$theme->getCodename().'.templates.'.ucfirst($properties['byCodename']).';';
+		}
+		return $properties;
+	}	
 }

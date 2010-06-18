@@ -384,26 +384,4 @@ class theme_patch_0300 extends patch_BasePatch
 		$themeDoc->setAttribute('description', $this->themecodename);
 		return $themeDoc;
 	}
-	
-	//DEBUGING FUNCTION
-	
-
-	private function dropThemeTables()
-	{
-		$this->executeSQLQuery("DROP TABLE `m_theme_doc_css`, `m_theme_doc_image`, `m_theme_doc_javascript`, `m_theme_doc_pagetemplate`, `m_theme_doc_theme`");
-	}
-	
-	private function createThemeTables()
-	{
-		$sqlPath = f_util_FileUtils::buildChangeBuildPath('modules', 'theme', 'dataobject');
-		foreach (f_util_FileUtils::getDirFiles($sqlPath) as $script)
-		{
-			if (f_util_StringUtils::endsWith($script, '.mysql.sql'))
-			{
-				$sql = file_get_contents($script);
-				$this->executeSQLQuery($sql);
-			}
-		}
-	}
-
 }
