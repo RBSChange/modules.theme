@@ -54,9 +54,22 @@ class theme_PagetemplateScriptDocumentElement extends import_ScriptDocumentEleme
 	{
 		$properties = parent::getDocumentProperties();
 		$theme = $this->getTheme();
-		if ($theme && !isset($properties['label']))
+		if (isset($properties['byCodename']))
 		{
-			$properties['label'] = '&themes.'.$theme->getCodename().'.templates.'.ucfirst($properties['byCodename']).';';
+			$codename = $properties['byCodename'];
+		}
+		else
+		{
+			$codename = $this->getPersistentDocument()->getCodename();
+			if ($codename)
+			{
+				list(, $codename) = explode('/', $codename);
+			}
+		}
+		
+		if ($theme && !isset($properties['label']) && $codename)
+		{
+			$properties['label'] = '&themes.'.$theme->getCodename().'.templates.'.ucfirst($codename).';';
 		}
 		return $properties;
 	}	
