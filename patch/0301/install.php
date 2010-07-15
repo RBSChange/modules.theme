@@ -32,9 +32,12 @@ class theme_patch_0301 extends patch_BasePatch
 			$this->updatePageTemplateName('webfactory');			
 			$this->applyPageTemplateToAllWebsite('webfactory');
 		}		
-		theme_ModuleService::getInstance()->installTheme($this->themecodename);
-		$this->updatePageTemplateName($this->themecodename);
-		$this->applyPageTemplateToAllWebsite($this->themecodename);
+		else
+		{
+			theme_ModuleService::getInstance()->installTheme($this->themecodename);
+			$this->updatePageTemplateName($this->themecodename);
+			$this->applyPageTemplateToAllWebsite($this->themecodename);
+		}
 	}
 
 	private function applyPageTemplateToAllWebsite($themecodename)
