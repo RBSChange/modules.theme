@@ -33,16 +33,15 @@ class commands_theme_CompileTheme extends commands_AbstractChangeCommand
 	 * @return String[]
 	 */
 	function getParameters($completeParamCount, $params, $options, $current)
-	{
-		$components = array();
-		$themes = glob("themes/*", GLOB_ONLYDIR);
-		if (!is_array($themes))
+	{	
+		$components = array();		
+		$themes = glob("themes/*/install.xml");
+		if (is_array($themes))
 		{
-			return $components;
-		}
-		foreach ($themes as $theme)
-		{
-			$components[] = basename($theme);
+			foreach ($themes as $theme)
+			{
+				$components[] = basename(dirname($theme));
+			}
 		}
 		return array_diff($components, $params);
 	}

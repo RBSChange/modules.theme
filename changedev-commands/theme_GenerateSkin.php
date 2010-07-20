@@ -34,17 +34,19 @@ class commands_theme_GenerateSkin extends commands_AbstractChangeCommand
 	 */
 	function getParameters($completeParamCount, $params, $options, $current)
 	{
-		$components = array();
-		$themes = glob("themes/*", GLOB_ONLYDIR);
-		if (!is_array($themes))
+		if ($completeParamCount == 0)
 		{
+			$components = array();		
+			$themes = glob("themes/*/install.xml");
+			if (is_array($themes))
+			{
+				foreach ($themes as $theme)
+				{
+					$components[] = basename(dirname($theme));
+				}
+			}
 			return $components;
 		}
-		foreach ($themes as $theme)
-		{
-			$components[] = basename($theme);
-		}
-		return $components;
 	}
 	
 	/**
