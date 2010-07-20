@@ -64,10 +64,15 @@ class theme_patch_0301 extends patch_BasePatch
 		
 	private function updatePageTemplateName($themecodename)
 	{
+		$this->log("Update old dynamic template ref..");
+		$sql = "UPDATE m_website_doc_page SET template = (SELECT template FROM m_website_doc_template WHERE document_id = REPLACE(m_website_doc_page.template, 'cmpref::', '')) WHERE m_website_doc_page.template like 'cmpref::%'";
+		$this->executeSQLQuery($sql);
+		
 		$this->log('Update template name for all pages');
 		$sql = "UPDATE `m_website_doc_page` SET `template` =  CONCAT('". $themecodename ."/', `template`) WHERE `template` not like '". $themecodename ."/%'";
 		$this->executeSQLQuery($sql);
 		
+		$this->log('Update dynamic template name for all pages');
 		$sql = "UPDATE `m_website_doc_template` SET `template` =  CONCAT('". $themecodename ."/', `template`) WHERE `template` not like '". $themecodename ."/%'";
 		$this->executeSQLQuery($sql);
 	}
