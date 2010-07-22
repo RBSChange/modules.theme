@@ -53,16 +53,10 @@ class commands_theme_GenerateSkin extends commands_AbstractChangeCommand
 	 * @param String[] $params
 	 * @param array<String, String> $options where the option array key is the option name, the potential option value or true
 	 */
-//	protected function validateArgs($params, $options)
-//	{
-//	}
-
-	/**
-	 * @return String[]
-	 */
-//	function getOptions()
-//	{
-//	}
+	protected function validateArgs($params, $options)
+	{
+		return count($params) == 1;
+	}
 
 	/**
 	 * @param String[] $params
@@ -74,16 +68,14 @@ class commands_theme_GenerateSkin extends commands_AbstractChangeCommand
 		$this->message("== Generate Skin ==");
 
 		$this->loadFramework();
-		if (f_util_ArrayUtils::isNotEmpty($params) && count($params) == 1)
+		$codeName = $params[0];
+		$theme = theme_ThemeService::getInstance()->getByCodeName($codeName);
+		if ($theme !== null)
 		{
-			$theme = theme_ThemeService::getInstance()->getByCodeName($params[0]);
-			if ($theme)
-			{
-				theme_SkinGeneratorService::getInstance()->updateSkinVars($theme);
-			}
+			theme_SkinGeneratorService::getInstance()->updateSkinVars($theme);
 			$this->getParent()->executeCommand('clear-webapp-cache');
-			return $this->quitOk('Skin Generated  successfully.');
+			return $this->quitOk('Skin Generated successfully.');
 		}
-		return $this->quitError('no theme defined');
+		return $this->quitError("No theme name $codeName");
 	}
 }
