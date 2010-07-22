@@ -239,10 +239,10 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 				$pageTemplate = $this->getNewDocumentInstance();		
 				$pageTemplate->setCodename($codeName);
 				$pageTemplate->setLabel('&themes.'.$theme->getCodename() .'.templates.' . ucfirst($key).';');
-				$pageTemplate->setProjectpath('themes/' . $theme->getCodename() . '/templates/' . $baseName);
-				$pageTemplate->save();
 				$theme->addPagetemplate($pageTemplate);
 			}
+			$pageTemplate->setProjectpath('themes/' . $theme->getCodename() . '/templates/' . $baseName);
+			$pageTemplate->save();
 			$pageTemplates[] = $pageTemplate->getId();
 		}
 		
