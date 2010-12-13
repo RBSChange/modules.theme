@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.theme.bo.errors" lcid="fr_FR">
+  <key id="import-file">Fichier manquant</key>
+  <key id="import-file-type">mauvais type de fichier (.zip attendue)</key>
+  <key id="import-error">Erreur durant l'import</key>
+  <key id="uninstall-error">Erreur durant la desinstallation</key>
+  <key id="uninstall-used-theme">Ce thème ne peux etre desinstallé, il est encore utilisé par {pageCount} page(s).</key>
+</i18n>

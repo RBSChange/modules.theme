@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.theme.bo.general" lcid="fr_FR">
+  <key id="module-name">theme</key>
+  <key id="tree-root-name">theme</key>
+  <key id="system-folder-name">theme</key>
+  <key id="uninstall-succes">le thème {codeName} à été desinstallé avec succés.</key>
+  <key id="import-title">installer un thème</key>
+  <key id="import-file">sélectionner votre fichier zip à installer</key>
+  <key id="import-import">installer !</key>
+  <key id="importing">installation en cours...</key>
+  <key id="import-succes">le thème {label} ({codename}) à été installé avec succés.</key>
+</i18n>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.theme.bo.general" lcid="en_GB">
+  <key id="module-name">theme</key>
+  <key id="tree-root-name">theme</key>
+  <key id="system-folder-name">theme</key>
+  <key id="import-title">install theme</key>
+  <key id="import-file">select your zip file to install</key>
+  <key id="import-import">install !</key>
+</i18n>

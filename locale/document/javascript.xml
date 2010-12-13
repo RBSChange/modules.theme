@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<localization>
-  <entity id="document-name">
-    <locale lang="fr">javascript</locale>
-    <locale lang="en">javascript</locale>
-  </entity>
-
-</localization>
