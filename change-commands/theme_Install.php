@@ -73,16 +73,35 @@ class commands_theme_Install extends commands_AbstractChangeCommand
 		$this->message("== Install ==");
 
 		$this->loadFramework();
+		$themes = array();
+		
 		if (f_util_ArrayUtils::isNotEmpty($params) && count($params) == 1)
 		{
-			$path = f_util_FileUtils::buildWebeditPath('themes', $params[0], 'install.xml');
-			if (is_readable($path))
+			$themes[] = $params[0];
+		}
+		else
+		{
+			foreach (glob("themes/*/install.xml") as $installXML)
 			{
-				theme_ModuleService::getInstance()->installTheme($params[0]);
-				$this->getParent()->executeCommand('clear-webapp-cache');
-				return $this->quitOk('Theme ' . $params[0] . ' installed successfully');
+				$themes[] = basename(dirname($installXML));
 			}
 		}
-		return $this->quitError('no theme defined');
+		
+		if (count($themes) == 0)
+		{
+			return $this->quitError('no theme defined');
+		}
+		
+		foreach ($themes as $theme)
+		{
+			$path = f_util_FileUtils::buildWebeditPath('themes', $theme, 'install.xml');
+			if (is_readable($path))
+			{
+				theme_ModuleService::getInstance()->installTheme($theme);
+				$this->okMessage("Theme $theme installed successfully");
+			}
+		}
+		$this->getParent()->executeCommand('clear-webapp-cache');
+		return $this->quitOk();
 	}
 }
