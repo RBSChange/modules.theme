@@ -306,4 +306,23 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 		$resume['properties']['requiredmodules'] = implode(', ', $infos['modules']);
 		return $resume;
 	}
+	
+	/**
+	 * @param theme_persistentdocument_pagetemplate $document
+	 * @param string $moduleName
+	 * @param string $treeType
+	 * @param array<string, string> $nodeAttributes
+	 */
+	public function addTreeAttributes($document, $moduleName, $treeType, &$nodeAttributes)
+	{
+		$thumbnail = $document->getThumbnail();
+		if ($thumbnail)
+		{		
+			$nodeAttributes['hasPreviewImage'] = true;
+			if ($treeType == 'wlist')
+			{
+	    		$nodeAttributes['thumbnailsrc'] = $thumbnail->getUISrc();
+			}
+		}
+	}
 }

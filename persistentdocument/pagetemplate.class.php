@@ -6,34 +6,7 @@
 class theme_persistentdocument_pagetemplate extends theme_persistentdocument_pagetemplatebase 
 {
 	/**
-	 * @param string $moduleName
-	 * @param string $treeType
-	 * @param array<string, string> $nodeAttributes
-	 */
-	protected function addTreeAttributes($moduleName, $treeType, &$nodeAttributes)
-	{
-		$thumbnail = $this->getThumbnail();
-		if ($thumbnail)
-		{		
-			$nodeAttributes['hasPreviewImage'] = true;
-			if ($treeType == 'wlist')
-			{
-	    		$nodeAttributes['thumbnailsrc'] = $thumbnail->getUISrc();
-			}
-		}
-	}
-	
-	/**
-	 * @param string $actionType
-	 * @param array $formProperties
-	 */
-	//	public function addFormProperties($propertiesNames, &$formProperties)
-	//	{	
-	//	}
-	
-	/**
 	 * @see f_persistentdocument_PersistentDocumentImpl::getTreeNodeLabel()
-	 *
 	 * @return String
 	 */
 	public function getLabel()
@@ -76,8 +49,6 @@ class theme_persistentdocument_pagetemplate extends theme_persistentdocument_pag
 		}
 		return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
 	}
-	
-	
 	
 	/**
 	 * @return string[]
