@@ -73,7 +73,7 @@ class commands_theme_CompileTheme extends commands_AbstractChangeCommand
 		$ts = theme_ModuleService::getInstance();
 		if (f_util_ArrayUtils::isEmpty($params))
 		{
-			$ts->regenerateAllThemes();
+			$ts->regenerateAllThemes(true);
 			$this->getParent()->executeCommand('clear-webapp-cache');
 			return $this->quitOk('All themes compiled successfully.');
 		}
@@ -87,7 +87,7 @@ class commands_theme_CompileTheme extends commands_AbstractChangeCommand
 			}
 			else
 			{
-				$ts->regenerateTheme($theme);
+				$ts->regenerateTheme($theme, null, true);
 				$this->message("$theme compiled");
 			}
 		}

@@ -120,9 +120,9 @@ class theme_ModuleService extends ModuleBaseService
 	}
 	
 	/**
-	 * @return void
+	 * @param boolean $doEcho
 	 */
-	public function regenerateAllThemes()
+	public function regenerateAllThemes($doEcho = false)
 	{
 		$path = f_util_FileUtils::buildWebeditPath('themes', '*');
 		$themes = glob($path, GLOB_ONLYDIR);
@@ -130,7 +130,7 @@ class theme_ModuleService extends ModuleBaseService
 		{
 			foreach ($themes as $codeName)
 			{
-				$this->regenerateTheme(basename($codeName));
+				$this->regenerateTheme(basename($codeName), null, $doEcho);
 			}
 		}
 	}
@@ -138,11 +138,15 @@ class theme_ModuleService extends ModuleBaseService
 	/**
 	 * @param string $codeName
 	 * @param generic_persistentdocument_folder $folder
+	 * @param boolean $doEcho
 	 * @return theme_persistentdocument_theme
 	 */
-	public function regenerateTheme($codeName, $folder = null)
+	public function regenerateTheme($codeName, $folder = null, $doEcho = false)
 	{
-		echo "Compile theme: $codeName\n";
+		if ($doEcho)
+		{
+			echo "Compile theme: $codeName\n";
+		}
 		$theme = theme_ThemeService::getInstance()->refreshByFiles($codeName, $folder);
 		if (!$theme)
 		{
@@ -157,15 +161,16 @@ class theme_ModuleService extends ModuleBaseService
 		$theme->save();
 		LocaleService::getInstance()->regenerateLocalesForTheme('themes_' . $codeName);
 		
-		$this->buildSkinVars($theme);
+		$this->buildSkinVars($theme, $doEcho);
 		
 		return $theme;
 	}
 	
 	/**
 	 * @param theme_persistentdocument_theme $theme
+	 * @param boolean $doEcho
 	 */
-	private function buildSkinVars($theme)
+	private function buildSkinVars($theme, $doEcho = false)
 	{
 		$skinVarsPath = FileResolver::getInstance()
 			->setPackageName('themes_' . $theme->getCodename())
@@ -183,7 +188,10 @@ class theme_ModuleService extends ModuleBaseService
 			}
 		}
 		$variablesPath = f_util_FileUtils::buildChangeBuildPath('themes', $theme->getCodename(), 'variables.ser');
-		echo "Update: $variablesPath\n";
+		if ($doEcho)
+		{
+			echo "Update: $variablesPath\n";
+		}
 		f_util_FileUtils::writeAndCreateContainer($variablesPath, serialize($skinVars), f_util_FileUtils::OVERRIDE);
 	}
 	
