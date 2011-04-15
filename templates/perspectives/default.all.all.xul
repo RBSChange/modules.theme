@@ -10,13 +10,9 @@
 	</splitter>
 	<deck flex="1" anonid="mainViewDeck">
 		<vbox flex="1" anonid="documentlistmode">
-			<cmoduletoolbar id="moduletoolbar"  allowthumbnail="true"/>
+			<cmoduletoolbar id="moduletoolbar" allowthumbnail="true"/>
 			<cmodulelist id="documentlist" flex="1"  allowthumbnail="true"/>			
 		</vbox>
 		<tal:block change:documenteditors="module theme" />				
 	</deck>
-	<splitter collapse="after">
-		<wsplitterbutton />
-	</splitter>
-	<cressourcesselector width="210" id="ressourcesSelector" collapsed="true" />
 </hbox>
