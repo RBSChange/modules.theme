@@ -52,7 +52,7 @@ class commands_theme_Init extends commands_AbstractChangeCommand
 		f_util_FileUtils::mkdir($themeDir);
 		f_util_FileUtils::mkdir($themeDir."/image");
 		f_util_FileUtils::mkdir($themeDir."/js");
-		f_util_FileUtils::mkdir($themeDir."/locale");
+		f_util_FileUtils::mkdir($themeDir."/i18n");
 		f_util_FileUtils::mkdir($themeDir."/modules");
 		f_util_FileUtils::mkdir($themeDir."/skin");
 		f_util_FileUtils::mkdir($themeDir."/style");
