@@ -325,4 +325,48 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 			}
 		}
 	}
+	
+	/**
+	 * @param theme_persistentdocument_pagetemplate $document
+	 * @param String[] $propertiesName
+	 * @param array $datas
+	 */
+	public function addFormProperties($document, $propertiesName, &$datas)
+	{
+		if (in_array('editableblocksJSON', $propertiesName))
+		{
+			$datas['propertyGrids'] = block_BlockService::getInstance()->getBlocksWithPropertyGrid();
+		}
+	}
+
+	/**
+	 * @param theme_persistentdocument_pagetemplate $document
+	 * @return array
+	 */
+	public function getEditableblocksInfos($document)
+	{
+		$result = array();
+		$doc = $document->getDOMContent();
+		$doc->registerNamespace('change', website_PageRessourceService::CHANGE_PAGE_EDITOR_NS);
+		foreach ($doc->find('//change:templateblock[@editname]') as $element) 
+		{
+			if ($element instanceof DOMElement) 
+			{
+				$name = $element->getAttribute('editname');
+				$result[$name] = array('type' => 'empty', 'parameters' => array());
+				if ($element->hasAttribute('type'))
+				{
+					$result[$name]['type'] = $element->getAttribute('type');
+					foreach ($element->attributes as $attrNode) 
+					{
+						if (strpos($attrNode->name, '__') === 0)
+						{
+							$result[$name]['parameters'][substr($attrNode->name, 2)] = $attrNode->value;
+						}
+					}
+				}
+			}
+		}
+		return $result;
+	}
 }

@@ -39,6 +39,42 @@ class theme_persistentdocument_pagetemplate extends theme_persistentdocument_pag
 	}
 	
 	/**
+	 * @return f_util_DOMDocument
+	 */
+	public function getReplacedDOMContent()
+	{
+		$DOMDocument = f_util_DOMUtils::fromPath($this->getContentFilePath());
+		$configuredBloc = $this->getConfiguredBlocks();
+		if (count($configuredBloc))
+		{
+			$resultXPath = new DOMXPath($DOMDocument);
+			$resultXPath->registerNameSpace('change', website_PageRessourceService::CHANGE_PAGE_EDITOR_NS);
+			foreach ($configuredBloc as $editname => $data) 
+			{
+				foreach ($resultXPath->query('//change:templateblock[@editname="'.$editname.'"]') as $element) 
+				{
+					if ($element instanceof DOMElement) 
+					{
+						if ($data['type'] === 'empty')
+						{
+							$element->removeAttribute('type');
+						}
+						else
+						{
+							$element->setAttribute('type', $data['type']);
+							foreach ($data['parameters'] as $name => $value)
+							{
+								$element->setAttribute('__' . $name, $value);
+							}
+						}
+					}
+				}
+			}
+		}
+		return $DOMDocument;
+	}	
+	
+	/**
 	 * @return string
 	 */
 	public function getDocTypeDeclaration()
@@ -118,5 +154,94 @@ class theme_persistentdocument_pagetemplate extends theme_persistentdocument_pag
 			}
 		}
 		return $array;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getEditableblocksJSON()
+	{
+		$result = array();
+		$infos = $this->getDocumentService()->getEditableblocksInfos($this);
+		$config = $this->getConfiguredBlocks();
+		foreach ($infos as $name => $data) 
+		{
+			$row = array('editname' => $name, 'ot' => $data['type'], 'op' => $data['parameters']);
+			$row['ct'] = $row['ot'];
+			$row['cp'] = $row['op'];
+			if (isset($config[$name]))
+			{
+				if (isset($config[$name]['type'])) { $row['ct'] = $config[$name]['type'];}
+				if (isset($config[$name]['parameters'])) { $row['cp'] = $config[$name]['parameters'];}
+			}
+			$result[] = $row;
+		}
+		return JsonService::getInstance()->encode($result);
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function setEditableblocksJSON($json)
+	{
+		$config = array();
+		if (f_util_StringUtils::isNotEmpty($json))
+		{	
+			$infos = JsonService::getInstance()->decode($json);
+			$default = $this->getDocumentService()->getEditableblocksInfos($this);
+			foreach ($infos as $row) 
+			{
+				$editName = $row['editname'];
+				if (!isset($default[$editName])) {continue;}
+				$data = $default[$editName];
+					
+				$type = f_util_StringUtils::isEmpty($row['ct']) ? 'empty' : trim($row['ct']);
+				$parameters = f_util_ArrayUtils::isEmpty($row['cp']) ? array() : $row['cp']; 
+				$add = $data['type'] != $type;
+				if (!$add)
+				{
+					foreach ($parameters as $name => $value) 
+					{
+						if (!isset($data['parameters'][$name]) || $data['parameters'][$name] != $value)
+						{
+							$add = true;
+							break;
+						}
+					}	
+				}
+				if ($add)
+				{
+					$config[$editName] = array('type' => $type, 'parameters' => $parameters);
+				}
+			}
+		}
+		$this->setConfiguredBlocks($config);
+	}
+	
+	/**
+	 * @return array
+	 */
+	public function getConfiguredBlocks()
+	{
+		if (f_util_StringUtils::isEmpty($this->getEditableblocks()))
+		{
+			return array();
+		}
+		else
+		{
+			return unserialize($this->getEditableblocks());
+		}
+	}
+	
+	public function setConfiguredBlocks($infos)
+	{
+		if (f_util_ArrayUtils::isNotEmpty($infos))
+		{
+			$this->setEditableblocks(serialize($infos));
+		}
+		else
+		{
+			$this->setEditableblocks(null);
+		}
 	}
 }

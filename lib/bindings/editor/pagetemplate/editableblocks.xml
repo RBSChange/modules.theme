@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings xmlns="http://www.mozilla.org/xbl" xmlns:xbl="http://www.mozilla.org/xbl" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<binding id="pagetemplate_editableblocks" extends="layout.cDocumentEditor#cDocumentEditorPanelProperties">
+		<content>
+			<xul:vbox flex="1">
+				<xul:cmessageinfo anonid="message" />
+				<xul:hbox anonid="action-bar">
+					<xul:button anonid="save_properties" oncommand="saveProperties()" label="${transui:m.uixul.bo.doceditor.button.save,ucf,attr}"
+						image="{IconsBase}/small/save.png" />
+					<xul:button anonid="reset_properties" oncommand="resetProperties()" label="${transui:m.uixul.bo.doceditor.button.canceledit,ucf,attr}"
+						image="{IconsBase}/small/undo.png" />
+					<xul:button anonid="next_error_property" oncommand="nextErrorProperty()" label="${transui:m.uixul.bo.doceditor.button.nexterror,ucf,attr}"
+						image="{IconsBase}/small/next-invalid-field.png" />
+				</xul:hbox>
+				<xul:scrollbox anonid="scrollctrl" flex="1" class="editordatacontainer" orient="horizontal">
+					<xul:cfield name="editableblocksJSON" id="pagetemplate_editableblocks_editableblocksJSON" 
+						anonid="field_editableblocksJSON" fieldtype="namedgridlist" flex="1">
+					</xul:cfield>
+					<xul:splitter hidden="true" />
+					<xul:cblockpropertypanel anonid="blockpropertypanel" style="max-width:280px" collapsed="true" />
+				</xul:scrollbox>
+			</xul:vbox>
+		</content>
+		<implementation>
+			<field name="mFieldNames">["editableblocksJSON"]</field>
+			<field name="mPropertyGrids">null</field>
+			
+			<constructor><![CDATA[
+				this.extendMethod("fireInitializeComplete", this.initializeCompleteExtend);
+			]]></constructor>
+								
+			<method name="initializeCompleteExtend">
+				<parameter name="result" />
+				<body><![CDATA[
+					if ('propertyGrids' in result.contents)
+					{
+						this.mPropertyGrids = result.contents.propertyGrids;
+					}
+				]]></body>
+			</method>	
+					
+			<method name="saveProperties">
+				<body><![CDATA[
+					this.lockCommandsUI();
+					this.hidePropertyGrid();
+					this.showTextMessage("&modules.uixul.bo.doceditor.Update-in-progress;");
+					this.documentEditor.executeServerAction('editableblocks', 'Update');
+				]]></body>
+			</method>
+			
+			<method name="openPropertyGrid">
+				<parameter name="grid" />
+				<parameter name="rowData" />
+				<body><![CDATA[
+					var blockType = rowData.ct;
+					var propertypanel = this.getElementByAnonId('blockpropertypanel');
+					for (var i = 0; i < this.mPropertyGrids.length; i++)
+					{
+						if (this.mPropertyGrids[i] === blockType)
+						{
+							propertypanel.openPropertyGrid(grid, rowData);
+							return;
+						}
+					}
+					propertypanel.hide();
+				]]></body>
+			</method>
+			<method name="hidePropertyGrid">
+				<body><![CDATA[
+					var propertypanel = this.getElementByAnonId('blockpropertypanel');
+					propertypanel.hide();
+				]]></body>
+			</method>			
+		</implementation>
+	</binding>
+	
+	<binding id="cEditableblocksGrid" extends="widgets.cGrid#cAbstractGrid">
+		<implementation>
+			<xbl:field name="editNode">null</xbl:field>
+			
+			<constructor><![CDATA[
+				this.fireEvent('gridInitialised');
+			]]></constructor>
+
+			<method name="getPanel">
+				<body><![CDATA[
+					var panel = this.parentNode;
+					while (panel && (panel.localName != 'ceditableblockspanel'))
+					{
+						panel = panel.parentNode;
+					}
+                	return panel 
+				]]></body>
+			</method>
+			
+			<method name="getDatarowKey">
+				<parameter name="datarow" />
+				<body><![CDATA[
+					var str = [datarow.editname, datarow.ct];
+					for (var name in datarow.cp)
+					{
+						str.push(name + ':' + datarow.cp[name]);
+					}
+					return str.join(',');
+				]]></body>
+			</method>
+						
+			<method name="execute_info">
+				<parameter name="rowNode" />
+				<parameter name="rowData" />
+				<body><![CDATA[
+					var infos = {type: rowData.ct};
+                	infos.configuration = rowData.cp;  
+					getController().openModalDialog(this, 'blockInfos', infos);	
+				]]></body>
+			</method>	
+								
+			<method name="execute_edit">
+				<parameter name="rowNode" />
+				<parameter name="rowData" />
+				<body><![CDATA[
+					this.editNode = rowNode;
+					this.getPanel().openPropertyGrid(this, rowData);	
+				]]></body>
+			</method>	
+			
+			<method name="execute_empty">
+				<parameter name="rowNode" />
+				<parameter name="rowData" />
+				<body><![CDATA[
+					if (this.editNode === rowNode)
+					{
+						this.getPanel().hidePropertyGrid();
+						this.editNode = null;
+					}
+					rowData.ct = 'empty';
+					rowData.cp = {};
+					this.raiseUpdate();
+				]]></body>
+			</method>
+			
+			<method name="execute_reset">
+				<parameter name="rowNode" />
+				<parameter name="rowData" />
+				<body><![CDATA[
+					if (this.editNode === rowNode)
+					{
+						this.getPanel().hidePropertyGrid();
+						this.editNode = null;
+					}
+					rowData.ct = rowData.ot;
+					rowData.cp = {};
+					for (var name in rowData.op)
+					{
+						rowData.cp[name] = rowData.op[name];
+					}
+					this.raiseUpdate();
+				]]></body>
+			</method>
+				
+			
+			<method name="execute_add">
+				<parameter name="rowNode" />
+				<parameter name="rowData" />
+				<body><![CDATA[
+					if (this.editNode === rowNode)
+					{
+						this.getPanel().hidePropertyGrid();
+						this.editNode = null;
+					}
+					this.editNode = rowNode;
+					var params = {allowlayout: false, category: "website"};
+					getController().openModalDialog(this, "blockselector", params);	
+				]]></body>
+			</method>			
+
+			<method name="focus">
+				<body><![CDATA[
+					//wCore.debug('cEditableblocksGrid.focus');
+				]]></body>
+			</method>
+
+			<method name="createBlock">
+				<parameter name="infos" />
+				<body><![CDATA[
+					if ('type' in infos)
+					{
+						var rowNode = this.editNode;
+						this.editNode = null;
+						
+						var rowData = rowNode.mDataRow;
+						rowData.ct = infos.type;
+						rowData.cp = {};
+						for (var name in infos)
+						{
+							if (name.substring(0,2) === '__')
+							{
+								rowData.cp[name.substring(2)] = infos[name];
+							}
+						}
+						this.raiseUpdate();
+						this.execute_edit(rowNode, rowData);
+					}
+				]]></body>
+			</method>	
+			
+			<method name="raiseUpdate">
+				<body><![CDATA[
+					var dataset = this.buildDataset();
+					this.updateDataset(dataset);
+				]]></body>
+			</method>				
+		</implementation>
+
+		<content>
+			<xul:grid flex="1" anonid="grid" xbl:inherits="disabled" style="padding-left: 5px;padding-right: 5px;">
+				<xul:columns>
+					<xul:column />
+					<xul:column flex="1" />
+					<xul:column />
+				</xul:columns>
+				<xul:rows>
+					<xul:row class="head" anonid="head-row">
+						<xul:label name="editname" value="Identifiant" />
+						<xul:label name="ct" value="bloc type" />
+						<xul:label name="actionrow" value="${transui:m.uixul.bo.doceditor.actions,ucf,attr}" />
+					</xul:row>
+				</xul:rows>
+			</xul:grid>
+
+			<xul:row anonid="template-row" class="document" hidden="true">
+				<xul:label value="" />				
+				<xul:label value="" />
+				<xul:toolbar class="actions">
+					<xul:toolbarbutton action="info" image="{IconsBase}/small/help.png" tooltiptext="${transui:m.theme.bo.general.info,ucf,attr}" />
+					<xul:toolbarbutton action="edit" image="{IconsBase}/small/edit.png" tooltiptext="${transui:m.theme.bo.general.edit,ucf,attr}" />
+					<xul:toolbarbutton action="add" image="{IconsBase}/small/add.png" tooltiptext="${transui:m.theme.bo.general.add,ucf,attr}" />
+					<xul:toolbarbutton action="empty" image="{IconsBase}/small/document.png" tooltiptext="${transui:m.theme.bo.general.empty,ucf,attr}" />
+					<xul:toolbarbutton action="reset" image="{IconsBase}/small/delete.png" tooltiptext="${transui:m.theme.bo.general.reset,ucf,attr}" />
+				</xul:toolbar>
+			</xul:row>
+		</content>
+	</binding>
+	
+	<binding id="cBlockPropertyPanel">
+		<implementation>
+			<field name="isPropertyGridContainer">true</field>
+			<field name="currentData">null</field>
+			<field name="currentGrid">null</field>
+			<field name="defaultParameters">null</field>
+			
+			<constructor><![CDATA[
+				//wCore.debug("cBlockPropertyPanel.constructor");
+			]]></constructor>
+			
+			<method name="getPanel">
+				<body><![CDATA[
+					var panel = this.parentNode;
+					while (panel && (panel.localName != 'ceditableblockspanel'))
+					{
+						panel = panel.parentNode;
+					}
+                	return panel 
+				]]></body>
+			</method>
+						
+			<method name="createPropertyGrid">
+				<parameter name="block" />
+				<body><![CDATA[
+					while (this.firstChild) {this.removeChild(this.firstChild);}
+					var propertyGrid = document.createElement('wpropertygrid');
+					propertyGrid.setAttribute('block', block);
+					propertyGrid.setAttribute('flex', '1');
+					this.appendChild(propertyGrid);
+					return propertyGrid;
+				]]></body>
+			</method>			
+			
+			<method name="openPropertyGrid">
+				<parameter name="grid" />
+				<parameter name="rowData" />
+				<body><![CDATA[
+					this.currentData = rowData;
+					this.currentGrid = grid;
+					var proppanel = this;					
+					var propertyGrid = this.createPropertyGrid(rowData.ct);               
+	                wCore.executeOnPredicate(function(){
+	               		if ("isReady" in propertyGrid && "setBlock" in propertyGrid)
+						{
+							return (propertyGrid.isReady);
+						}
+	                },
+	                function(){
+	                	try
+	                	{
+	                		wCore.debug('openPropertyGrid:executeOnPredicate');
+	                		propertyGrid.setBlock(proppanel);
+                			proppanel.show();
+                			wCore.debug('openPropertyGrid:OK');
+                		}
+                		catch (e)
+                		{
+                			wCore.debug('openPropertyGrid:ERR');
+                		}
+	                });
+				]]></body>
+			</method>	
+			
+			<method name="show">
+				<body><![CDATA[
+					this.collapsed = false;
+					this.previousSibling.hidden = false;
+				]]></body>
+			</method>
+			
+			<method name="hide">
+				<body><![CDATA[
+					this.collapsed = true;
+					this.previousSibling.hidden = true;
+					while (this.firstChild) {this.removeChild(this.firstChild);}
+				]]></body>
+			</method>
+			
+			<method name="getParameters">
+				<body><![CDATA[
+					var parameters = {};
+					var cp = this.currentData.cp;
+					for (var name in cp)
+					{
+						parameters[name] = cp[name];
+					}
+					return parameters;
+				]]></body>
+			</method>
+			
+			<method name="setParameter">
+				<parameter name="name" />
+				<parameter name="value" />
+				<body><![CDATA[
+					if (this.currentData.cp.constructor == Array) {this.currentData.cp = {};}
+					this.currentData.cp[name] = value;
+				]]></body>
+			</method>
+							
+			<method name="setParameters">
+				<parameter name="data" />
+				<body><![CDATA[
+					if (this.currentData.cp.constructor == Array) {this.currentData.cp = {};}
+					for (var name in data)
+					{
+						this.currentData.cp[name] = data[name];
+					}
+				]]></body>
+			</method>
+			
+			<property name="hasModifications">
+				<getter><![CDATA[
+					var defParams = this.getDefaultParameters();
+					for (var name in defParams)
+					{
+						if (defParams[name] != this.currentData.cp[name])
+						{
+							return true;
+						}
+					}
+                    return false;
+                ]]></getter>
+			</property>
+			
+			<property name="type">
+				<getter><![CDATA[
+                    return this.currentData.ct;
+                ]]></getter>
+			</property>
+			
+			<method name="refreshContent">
+				<body><![CDATA[
+					this.currentGrid.raiseUpdate();
+				]]></body>
+			</method>			
+			
+			<method name="getDefaultParameters">
+				<body><![CDATA[
+					if (this.defaultParameters == null)
+					{ 
+						this.defaultParameters = {};
+						for (var name in this.currentData.cp)
+						{
+							this.defaultParameters[name] = this.currentData.cp[name]
+						}
+					}
+					return this.defaultParameters;
+				]]></body>
+			</method>								
+		</implementation>	
+		
+		<content>
+			<xul:vbox>
+				<xbl:children />
+			</xul:vbox>
+		</content>
+	</binding>
+</bindings>

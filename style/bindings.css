@@ -1,3 +1,11 @@
 wdialog[template="ImportTheme"]{
 	-moz-binding: url(binding:modules.theme.themeBindings#importThemeDialog);
 }
+
+gridlist.editableblocksJSON{
+	-moz-binding: url(binding:modules.theme.editors.pagetemplate#cEditableblocksGrid);
+}
+
+cblockpropertypanel{
+	-moz-binding: url(binding:modules.theme.editors.pagetemplate#cBlockPropertyPanel);
+}

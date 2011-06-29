@@ -9,4 +9,11 @@
   <key id="import-import">installer !</key>
   <key id="importing">installation en cours...</key>
   <key id="import-succes">le thème {label} ({codename}) à été installé avec succès.</key>
+  
+  <key id="editableblocks-tab">Blocs editables</key>
+  <key id="info">informations</key>
+  <key id="edit">editer</key>
+  <key id="add">changer de bloc</key>
+  <key id="empty">vider</key>
+  <key id="reset">valeur par défaut</key>
 </i18n>
