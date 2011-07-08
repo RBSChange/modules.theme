@@ -32,6 +32,7 @@ class theme_SkinGeneratorService extends BaseService
 	 */
 	public function updateSkinVars($theme)
 	{
+		$codeName = $theme->getCodename();
 		$skinVars = $this->getThemeVars($theme);
 		$result = theme_PagetemplateService::getInstance()->createQuery()
 			->setProjection(Projections::count('id', 'nbUseStd'))
@@ -43,25 +44,18 @@ class theme_SkinGeneratorService extends BaseService
 			$skinVars = array_merge($skinVars, $this->getStandardVars());
 		}
 		
-		$skinVarsPath = f_util_FileUtils::buildWebeditPath('themes', $theme->getCodename(), 'skin', 'skin.xml');		
+		$skinVarsPath = f_util_FileUtils::buildWebeditPath('themes', $codeName, 'skin', 'skin.xml');		
 		if (!file_exists($skinVarsPath))
 		{
 			$content = '<?xml version="1.0" encoding="UTF-8"?><sections />';
 			f_util_FileUtils::writeAndCreateContainer($skinVarsPath, $content);
 		}
 		
-		$skinLocalPath = f_util_FileUtils::buildWebeditPath('themes', $theme->getCodename(), 'locale', 'skin.xml');
-		if (!file_exists($skinLocalPath))
-		{
-			$content = '<?xml version="1.0" encoding="utf-8"?><localization />';
-			f_util_FileUtils::writeAndCreateContainer($skinLocalPath, $content);
-		}		
-		
-		$undefinedSection = null;
-		$modifiedLocal = false;
+		$ls = LocaleService::getInstance();
 		$modified = false;
+		$undefinedSection = null;
 		$skinDoc = f_util_DOMUtils::fromPath($skinVarsPath);
-		$skinLocalDoc = f_util_DOMUtils::fromPath($skinLocalPath);
+		$keysInfos = array();		
 		foreach ($skinVars as $varName => $initialvalue) 
 		{
 			$varNode = $skinDoc->findUnique('//field[@name="'.$varName.'"]');
@@ -78,24 +72,7 @@ class theme_SkinGeneratorService extends BaseService
 				$varNode->setAttribute('name', $varName);
 				$varNode->setAttribute('type', 'text');
 				$varNode->setAttribute('initialvalue', $initialvalue);
-				
-				if (!$skinLocalDoc->findUnique('/localization/entity[@id="'.$varName.'"]'))
-				{
-					$modifiedLocal = true;
-					$localNode = $skinLocalDoc->documentElement->appendChild($skinLocalDoc->createElement('entity'));
-					$localNode->setAttribute('id', $varName);
-					foreach (array('fr', 'en') as $lang) 
-					{
-						$langNode = $localNode->appendChild($skinLocalDoc->createElement('locale'));
-						$langNode->setAttribute('lang', $lang);
-						$langNode->appendChild($skinLocalDoc->createTextNode('_' . $varName));
-					}
-					$varNode->setAttribute('hidehelp', 'true'); 
-				}
-				else if (!$skinLocalDoc->findUnique('/localization/entity[@id="'.$varName.'-help"]'))
-				{
-					$varNode->setAttribute('hidehelp', 'true'); 
-				}
+				$varNode->setAttribute('hidehelp', 'true');			
 			}
 			else
 			{
@@ -113,24 +90,24 @@ class theme_SkinGeneratorService extends BaseService
 				{
 					$modified = true;
 					$varNode->setAttribute('type', 'imagecss');
-					$varNode->setAttribute('mediafoldername', 'Inbox_' .$theme->getCodename());
+					$varNode->setAttribute('mediafoldername', 'Inbox_' .$codeName);
 				}
 			}
+				
+			// [id => [text, format]]
+			$keysInfos[strtolower($varName)] = array('_' . $varName, 'text');
 		}
+		
+		$lcid = $ls->getLCID('fr');
+		$baseKey = strtolower('t.'.$codeName.'.skin');
+		Framework::fatal(__METHOD__ . ' ' . var_export($keysInfos, true));
+		$ls->updatePackage($baseKey, array($lcid => $keysInfos), false, true);
 		
 		if ($modified)
 		{
-			
 			echo "Update: $skinVarsPath\n";
 			f_util_FileUtils::mkdir(dirname($skinVarsPath));
 			$skinDoc->save($skinVarsPath);
-		}
-		
-		if ($modifiedLocal)
-		{
-			echo "Update: $skinLocalPath\n";
-			f_util_FileUtils::mkdir(dirname($skinLocalPath));
-			$skinLocalDoc->save($skinLocalPath);
 		}
 	}
 	

@@ -39,18 +39,17 @@ abstract class theme_BindingHelper
 		$element = $elementArray[0];
 		if ($element->hasAttribute('labeli18n'))
 		{
-			$key = "&" . $element->getAttribute('labeli18n') . ";";
-			return f_Locale::translate($key);
+			$key = $element->getAttribute('labeli18n');
+			return LocaleService::getInstance()->transBO(strtolower($key), array('ucf'));
 		}
 		else if ($element->hasAttribute('label'))
 		{
-			$key = $element->getAttribute('label');
-			return f_Locale::translate($key);
+			return $element->getAttribute('label');
 		} 
 		else if ($element->hasAttribute('name'))
 		{
-			$key = "&themes." . self::$codename .".skin." . $element->getAttribute('name') . ";";
-			return f_Locale::translate($key);
+			$key = "t." . self::$codename .".skin." . $element->getAttribute('name');
+			return LocaleService::getInstance()->transBO(strtolower($key), array('ucf'));
 		}
 		return '';
 	}
