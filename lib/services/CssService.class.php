@@ -132,7 +132,7 @@ class theme_CssService extends f_persistentdocument_DocumentService
 	 */
 	public function extractSkinVars($style)
 	{
-		$stylePath = StyleService::getInstance()->getSourceLocation($style->getCodename());
+		$stylePath = website_StyleService::getInstance()->getSourceLocation($style->getCodename());
 		if ($stylePath)
 		{
 			return $this->extractSkinVarsByFile($stylePath);
@@ -143,7 +143,7 @@ class theme_CssService extends f_persistentdocument_DocumentService
 	public function extractSkinVarsByFile($stylePath)
 	{
 		$skinRefs = array();
-		$ss = f_web_CSSStylesheet::getInstanceFromFile($stylePath);
+		$ss = website_CSSStylesheet::getInstanceFromFile($stylePath);
 		foreach ($ss->getCSSRules() as $CSSRule) 
 		{
 			foreach ($CSSRule->getDeclarations() as $CSSDeclaration) 

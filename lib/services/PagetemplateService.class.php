@@ -154,7 +154,7 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 		if ($this->standardScreenStyleIds === null)
 		{
 			$this->standardScreenStyleIds = array('modules.generic.frontoffice', 'modules.generic.richtext', 'modules.website.frontoffice', 'modules.website.richtext');			
-			$ss = StyleService::getInstance();
+			$ss = website_StyleService::getInstance();
 			foreach (ModuleService::getInstance()->getModulesObj() as $changeModule)
 			{
 				$moduleName = $changeModule->getName();
@@ -180,7 +180,7 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 		if ($this->standardPrintStyleIds === null)
 		{
 			$this->standardPrintStyleIds = array('modules.generic.print', 'modules.website.print');
-			$ss = StyleService::getInstance();			
+			$ss = website_StyleService::getInstance();			
 			foreach (ModuleService::getInstance()->getModulesObj() as $changeModule)
 			{
 				$moduleName = $changeModule->getName();

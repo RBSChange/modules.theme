@@ -135,7 +135,7 @@ class theme_SkinGeneratorService extends BaseService
 		$styleIds = theme_PagetemplateService::getInstance()->getStandardScreenStyleIds();
 		foreach ($styleIds as $styleId) 
 		{
-			$stylePath = StyleService::getInstance()->getSourceLocation($styleId);
+			$stylePath = website_StyleService::getInstance()->getSourceLocation($styleId);
 			$skinRefs = theme_CssService::getInstance()->extractSkinVarsByFile($stylePath);
 			if (count($skinRefs))
 			{
