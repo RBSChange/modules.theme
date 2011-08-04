@@ -1,10 +1,10 @@
 <?php
-class theme_PreviewImageAction extends f_action_BaseAction
+class theme_PreviewImageAction extends change_Action
 {
 	
 	/**
-	 * @param Context $context
-	 * @param Request $request
+	 * @param change_Context $context
+	 * @param change_Request $request
 	 */
 	public function _execute ($context, $request)
 	{
@@ -25,7 +25,7 @@ class theme_PreviewImageAction extends f_action_BaseAction
 					
 		        	MediaHelper::outputHeader($imagePath, null, false);
 					readfile($imagePath);
-					return View::NONE;	
+					return change_View::NONE;	
 				}
 			}
 		}
@@ -34,7 +34,7 @@ class theme_PreviewImageAction extends f_action_BaseAction
 			Framework::exception($e);
 		}
         f_web_http_Header::setStatus(404);
-        return View::NONE;
+        return change_View::NONE;
 	}	
 	
 	public function isSecure()

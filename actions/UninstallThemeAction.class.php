@@ -3,11 +3,11 @@
  * theme_ImportThemeAction
  * @package modules.theme.actions
  */
-class theme_UninstallThemeAction extends f_action_BaseJSONAction
+class theme_UninstallThemeAction extends change_JSONAction
 {
 	/**
-	 * @param Context $context
-	 * @param Request $request
+	 * @param change_Context $context
+	 * @param change_Request $request
 	 */
 	public function _execute($context, $request)
 	{
@@ -46,7 +46,7 @@ class theme_UninstallThemeAction extends f_action_BaseJSONAction
 	}
 	
 	/**
-	 * @param Request $request
+	 * @param change_Request $request
 	 * @return theme_persistentdocument_theme
 	 */
 	private function getThemeFromRequest($request)

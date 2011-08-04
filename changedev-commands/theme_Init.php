@@ -44,7 +44,7 @@ class commands_theme_Init extends commands_AbstractChangeCommand
 		$this->loadFramework();
 		
 		$themeName = $params[0];
-		$themeDir = WEBEDIT_HOME."/themes/".$themeName;
+		$themeDir = PROJECT_HOME."/themes/".$themeName;
 		if (file_exists($themeDir))
 		{
 			return $this->quitError("Theme $themeName already exists");	

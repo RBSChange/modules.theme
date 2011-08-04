@@ -2,11 +2,11 @@
 /**
  * @package modules.theme
  */
-class theme_GetImageAction extends f_action_BaseAction
+class theme_GetImageAction extends change_Action
 {
 	/**
-	 * @param Context $context
-	 * @param Request $request
+	 * @param change_Context $context
+	 * @param change_Request $request
 	 */
 	public function _execute($context, $request)
     {
@@ -34,7 +34,7 @@ class theme_GetImageAction extends f_action_BaseAction
 	        			f_util_FileUtils::symlink($imagePath, $link, f_util_FileUtils::OVERRIDE);	     			
 	        			MediaHelper::outputHeader($link, null, false);
 						readfile($link);
-						return View::NONE;
+						return change_View::NONE;
 	        		}
 	        	}
         	}
@@ -44,7 +44,7 @@ class theme_GetImageAction extends f_action_BaseAction
         	Framework::exception($e);
         }
         f_web_http_Header::setStatus(404);
-        return View::NONE;
+        return change_View::NONE;
     }
 
     public function isSecure()
@@ -54,6 +54,6 @@ class theme_GetImageAction extends f_action_BaseAction
 
     public function getRequestMethods ()
     {
-        return Request::GET;
+        return change_Request::GET;
     }
 }
