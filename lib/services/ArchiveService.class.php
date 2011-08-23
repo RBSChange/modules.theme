@@ -27,7 +27,7 @@ class theme_ArchiveService extends BaseService
 	{
 		if (is_null(self::$instance))
 		{
-			self::$instance = self::getServiceClassInstance(get_class());
+			self::$instance = new self();
 			if (!defined("PCLZIP_TEMPORARY_DIR"))
 			{
 				$tmpDir = TMP_PATH;			
