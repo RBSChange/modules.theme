@@ -106,7 +106,8 @@ class theme_ModuleService extends ModuleBaseService
 	{
 		$script = FileResolver::getInstance()
 			->setPackageName('themes_' . $codeName)
-			->getPath('install.xml');
+			->setDirectory('setup')->getPath('init.xml');
+			
 		if (!file_exists($script))
 		{
 			throw new Exception('Invalid theme: ' .$codeName);

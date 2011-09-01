@@ -19,7 +19,12 @@ class theme_persistentdocument_pagetemplate extends theme_persistentdocument_pag
 	 */
 	private function getContentFilePath()
 	{
-		return f_util_FileUtils::buildWebeditPath($this->getProjectpath());
+		$path = f_util_FileUtils::buildWebeditPath($this->getProjectpath());
+		if (!is_readable($path))
+		{
+			throw new Exception('Invalid page template path :' . $path);
+		}
+		return $path;
 	}
 	
 	/**
