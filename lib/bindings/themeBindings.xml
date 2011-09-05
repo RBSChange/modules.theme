@@ -142,9 +142,6 @@
 					</xul:vbox>
 					<xul:vbox anonid="message-panel" flex="1">
 						<xul:vbox anonid="messageBox" style="min-height: 90px"/>
-						<xul:hbox>
-							<xul:button image="{IconsBase}/small/delete.png" oncommand="onCancel()" label="&amp;modules.uixul.bo.dialog.Cancel;" />
-						</xul:hbox>
 					</xul:vbox>
 				</xul:deck>
 			</xul:vbox>
