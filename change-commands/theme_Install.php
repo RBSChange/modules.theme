@@ -3,7 +3,7 @@
  * commands_theme_Install
  * @package modules.theme.command
  */
-class commands_theme_Install extends commands_AbstractChangeCommand
+class commands_theme_Install extends c_ChangescriptCommand
 {
 	/**
 	 * @return String
@@ -20,6 +20,16 @@ class commands_theme_Install extends commands_AbstractChangeCommand
 	function getDescription()
 	{
 		return "Install theme";
+	}
+	
+	/**
+	 * @see c_ChangescriptCommand::getEvents()
+	 */
+	public function getEvents()
+	{
+		return array(
+			array('target' => 'reset-database'),
+		);
 	}
 	
 	/**
@@ -101,7 +111,7 @@ class commands_theme_Install extends commands_AbstractChangeCommand
 				$this->okMessage("Theme $theme installed successfully");
 			}
 		}
-		$this->getParent()->executeCommand('clear-webapp-cache');
+		$this->executeCommand('clear-webapp-cache');
 		return $this->quitOk();
 	}
 }

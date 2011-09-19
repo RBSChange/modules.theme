@@ -3,7 +3,7 @@
  * commands_theme_CompileTheme
  * @package modules.theme.command
  */
-class commands_theme_CompileTheme extends commands_AbstractChangeCommand
+class commands_theme_CompileTheme extends c_ChangescriptCommand
 {
 	/**
 	 * @return String
@@ -21,6 +21,16 @@ class commands_theme_CompileTheme extends commands_AbstractChangeCommand
 	function getDescription()
 	{
 		return "Compile theme data";
+	}
+	
+	/**
+	 * @see c_ChangescriptCommand::getEvents()
+	 */
+	public function getEvents()
+	{
+		return array(
+			array('target' => 'compile-all'),
+		);
 	}
 	
 	/**
@@ -74,7 +84,7 @@ class commands_theme_CompileTheme extends commands_AbstractChangeCommand
 		if (f_util_ArrayUtils::isEmpty($params))
 		{
 			$ts->regenerateAllThemes(true);
-			$this->getParent()->executeCommand('clear-webapp-cache');
+			$this->executeCommand('clear-webapp-cache');
 			return $this->quitOk('All themes compiled successfully.');
 		}
 
@@ -97,7 +107,7 @@ class commands_theme_CompileTheme extends commands_AbstractChangeCommand
 			return $this->quitError("All themes could not be compiled: ".$this->getErrorCount()." errors");
 		}
 		
-		$this->getParent()->executeCommand('clear-webapp-cache');
+		$this->executeCommand('clear-webapp-cache');
 		return $this->quitOk("Command successfully executed");
 	}
 }

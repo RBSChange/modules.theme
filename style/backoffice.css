@@ -1,18 +1,3 @@
-treechildren::-moz-tree-image(modules_theme_theme){
-	list-style-image: url(/changeicons/small/theme.png);
-}
-treechildren::-moz-tree-image(modules_theme_pagetemplate){
-	list-style-image: url(/changeicons/small/document-text.png);
-}
-treechildren::-moz-tree-image(modules_theme_css){
-	list-style-image: url(/changeicons/small/css.png);
-}
-treechildren::-moz-tree-image(modules_theme_image){
-	list-style-image: url(/changeicons/small/image-empty.png);
-}
-treechildren::-moz-tree-image(modules_theme_javascript){
-	list-style-image: url(/changeicons/small/javascript.png);
-}
 wdialog[template="ImportTheme"] .dialog-header{
 	background: url(/changeicons/small/upload.png) transparent center  left no-repeat!important;
 }

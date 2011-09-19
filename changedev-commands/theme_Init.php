@@ -3,7 +3,7 @@
  * commands_theme_GenerateSkin
  * @package modules.theme.command
  */
-class commands_theme_Init extends commands_AbstractChangeCommand
+class commands_theme_Init extends c_ChangescriptCommand
 {
 	/**
 	 * @return String

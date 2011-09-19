@@ -3,7 +3,7 @@
  * commands_theme_GenerateSkin
  * @package modules.theme.command
  */
-class commands_theme_GenerateSkin extends commands_AbstractChangeCommand
+class commands_theme_GenerateSkin extends c_ChangescriptCommand
 {
 	/**
 	 * @return String
@@ -73,7 +73,7 @@ class commands_theme_GenerateSkin extends commands_AbstractChangeCommand
 		if ($theme !== null)
 		{
 			theme_SkinGeneratorService::getInstance()->updateSkinVars($theme);
-			$this->getParent()->executeCommand('clear-webapp-cache');
+			$this->executeCommand('clear-webapp-cache');
 			return $this->quitOk('Skin Generated successfully.');
 		}
 		return $this->quitError("No theme name $codeName");
