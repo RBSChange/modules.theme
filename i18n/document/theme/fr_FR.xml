@@ -5,4 +5,7 @@
   <key id="label-help">libellé</key>
   <key id="description">déscription</key>
   <key id="description-help">déscription</key>
+  <key id="css">feuilles de style</key>
+  <key id="image">images</key>
+  <key id="javascript">javascripts</key>
 </i18n>
