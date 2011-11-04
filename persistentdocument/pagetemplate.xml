@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/3.5.xsd" model-version="1.0" has-url="false" icon="document-text" publish-on-day-change="false">
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd" model-version="1.0" has-url="false" icon="document-text" publish-on-day-change="false">
   <properties>
-    <add name="thumbnail" type="modules_theme/image"/>
-    <add name="codename" type="String" min-occurs="1">
-      <constraints>unique:true</constraints>
-    </add>
-    <add name="projectpath" type="String"/>
-    <add name="doctype" type="String" from-list="modules_theme/doctype"/>
-    <add name="useprojectcss" type="Boolean" default-value="true"/>
-    <add name="cssscreen" type="LongString"/>
-    <add name="cssprint" type="LongString"/>
-    <add name="useprojectjs" type="Boolean" default-value="true"/>
-    <add name="js" type="LongString"/>
-    <add name="editableblocks" type="Lob"/>
+    <property name="thumbnail" type="modules_theme/image"/>
+    <property name="codename" type="String" min-occurs="1">
+      <constraint name="unique" propertyName="codename" modelName="modules_theme/pagetemplate"/>
+    </property>
+    <property name="projectpath" type="String"/>
+    <property name="doctype" type="String" from-list="modules_theme/doctype"/>
+    <property name="useprojectcss" type="Boolean" default-value="true"/>
+    <property name="cssscreen" type="LongString"/>
+    <property name="cssprint" type="LongString"/>
+    <property name="useprojectjs" type="Boolean" default-value="true"/>
+    <property name="js" type="LongString"/>
+    <property name="editableblocks" type="Lob"/>
   </properties>
   <statuses default="ACTIVE"/>
   <serializedproperties>
