@@ -3,7 +3,16 @@
   <key id="module-name">theme</key>
   <key id="tree-root-name">theme</key>
   <key id="system-folder-name">theme</key>
-  <key id="import-title">install theme</key>
-  <key id="import-file">select your zip file to install</key>
-  <key id="import-import">install !</key>
+  <key id="import-title">install a theme</key>
+  <key id="import-file">select the zip file to install</key>
+  <key id="import-import">install it!</key>
+  <key id="add">change block</key>
+  <key id="edit">edit</key>
+  <key id="editableblocks-tab">Editable blocks</key>
+  <key id="empty">empty</key>
+  <key id="import-succes">The theme {label} ({codename}) has been installed successfully.</key>
+  <key id="importing">installing…</key>
+  <key id="info">information</key>
+  <key id="reset">default value</key>
+  <key id="uninstall-succes">The theme {codeName} has been uninstalled successfully.</key>
 </i18n>
