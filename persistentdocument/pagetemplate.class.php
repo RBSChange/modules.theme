@@ -1,12 +1,10 @@
 <?php
 /**
- * Class where to put your custom methods for document theme_persistentdocument_pagetemplate
  * @package modules.theme.persistentdocument
  */
 class theme_persistentdocument_pagetemplate extends theme_persistentdocument_pagetemplatebase 
 {
 	/**
-	 * @see f_persistentdocument_PersistentDocumentImpl::getTreeNodeLabel()
 	 * @return String
 	 */
 	public function getLabel()
