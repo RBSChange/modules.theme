@@ -2,4 +2,5 @@
 <script>
   <binding fileName="modules/useractionlogger/persistentdocument/import/useractionlogger_binding.xml"/>
   <actiondef modulename="theme" actionname="update.pagetemplate" label="m.theme.bo.useractionlogger.update-pagetemplate"/>
+  <actiondef modulename="theme" actionname="move.theme" label="m.theme.bo.useractionlogger.move-theme"/>
 </script>

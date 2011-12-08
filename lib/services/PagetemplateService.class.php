@@ -309,19 +309,22 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param theme_persistentdocument_pagetemplate $document
+	 * @param array<string, string> $attributes
+	 * @param integer $mode
 	 * @param string $moduleName
-	 * @param string $treeType
-	 * @param array<string, string> $nodeAttributes
 	 */
-	public function addTreeAttributes($document, $moduleName, $treeType, &$nodeAttributes)
+	public function completeBOAttributes($document, &$attributes, $mode, $moduleName)
 	{
 		$thumbnail = $document->getThumbnail();
 		if ($thumbnail)
-		{		
-			$nodeAttributes['hasPreviewImage'] = true;
-			if ($treeType == 'wlist')
+		{	
+			if ($mode & DocumentHelper::MODE_ITEM)
 			{
-	    		$nodeAttributes['thumbnailsrc'] = $thumbnail->getUISrc();
+				$attributes['hasPreviewImage'] = true;
+			}
+			if ($mode & DocumentHelper::MODE_CUSTOM)
+			{
+	    		$attributes['thumbnailsrc'] = $thumbnail->getUISrc();
 			}
 		}
 	}
