@@ -15,7 +15,6 @@ class commands_theme_Install extends commands_AbstractChangeCommand
 
 	/**
 	 * @return String
-	 * @example "initialize a document"
 	 */
 	function getDescription()
 	{
