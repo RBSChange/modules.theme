@@ -62,7 +62,7 @@ class commands_theme_Init extends commands_AbstractChangeCommand
   <rootfolder module="theme">
     <theme id="'.$themeName.'" byCodename="'.$themeName.'" label="" description="">
       <!-- 
-      <pagetemplate byCodename="'.$themeName.'/fileNameWithoutExtension" doctype="XHTML-1.0-Strict|XHTML-1.0-Transitional" js="themes.'.$themeName.'.js..." useprojectcss="false|true" cssscreen="themes.'.$themeName.'..." />
+      <pagetemplate byCodename="'.$themeName.'/fileNameWithoutExtension" doctype="HTML-5|XHTML-1.0-Strict|XHTML-1.0-Transitional" js="themes.'.$themeName.'.js..." useprojectcss="false|true" cssscreen="themes.'.$themeName.'..." />
       -->
     </theme>
     </rootfolder>
