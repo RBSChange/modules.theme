@@ -50,8 +50,7 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	public function createStrictQuery()
 	{
 		return $this->pp->createQuery('modules_theme/pagetemplate', false);
-	}
-	
+	}	
 	
 	/**
 	 * @param string $codeName
@@ -368,5 +367,51 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 			}
 		}
 		return $result;
+	}
+	
+	/**
+	 * @param theme_persistentdocument_pagetemplate $document
+	 * @param integer $parentNodeId
+	 */
+	protected function preUpdate($document, $parentNodeId)
+	{
+		$this->syncroniseDeclinations($document);
+	}
+	
+	/**
+	 * @param theme_persistentdocument_pagetemplate $document
+	 */
+	protected function syncroniseDeclinations($document)
+	{
+		$array = array_intersect($document->getModifiedPropertyNames(), $this->getSynchronizedPropertiesName());
+		if (count($array))
+		{
+			if (Framework::isInfoEnabled())
+			{
+				Framework::info(__METHOD__ . " Synchronize properties :" . implode(', ', $array));
+			}
+			$this->touchAllDeclinations($document);
+		}
+	}
+
+	/**
+	 * @param theme_persistentdocument_pagetemplate $pagetemplate
+	 */
+	protected function touchAllDeclinations($pagetemplate)
+	{
+		$declinations = $pagetemplate->getPagetemplatedeclinationArrayInverse();
+		foreach ($declinations as $declination)
+		{
+			$declination->setModificationdate(null);
+			$declination->save();
+		}
+	}
+	
+	/**
+	 * @return string[]
+	 */
+	public function getSynchronizedPropertiesName()
+	{
+		return array('thumbnail', 'projectpath', 'doctype', 'useprojectcss', 'cssscreen', 'cssprint', 'useprojectjs', 'js');
 	}
 }

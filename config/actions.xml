@@ -6,6 +6,12 @@
 			this.createDocumentEditor('modules_theme_folder', listWidget.getSelectedItems()[0].id);
 		]]></body>
 	</action>
+	<action name="createPagetemplatedeclination">
+		<parameter name="listWidget" />
+		<body><![CDATA[
+			this.createDocumentEditor('modules_theme_pagetemplatedeclination', listWidget.getSelectedItems()[0].id);
+		]]></body>
+	</action>
 	
 	<action name="importTheme">
 		<parameter name="listWidget" />

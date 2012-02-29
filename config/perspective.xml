@@ -2,7 +2,7 @@
 <perspective>
 	<models>
 		<model name="modules_generic/rootfolder">
-			<children>	
+			<children>
 				<child model="modules_generic/folder" />
 				<child model="modules_theme/theme" />
 			</children>
@@ -15,7 +15,7 @@
 				<contextaction name="importTheme" />
 				<contextaction name="createFolder" />
 				<contextaction name="openTreeNodeOrder" />
-			</contextactions>	
+			</contextactions>
 		</model>
 		<model name="modules_generic/folder">
 			<children>
@@ -29,26 +29,41 @@
 			<contextactions>
 				<contextaction name="edit" />
 				<contextaction name="importTheme" />
-				<contextaction name="delete" />				
+				<contextaction name="delete" />
 				<contextaction name="createFolder" />
 				<contextaction name="openTreeNodeOrder" />
 				<contextaction name="openFolder" />
 			</contextactions>
 		</model>
 		<model name="modules_theme/theme">
-			<children>	
-				<child model="modules_theme/pagetemplate" from="pagetemplate"/>
+			<children>
+				<child model="modules_theme/pagetemplate" from="pagetemplate" />
 			</children>
 			<contextactions>
 				<contextaction name="edit" />
 				<contextaction name="uninstallTheme" />
+				<contextaction name="openTreeNodeOrder" />
+				<contextaction name="openFolder" />
 			</contextactions>
 		</model>
 		<model name="modules_theme/pagetemplate">
+			<children>
+				<child model="modules_theme/pagetemplatedeclination" from="pagetemplatedeclination" />
+			</children>
 			<contextactions>
 				<contextaction name="edit" />
+				<contextaction name="createPagetemplatedeclination" />
+				<contextaction name="openTreeNodeOrder" />
+				<contextaction name="openFolder" />
 			</contextactions>
-		</model>	
+		</model>
+		<model name="modules_theme/pagetemplatedeclination">
+			<contextactions>
+				<contextaction name="edit" />
+				<contextaction name="duplicate" />
+				<contextaction name="delete" />
+			</contextactions>
+		</model>
 	</models>
 	<toolbar>
 		<toolbarbutton name="edit" />
@@ -70,6 +85,7 @@
 		<action name="reactivate" permission="ReActivate" icon="reactivate" labeli18n="m.uixul.bo.actions.ReActivate" />
 		<action name="openTreeNodeOrder" single="true" permission="Order" icon="sort" labeli18n="m.uixul.bo.actions.Set-children-order" />
 		<action name="createFolder" single="true" permission="Insert_folder" icon="create-folder" labeli18n="m.uixul.bo.actions.Create-folder" />
+		<action name="createPagetemplatedeclination" single="true" permission="Insert_pagetemplatedeclination" icon="add" />
 		<action name="importTheme" single="true" permission="ImportTheme" icon="upload" />
 		<action name="uninstallTheme" single="true" permission="UninstallTheme" icon="delete" />
 	</actions>

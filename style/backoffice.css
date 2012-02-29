@@ -16,3 +16,6 @@ treechildren::-moz-tree-image(modules_theme_javascript){
 wdialog[template="ImportTheme"] .dialog-header{
 	background: url(/changeicons/small/upload.png) transparent center  left no-repeat!important;
 }
+treechildren::-moz-tree-image(modules_theme_pagetemplatedeclination){
+	list-style-image: url(/changeicons/small/document-text.png);
+}

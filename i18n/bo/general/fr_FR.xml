@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.theme.bo.general" lcid="fr_FR">
-  <key id="module-name">theme</key>
-  <key id="tree-root-name">theme</key>
-  <key id="system-folder-name">theme</key>
-  <key id="uninstall-succes">le thème {codeName} à été desinstallé avec succès.</key>
-  <key id="import-title">installer un thème</key>
-  <key id="import-file">sélectionner votre fichier zip à installer</key>
-  <key id="import-import">installer !</key>
-  <key id="importing">installation en cours...</key>
-  <key id="import-succes">le thème {label} ({codename}) à été installé avec succès.</key>
-  
-  <key id="editableblocks-tab">Blocs editables</key>
-  <key id="info">informations</key>
-  <key id="edit">editer</key>
-  <key id="add">changer de bloc</key>
-  <key id="empty">vider</key>
-  <key id="reset">valeur par défaut</key>
+	<key id="module-name">theme</key>
+	<key id="tree-root-name">theme</key>
+	<key id="system-folder-name">theme</key>
+	<key id="uninstall-succes">le thème {codeName} à été desinstallé avec succès.</key>
+	<key id="import-title">installer un thème</key>
+	<key id="import-file">sélectionner votre fichier zip à installer</key>
+	<key id="import-import">installer !</key>
+	<key id="importing">installation en cours...</key>
+	<key id="import-succes">le thème {label} ({codename}) à été installé avec succès.</key>
+	<key id="editableblocks-tab">Blocs editables</key>
+	<key id="info">informations</key>
+	<key id="edit">editer</key>
+	<key id="add">changer de bloc</key>
+	<key id="empty">vider</key>
+	<key id="editname">identifiant</key>
+	<key id="block-type">type du bloc</key>
 </i18n>

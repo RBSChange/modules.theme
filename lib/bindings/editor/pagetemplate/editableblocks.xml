@@ -15,8 +15,7 @@
 						image="{IconsBase}/small/next-invalid-field.png" />
 				</xul:hbox>
 				<xul:scrollbox anonid="scrollctrl" flex="1" class="editordatacontainer" orient="horizontal">
-					<xul:cfield name="editableblocksJSON" id="pagetemplate_editableblocks_editableblocksJSON" 
-						anonid="field_editableblocksJSON" fieldtype="namedgridlist" flex="1">
+					<xul:cfield name="editableblocksJSON" anonid="field_editableblocksJSON" fieldtype="namedgridlist" flex="1">
 					</xul:cfield>
 					<xul:splitter hidden="true" />
 					<xul:cblockpropertypanel anonid="blockpropertypanel" style="max-width:280px" collapsed="true" />
@@ -45,7 +44,7 @@
 				<body><![CDATA[
 					this.lockCommandsUI();
 					this.hidePropertyGrid();
-					this.showTextMessage("&modules.uixul.bo.doceditor.Update-in-progress;");
+					this.showTextMessage("${transui:m.uixul.bo.doceditor.update-in-progress,ucf,js}");
 					this.documentEditor.executeServerAction('editableblocks', 'Update');
 				]]></body>
 			</method>
@@ -223,8 +222,8 @@
 				</xul:columns>
 				<xul:rows>
 					<xul:row class="head" anonid="head-row">
-						<xul:label name="editname" value="Identifiant" />
-						<xul:label name="ct" value="bloc type" />
+						<xul:label name="editname" value="${transui:m.theme.bo.general.editname,ucf,attr}" />
+						<xul:label name="ct" value="${transui:m.theme.bo.general.block-type,ucf,attr}" />
 						<xul:label name="actionrow" value="${transui:m.uixul.bo.doceditor.actions,ucf,attr}" />
 					</xul:row>
 				</xul:rows>
