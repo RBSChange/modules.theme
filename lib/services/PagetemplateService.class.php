@@ -414,4 +414,19 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	{
 		return array('thumbnail', 'projectpath', 'doctype', 'useprojectcss', 'cssscreen', 'cssprint', 'useprojectjs', 'js');
 	}
+	
+	/**
+	 * @param theme_persistentdocument_pagetemplate $document
+	 */
+	protected function preDelete($document)
+	{
+		// Check that no page is using is.
+		$query = website_PageService::getInstance()->createQuery()->add(Restrictions::published());
+		$query->add(Restrictions::eq('template', $document->getCodename()))->setProjection(Projections::count('id', 'count'));
+		$count = f_util_ArrayUtils::firstElement($query->findColumn('count'));
+		if ($count > 0)
+		{
+			throw new BaseException('This template can\'t be deleted, it is used by ' . $count . ' pages.', 'm.theme.bo.errors.uninstall-used-template', array('pageCount' => $count));
+		}
+	}
 }
