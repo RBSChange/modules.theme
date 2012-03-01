@@ -1,0 +1,19 @@
+.dialog-header{
+	background: url(/changeicons/small/richtext/search-replace.png) transparent center  left no-repeat!important;
+}
+[anonid=importing-panel] {
+	opacity: 0.7;
+}
+[anonid=form-panel] {
+	padding: 5px;
+}
+[anonid=message-panel] {
+	padding: 20px;
+}
+[anonid=message-panel] .message, [anonid=message-panel] .error {
+	max-width: 770px;
+	font-size: 13px;
+}
+[anonid=message-panel] .error {
+	color: red;
+}

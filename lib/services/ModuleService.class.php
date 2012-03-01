@@ -227,4 +227,16 @@ class theme_ModuleService extends ModuleBaseService
 		$panelDoc = $xslt->transformToDoc($skinDefDoc);
 		return $panelDoc;
 	}
+	
+	/**
+	 * @return string[]
+	 */
+	public function getDeadPageStatuses()
+	{
+		return array(
+			f_persistentdocument_PersistentDocument::STATUS_DEPRECATED, 
+			f_persistentdocument_PersistentDocument::STATUS_FILED, 
+			f_persistentdocument_PersistentDocument::STATUS_TRASH, 
+		);
+	}
 }

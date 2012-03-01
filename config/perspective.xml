@@ -39,6 +39,9 @@
 			<children>
 				<child model="modules_theme/pagetemplate" from="pagetemplate" />
 			</children>
+			<columns>
+				<column name="usageCount" label="&amp;modules.theme.document.pagetemplate.resume.Usagecount;" />
+			</columns>
 			<contextactions>
 				<contextaction name="edit" />
 				<contextaction name="uninstallTheme" />
@@ -50,8 +53,12 @@
 			<children>
 				<child model="modules_theme/pagetemplatedeclination" from="pagetemplatedeclination" />
 			</children>
+			<columns>
+				<column name="usageCount" label="&amp;modules.theme.document.pagetemplate.resume.Usagecount;" />
+			</columns>
 			<contextactions>
 				<contextaction name="edit" />
+				<contextaction name="replacePagetemplate" />
 				<contextaction name="createPagetemplatedeclination" />
 				<contextaction name="openTreeNodeOrder" />
 				<contextaction name="openFolder" />
@@ -61,6 +68,7 @@
 			<contextactions>
 				<contextaction name="edit" />
 				<contextaction name="duplicate" />
+				<contextaction name="replacePagetemplate" />
 				<contextaction name="delete" />
 			</contextactions>
 		</model>
@@ -88,5 +96,6 @@
 		<action name="createPagetemplatedeclination" single="true" permission="Insert_pagetemplatedeclination" icon="add" />
 		<action name="importTheme" single="true" permission="ImportTheme" icon="upload" />
 		<action name="uninstallTheme" single="true" permission="UninstallTheme" icon="delete" />
+		<action name="replacePagetemplate" single="true" permission="ReplacePagetemplate" icon="richtext/search-replace" />
 	</actions>
 </perspective>

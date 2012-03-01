@@ -34,4 +34,18 @@
 				{cmpref: listWidget.getSelectedItems()[0].id, lang: this.getContextLang(null)});
 		]]></body>
 	</action>
+	
+	<action name="replacePagetemplate">
+		<parameter name="listWidget" />
+		<body><![CDATA[
+			try
+			{
+				this.getController().openModalDialog(this, 'theme_ReplacePagetemplate', {module: this, toReplaceId: listWidget.getSelectedItems()[0].id});
+			}
+			catch (e)
+			{
+				wCore.error('importTheme', [], e);
+			}
+		]]></body>
+	</action>
 </actions>

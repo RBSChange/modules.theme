@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.theme.document.pagetemplate" lcid="fr_FR">
-  <key id="document-name">gabarit de page</key>
-  <key id="label">libellé</key>
-  <key id="label-help">libellé</key>
-  <key id="doctype">doctype</key>
-  <key id="doctype-help">doctype</key>
-  <key id="useprojectcss">styles par défaut</key>
-  <key id="useprojectcss-help">Utilisation des styles par défaut</key>
-  <key id="cssscreen">feuilles de style</key>
-  <key id="cssscreen-help">liste des feuilles de style séparé par une virgule</key>
-  <key id="cssprint">feuilles de style impression</key>
-  <key id="cssprint-help">liste des feuilles de style utilisé pour l'impression séparé par une virgule</key>
-  <key id="useprojectjs">javascript par défaut</key>
-  <key id="js">javascripts</key>
-  <key id="js-help">liste des javascripts séparés par une virgule</key>
+	<key id="document-name">gabarit de page</key>
+	<key id="label">libellé</key>
+	<key id="label-help">libellé</key>
+	<key id="doctype">doctype</key>
+	<key id="doctype-help">doctype</key>
+	<key id="useprojectcss">styles par défaut</key>
+	<key id="useprojectcss-help">Utilisation des styles par défaut</key>
+	<key id="cssscreen">feuilles de style</key>
+	<key id="cssscreen-help">liste des feuilles de style séparé par une virgule</key>
+	<key id="cssprint">feuilles de style impression</key>
+	<key id="cssprint-help">liste des feuilles de style utilisé pour l'impression séparé par une virgule</key>
+	<key id="useprojectjs">javascript par défaut</key>
+	<key id="js">javascripts</key>
+	<key id="js-help">liste des javascripts séparés par une virgule</key>
 </i18n>

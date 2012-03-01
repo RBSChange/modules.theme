@@ -16,9 +16,10 @@ class theme_UninstallThemeAction extends f_action_BaseJSONAction
 			$theme = $this->getThemeFromRequest($request);
 			$codename = $theme->getCodename();
 			
+			$tms = theme_ModuleService::getInstance();
 			$result = website_PageService::getInstance()->createQuery()
 				->setProjection(Projections::count('id', 'pagecount'))
-				->add(Restrictions::published())
+				->add(Restrictions::notin('publicationstatus', $tms->getDeadPageStatuses()))
 				->add(Restrictions::like('template', $codename.'/', MatchMode::START()))
 				->find();
 			if ($result[0]['pagecount'] > 0)

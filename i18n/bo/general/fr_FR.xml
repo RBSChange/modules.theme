@@ -16,4 +16,9 @@
 	<key id="empty">vider</key>
 	<key id="editname">identifiant</key>
 	<key id="block-type">type du bloc</key>
+	<key id="pagetemplate-replaced">Le gabrit a bien été remplacé dans toutes les pages qui l'utilisaient.</key>
+	<key id="replacing-pagetemplate">Le remplacement du gabarit est en cours...</key>
+	<key id="select-pagetemplate">Sélectionnez le gabarit de remplacement.</key>
+	<key id="replace">remplacer</key>
+	<key id="replace-pagetemplate-title">remplacement d'un gabarit de page</key>
 </i18n>

@@ -289,6 +289,21 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 		
 		return array('modules' => array_keys($modules), 'layout' => array_keys($layoutIds));
 	}
+		
+	/**
+	 * @param theme_persistentdocument_pagetemplate $document
+	 * @return integer
+	 */
+	public function getUsageCount($document)
+	{
+		$tms = theme_ModuleService::getInstance();
+		$result = website_PageService::getInstance()->createQuery()
+			->setProjection(Projections::count('id', 'pagecount'))
+			->add(Restrictions::notin('publicationstatus', $tms->getDeadPageStatuses()))
+			->add(Restrictions::eq('template', $document->getCodeName()))
+			->find();
+		return $result[0]['pagecount'];
+	}
 	
 	/**
 	 * @param theme_persistentdocument_pagetemplate $document
@@ -300,6 +315,7 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	{
 		$resume = parent::getResume($document, $forModuleName, $allowedSections);
 		$resume['properties']['codename'] = $document->getCodename();
+		$resume['properties']['usageCount'] = $document->getDocumentService()->getUsageCount($document);
 		$infos = $this->getCompatibilityInfo($document);
 		$resume['properties']['layoutids'] = implode(', ', $infos['layout']);
 		$resume['properties']['requiredmodules'] = implode(', ', $infos['modules']);
@@ -322,6 +338,10 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 			{
 	    		$nodeAttributes['thumbnailsrc'] = $thumbnail->getUISrc();
 			}
+		}
+		if ($treeType == 'wlist')
+		{
+			$nodeAttributes['usageCount'] = $document->getDocumentService()->getUsageCount($document);
 		}
 	}
 	
@@ -420,13 +440,36 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	 */
 	protected function preDelete($document)
 	{
-		// Check that no page is using is.
-		$query = website_PageService::getInstance()->createQuery()->add(Restrictions::published());
-		$query->add(Restrictions::eq('template', $document->getCodename()))->setProjection(Projections::count('id', 'count'));
-		$count = f_util_ArrayUtils::firstElement($query->findColumn('count'));
-		if ($count > 0)
+		// Check that no page is using it.
+		if ($this->getUsageCount($document) > 0)
 		{
 			throw new BaseException('This template can\'t be deleted, it is used by ' . $count . ' pages.', 'm.theme.bo.errors.uninstall-used-template', array('pageCount' => $count));
 		}
 	}
+	
+	/**
+	 * @param theme_persistentdocument_pagetemplate $toReplace
+	 * @param theme_persistentdocument_pagetemplate $replaceBy
+	 */
+	public function replacePagetemplate($toReplace, $replaceBy)
+	{
+		$chunkSize = Framework::getConfigurationValue('modules/theme/pagetemplateReplacementChunkSize');
+		$batchPath = f_util_FileUtils::buildRelativePath('modules', 'theme', 'lib', 'bin', 'batchReplacePagetemplate.php');
+		$startId = 0;
+		do
+		{
+			$result = f_util_System::execHTTPScript($batchPath, array($toReplace->getCodename(), $replaceBy->getCodename(), $chunkSize));
+			if (f_util_StringUtils::endsWith($result, 'END'))
+			{
+				break;
+			}
+			elseif (!f_util_StringUtils::endsWith($result, 'CONTINUE'))
+			{
+				throw new Exception($result);
+			}
+		}
+		while (f_util_StringUtils::endsWith($result, 'CONTINUE'));
+	}
+	
+	
 }

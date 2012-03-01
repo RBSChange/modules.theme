@@ -13,6 +13,7 @@
 		<document name="javascript" />
 		<action name="ImportTheme" />
 		<action name="UninstallTheme" />
+		<action name="ReplacePagetemplate" />
 	</actions>
 	<roles>
 		<role name="Admin">
@@ -23,6 +24,7 @@
 			<permission name="EditLocale" />
 			<permission name="ImportTheme" />
 			<permission name="UninstallTheme" />
+			<permission name="ReplacePagetemplate" />
 			<permission name="Delete.*" />
 			<permission name="Update.*" />
 			<permission name="Load.*" />

@@ -5,6 +5,7 @@
 		<property name="author" labeli18n="modules.uixul.bo.doceditor.property.Author" />
 		<property name="creationdate" labeli18n="modules.uixul.bo.doceditor.property.Creationdate" />
 		<property name="codename" labeli18n="modules.theme.document.pagetemplate.resume.Codename" />
+    	<property name="usageCount" labeli18n="modules.theme.document.pagetemplate.resume.usagecount" />
 		<property name="layoutids" labeli18n="modules.theme.document.pagetemplate.resume.Layoutids" />
 		<property name="requiredmodules" labeli18n="modules.theme.document.pagetemplate.resume.Requiredmodules" />
 	</section>

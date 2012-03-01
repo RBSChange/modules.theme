@@ -1,6 +1,9 @@
 wdialog[template="ImportTheme"]{
 	-moz-binding: url(binding:modules.theme.themeBindings#importThemeDialog);
 }
+wdialog[template="theme_ReplacePagetemplate"]{
+	-moz-binding: url(binding:modules.theme.themeBindings#cReplacePagetemplateDialog);
+}
 gridlist.editableblocksJSON{
 	-moz-binding: url(binding:modules.theme.editors.pagetemplate#cEditableblocksGrid);
 }
