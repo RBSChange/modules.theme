@@ -238,7 +238,7 @@
 					this.getElementByAnonId('message-panel').removeAttribute('hidden');
 					if (result.status == 'OK')
 					{
-						this.appendMessage("${transui:m.theme.bo.general.pagetemplate-replaced,ucf,js}", false);
+						this.appendMessage("${transui:m.theme.bo.general.pagetemplate-replacement-planned,ucf,js}", false);
 					}
 					else
 					{
@@ -316,7 +316,7 @@
 							</xul:hbox>
 							<xul:spacer height="16px" />
 							<xul:hbox pack="center">
-								<xul:description style="font-size:18px" value="${transui:m.theme.bo.general.replacing-pagetemplate,ucf,attr}" />
+								<xul:description style="font-size:18px" value="${transui:m.theme.bo.general.planning-pagetemplate-replacement,ucf,attr}" />
 							</xul:hbox>
 						</xul:vbox>
 						<xul:vbox anonid="message-panel" flex="1">

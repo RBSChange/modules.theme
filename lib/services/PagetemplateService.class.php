@@ -441,7 +441,8 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	protected function preDelete($document)
 	{
 		// Check that no page is using it.
-		if ($this->getUsageCount($document) > 0)
+		$count = $this->getUsageCount($document);
+		if ($count > 0)
 		{
 			throw new BaseException('This template can\'t be deleted, it is used by ' . $count . ' pages.', 'm.theme.bo.errors.uninstall-used-template', array('pageCount' => $count));
 		}
@@ -453,23 +454,11 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	 */
 	public function replacePagetemplate($toReplace, $replaceBy)
 	{
-		$chunkSize = Framework::getConfigurationValue('modules/theme/pagetemplateReplacementChunkSize');
-		$batchPath = f_util_FileUtils::buildRelativePath('modules', 'theme', 'lib', 'bin', 'batchReplacePagetemplate.php');
-		$startId = 0;
-		do
-		{
-			$result = f_util_System::execHTTPScript($batchPath, array($toReplace->getCodename(), $replaceBy->getCodename(), $chunkSize));
-			if (f_util_StringUtils::endsWith($result, 'END'))
-			{
-				break;
-			}
-			elseif (!f_util_StringUtils::endsWith($result, 'CONTINUE'))
-			{
-				throw new Exception($result);
-			}
-		}
-		while (f_util_StringUtils::endsWith($result, 'CONTINUE'));
+		$refreshListTask = task_PlannedtaskService::getInstance()->getNewDocumentInstance();
+		$refreshListTask->setSystemtaskclassname('theme_PagetemplateReplacementTask');
+		$refreshListTask->setLabel(__METHOD__);
+		$refreshListTask->setParameters(serialize(array('toReplaceId' => $toReplace->getId(), 'replaceById' => $replaceBy->getId())));
+		$refreshListTask->setUniqueExecutiondate(date_Calendar::getInstance());
+		$refreshListTask->save();
 	}
-	
-	
 }

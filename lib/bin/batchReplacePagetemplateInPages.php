@@ -19,6 +19,7 @@ try
 	
 	foreach ($pages as $page)
 	{
+		/* @var website_persistentdocument_page */
 		echo $page->getId() , ' ';
 		$page->setTemplate($replaceByCodename);
 		$pp->updateDocument($page);
@@ -26,7 +27,7 @@ try
 		f_DataCacheService::getInstance()->clearCacheByDocId(f_DataCachePatternHelper::getIdPattern($page->getId()));
 	}
 	
-	echo PHP_EOL, (count($pages) != $chunckSize) ? 'END' : 'CONTINUE';
+	echo PHP_EOL, (count($pages) < $chunckSize) ? 'END' : 'CONTINUE';
 	$tm->commit();
 }
 catch (Exception $e)
