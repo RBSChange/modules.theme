@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
-	<binding fileName="modules/useractionlogger/persistentdocument/import/useractionlogger_binding.xml" />
-	<actiondef modulename="theme" actionname="update.pagetemplate" label="m.theme.bo.useractionlogger.update-pagetemplate" />
-	<actiondef modulename="theme" actionname="replacedBy.pagetemplate" label="m.theme.bo.useractionlogger.replacedby-pagetemplate" />
-	<actiondef modulename="theme" actionname="replace.pagetemplate" label="m.theme.bo.useractionlogger.replace-pagetemplate" />
+  <binding fileName="modules/useractionlogger/persistentdocument/import/useractionlogger_binding.xml"/>
+  <actiondef modulename="theme" actionname="update.pagetemplate" label="m.theme.bo.useractionlogger.update-pagetemplate"/>
+  <actiondef modulename="theme" actionname="replacedBy.pagetemplate" label="m.theme.bo.useractionlogger.replacedby-pagetemplate"/>
+  <actiondef modulename="theme" actionname="replace.pagetemplate" label="m.theme.bo.useractionlogger.replace-pagetemplate"/>
+  <actiondef modulename="theme" actionname="insert.pagetemplatedeclination" label="m.theme.bo.useractionlogger.insert-pagetemplatedeclination"/>
+  <actiondef modulename="theme" actionname="update.pagetemplatedeclination" label="m.theme.bo.useractionlogger.update-pagetemplatedeclination"/>
 </script>
