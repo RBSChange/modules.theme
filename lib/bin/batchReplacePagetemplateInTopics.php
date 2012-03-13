@@ -25,8 +25,6 @@ try
 		$topic->removeAllowedpagetemplate($toReplace);
 		$topic->addAllowedpagetemplate($replaceBy);
 		$pp->updateDocument($topic);
-		f_DataCacheService::getInstance()->clearCacheByPattern(f_DataCachePatternHelper::getModelPattern($topic->getDocumentModelName()));
-		f_DataCacheService::getInstance()->clearCacheByDocId(f_DataCachePatternHelper::getIdPattern($topic->getId()));
 	}
 	
 	echo PHP_EOL, (count($topics) < $chunckSize) ? 'END' : 'CONTINUE';

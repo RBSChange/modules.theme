@@ -1,20 +1,17 @@
 <?php
 $chunckSize = $_POST['argv'][2];
-$lang = $_POST['argv'][3];
-RequestContext::getInstance()->setLang($lang);
 
-echo 'Starting with chunksize: ', $chunckSize, ' and lang: ', $lang, PHP_EOL;
+echo 'Starting with chunksize: ', $chunckSize, PHP_EOL;
 $tm = f_persistentdocument_TransactionManager::getInstance();
 $pp = f_persistentdocument_PersistentProvider::getInstance();
 try
 {
-	$tm->beginTransaction();
-	$tms = theme_ModuleService::getInstance();
-	
 	$toReplace = theme_persistentdocument_pagetemplate::getInstanceById($_POST['argv'][0]);
 	$replaceBy = theme_persistentdocument_pagetemplate::getInstanceById($_POST['argv'][1]);
 	
-	$pages = website_PageService::getInstance()->createQuery()
+	$tm->beginTransaction();
+	$tms = theme_ModuleService::getInstance();
+	$pages = website_TemplateService::getInstance()->createQuery()
 		->add(Restrictions::notin('publicationstatus', $tms->getDeadPageStatuses()))
 		->add(Restrictions::eq('template', $toReplace->getCodename()))
 		->addOrder(Order::asc('id'))
@@ -27,7 +24,6 @@ try
 		echo $page->getId() , ' ';
 		$page->setTemplate($replaceBy->getCodename());
 		$pp->updateDocument($page);
-		f_DataCacheService::getInstance()->clearCacheByDocId(f_DataCachePatternHelper::getIdPattern($page->getId()));
 	}
 	
 	echo PHP_EOL, (count($pages) < $chunckSize) ? 'END' : 'CONTINUE';

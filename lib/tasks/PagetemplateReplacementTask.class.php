@@ -18,58 +18,29 @@ class theme_PagetemplateReplacementTask extends task_SimpleSystemTask
 			Framework::error(__METHOD__ . ' Invalid replaceById: ' . $this->getParameter('replaceById'));
 		}
 		
-		// Update websites.
-		$batchPath = f_util_FileUtils::buildRelativePath('modules', 'theme', 'lib', 'bin', 'batchReplacePagetemplateInWebsites.php');
-		$startId = 0;
-		do
+		$langs = RequestContext::getInstance()->getSupportedLanguages();
+		$suffixes = array('Websites', 'Topics', 'Pages', 'Templates');
+		foreach ($suffixes as $suffix)
 		{
-			$result = f_util_System::execHTTPScript($batchPath, array($toReplace->getId(), $replaceBy->getId(), $chunkSize));
-			if (f_util_StringUtils::endsWith($result, 'END'))
+			Framework::info(__METHOD__ . ' update ' . $suffix);
+			$batchPath = f_util_FileUtils::buildRelativePath('modules', 'theme', 'lib', 'bin', 'batchReplacePagetemplateIn' . $suffix . '.php');
+			foreach ($langs as $lang)
 			{
-				break;
+				do
+				{
+					$result = f_util_System::execHTTPScript($batchPath, array($toReplace->getId(), $replaceBy->getId(), $chunkSize, $lang));
+					if (f_util_StringUtils::endsWith($result, 'END'))
+					{
+						break;
+					}
+					elseif (!f_util_StringUtils::endsWith($result, 'CONTINUE'))
+					{
+						throw new Exception($result);
+					}
+					$this->plannedTask->ping();
+				}
+				while (true);
 			}
-			elseif (!f_util_StringUtils::endsWith($result, 'CONTINUE'))
-			{
-				throw new Exception($result);
-			}
-			$this->plannedTask->ping();
 		}
-		while (true);
-		
-		// Update topics.
-		$batchPath = f_util_FileUtils::buildRelativePath('modules', 'theme', 'lib', 'bin', 'batchReplacePagetemplateInTopics.php');
-		$startId = 0;
-		do
-		{
-			$result = f_util_System::execHTTPScript($batchPath, array($toReplace->getId(), $replaceBy->getId(), $chunkSize));
-			if (f_util_StringUtils::endsWith($result, 'END'))
-			{
-				break;
-			}
-			elseif (!f_util_StringUtils::endsWith($result, 'CONTINUE'))
-			{
-				throw new Exception($result);
-			}
-			$this->plannedTask->ping();
-		}
-		while (true);
-			
-		// Update pages.
-		$batchPath = f_util_FileUtils::buildRelativePath('modules', 'theme', 'lib', 'bin', 'batchReplacePagetemplateInPages.php');
-		$startId = 0;
-		do
-		{
-			$result = f_util_System::execHTTPScript($batchPath, array($toReplace->getCodename(), $replaceBy->getCodename(), $chunkSize));
-			if (f_util_StringUtils::endsWith($result, 'END'))
-			{
-				break;
-			}
-			elseif (!f_util_StringUtils::endsWith($result, 'CONTINUE'))
-			{
-				throw new Exception($result);
-			}
-			$this->plannedTask->ping();
-		}
-		while (true);
 	}
 }

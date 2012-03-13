@@ -25,8 +25,6 @@ try
 		$website->removeAllowedpagetemplate($toReplace);
 		$website->addAllowedpagetemplate($replaceBy);
 		$pp->updateDocument($website);
-		f_DataCacheService::getInstance()->clearCacheByPattern(f_DataCachePatternHelper::getModelPattern($website->getDocumentModelName()));
-		f_DataCacheService::getInstance()->clearCacheByDocId(f_DataCachePatternHelper::getIdPattern($website->getId()));
 	}
 	
 	echo PHP_EOL, (count($websites) < $chunckSize) ? 'END' : 'CONTINUE';
