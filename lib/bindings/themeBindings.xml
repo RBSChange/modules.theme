@@ -164,7 +164,7 @@
 			
 			<method name="onInitialize">
 				<body><![CDATA[
-					this.autoResize(500, 200);					
+					this.autoResize(550, 225);					
 					var me = this;
 					var callBack = function(result) { me.onLoadRessources(result); };
 					var params = {excludeId: this.parameters.toReplaceId};
@@ -183,7 +183,7 @@
 						for (var i in result.contents)
 						{
 							var itemInfos = result.contents[i];
-							this.mConfig[itemInfos.codename] = itemInfos;
+							this.mConfig[itemInfos.id] = itemInfos;
 							var item = field.appendItem(itemInfos.label, itemInfos.id);
 							if (itemInfos.disabled)
 							{
@@ -264,12 +264,13 @@
 		</implementation>
 		<handlers>
 			<handler event="fieldChanged"><![CDATA[
-				var templateName = event.originalTarget.value;
-				var item = this.mConfig[templateName];
+				var templateId = event.originalTarget.value;
+				wCore.debug('templateId = ' + templateId);
+				var item = this.mConfig[templateId];
 				var previewImageAnonId = 'previewimage';
 				if (item && item.hasPreviewImage)
 				{
-					var url = wCore.buildServerUrl('theme', 'PreviewImage', {cmpref: item.id, lang:Context.W_LANG, 'max-height':100, 'max-width':150});
+					var url = wCore.buildServerUrl('theme', 'PreviewImage', {cmpref: item.id, lang: Context.W_LANG, 'max-height': 200, 'max-width': 250});
 					this.getElementByAnonId(previewImageAnonId).setAttribute('src', url);
 				}
 				else
@@ -285,7 +286,7 @@
 					<xul:label value="${transui:m.theme.bo.general.replace-pagetemplate-title,ucf,attr}" class="dialog-title" />
 					<xul:spacer flex="1" />
 					<xul:vbox pack="center">
-						<xul:toolbarbutton height="16" width="16" image="{IconsBase}/small/delete.png" oncommand="onClose()" 
+						<xul:toolbarbutton image="{IconsBase}/small/delete.png" oncommand="onClose()" 
 							tooltiptexts="${transui:m.uixul.bo.dialog.cancel,ucf,attr}" />
 					</xul:vbox>
 				</xul:hbox>
@@ -294,19 +295,23 @@
 						<xul:vbox anonid="form-panel" flex="1">
 							<xul:vbox flex="1">
 								<xul:hbox>
-									<xul:vbox flex="1" pack="center">
-										<xul:description>${transui:m.theme.bo.general.select-pagetemplate,ucf}</xul:description>
-										<xul:spacer height="5px"/>
-										<xul:cfield anonid="template" name="template" fieldtype="dropdownlist" hidehelp="true" required="true" />
+									<xul:vbox>
+										<xul:vbox flex="1" pack="center">
+											<xul:description>${transui:m.theme.bo.general.select-pagetemplate,ucf}</xul:description>
+											<xul:spacer height="5px"/>
+											<xul:cfield anonid="template" name="template" fieldtype="dropdownlist" hidehelp="true" required="true" />
+										</xul:vbox>
+										<xul:hbox align="center" pack="center">
+											<xul:button anonid="submitButton" disabled="true" image="{IconsBase}/small/check.png" label="${transui:m.theme.bo.general.replace,ucf,attr}" oncommand="handleSelected()" />
+										</xul:hbox>	
 									</xul:vbox>
 									<xul:spacer width="5"/>
-									<xul:vbox width="150" height="100" align="center" pack="center">
+									<xul:vbox width="250" height="200" align="center" pack="center">
 										<xul:image anonid="previewimage" src="{IconsBase}/small/document.png" />
 									</xul:vbox>
 								</xul:hbox>
 								<xul:spacer height="10px" />
-								<xul:hbox align="center" pack="center"><xul:button anonid="submitButton" disabled="true" image="{IconsBase}/small/check.png" 
-									label="${transui:m.theme.bo.general.replace,ucf,attr}" oncommand="handleSelected()" /></xul:hbox>								
+															
 							</xul:vbox>
 						</xul:vbox>
 						<xul:vbox anonid="importing-panel" flex="1">
