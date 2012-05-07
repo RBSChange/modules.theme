@@ -71,8 +71,7 @@ class theme_SkinGeneratorService extends BaseService
 				$varNode = $undefinedSection->appendChild($skinDoc->createElement('field'));
 				$varNode->setAttribute('name', $varName);
 				$varNode->setAttribute('type', 'text');
-				$varNode->setAttribute('initialvalue', $initialvalue);
-				$varNode->setAttribute('hidehelp', 'true');			
+				$varNode->setAttribute('initialvalue', $initialvalue);		
 			}
 			else
 			{

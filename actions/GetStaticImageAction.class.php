@@ -21,7 +21,7 @@ class theme_GetStaticImageAction extends f_action_BaseJSONAction
 			$prefix = $theme->getCodename() . '/';
 			foreach ($theme->getImageArray() as $image) 
 			{
-				$result[] = array('label' => $prefix . basename($image->getCodename()), 'value' => 'url(/' . $image->getCodename() .')');
+				$result[] = array('label' => $prefix . $image->getLabel(), 'value' => 'url(/' . $image->getCodename() .')');
 			}
 		}
 		$result[] = array('label' => '--- --- ---', 'value' => '');	

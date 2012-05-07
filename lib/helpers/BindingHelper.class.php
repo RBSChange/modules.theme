@@ -87,18 +87,24 @@ abstract class theme_BindingHelper
 			$element->setAttribute('moduleselector', 'media');
 			$element->setAttribute('allow', 'modules_media_media');
 			$element->setAttribute('allowfile', 'true');
-			$element->setAttribute('mediafoldername', 'Inbox_' . self::$codename);
+			if (!$element->hasAttribute('mediafoldername'))
+			{
+				$element->setAttribute('mediafoldername', 't.' . self::$codename . '.skin.mediafoldername');
+			}
 		}
 		
-		$helpKey = "&themes." . self::$codename .".skin." . ucfirst($name) . "-help;";
-		$help = f_Locale::translate($helpKey, null, null, false);
-		if ($help)
+		if (!$element->hasAttribute('shorthelp'))
 		{
-			$element->setAttribute('shorthelp', $help);
-		}
-		else
-		{
-			$element->setAttribute('hidehelp', true);
+			$helpKey = "t." . self::$codename .".skin." . strtolower($name) . "-help";
+			$help = LocaleService::getInstance()->transBO($helpKey);
+			if ($help && $help != $helpKey)
+			{
+				$element->setAttribute('shorthelp', $helpKey);
+			}
+			else
+			{
+				$element->setAttribute('hidehelp', 'true');
+			}
 		}
 		return '';
 	}	
