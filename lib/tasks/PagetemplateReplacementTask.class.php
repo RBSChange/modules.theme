@@ -28,7 +28,7 @@ class theme_PagetemplateReplacementTask extends task_SimpleSystemTask
 			{
 				do
 				{
-					$result = f_util_System::execHTTPScript($batchPath, array($toReplace->getId(), $replaceBy->getId(), $chunkSize, $lang));
+					$result = f_util_System::execScript($batchPath, array($toReplace->getId(), $replaceBy->getId(), $chunkSize, $lang));
 					if (f_util_StringUtils::endsWith($result, 'END'))
 					{
 						break;
