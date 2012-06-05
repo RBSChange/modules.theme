@@ -7,17 +7,15 @@
 			<xul:vbox flex="1">
 				<xul:cmessageinfo anonid="message" />
 				<xul:hbox anonid="action-bar">
-					<xul:button anonid="save_properties" oncommand="saveProperties()" label="${transui:m.uixul.bo.doceditor.button.save,ucf,attr}"
+					<xul:button anonid="save_properties" oncommand="saveProperties()" label="${trans:m.uixul.bo.doceditor.button.save,ucf,attr}"
 						image="{IconsBase}/small/save.png" />
-					<xul:button anonid="reset_properties" oncommand="resetProperties()" label="${transui:m.uixul.bo.doceditor.button.canceledit,ucf,attr}"
+					<xul:button anonid="reset_properties" oncommand="resetProperties()" label="${trans:m.uixul.bo.doceditor.button.canceledit,ucf,attr}"
 						image="{IconsBase}/small/undo.png" />
-					<xul:button anonid="next_error_property" oncommand="nextErrorProperty()" label="${transui:m.uixul.bo.doceditor.button.nexterror,ucf,attr}"
+					<xul:button anonid="next_error_property" oncommand="nextErrorProperty()" label="${trans:m.uixul.bo.doceditor.button.nexterror,ucf,attr}"
 						image="{IconsBase}/small/next-invalid-field.png" />
 				</xul:hbox>
 				<xul:scrollbox anonid="scrollctrl" flex="1" class="editordatacontainer" orient="horizontal">
-					<xul:cfield name="editableblocksJSON" id="pagetemplate_editableblocks_editableblocksJSON" 
-						anonid="field_editableblocksJSON" fieldtype="namedgridlist" flex="1">
-					</xul:cfield>
+					<xul:cfield name="editableblocksJSON" anonid="field_editableblocksJSON" fieldtype="namedgridlist" flex="1" />
 					<xul:splitter hidden="true" />
 					<xul:cblockpropertypanel anonid="blockpropertypanel" style="max-width:280px" collapsed="true" />
 				</xul:scrollbox>
@@ -45,7 +43,7 @@
 				<body><![CDATA[
 					this.lockCommandsUI();
 					this.hidePropertyGrid();
-					this.showTextMessage("&modules.uixul.bo.doceditor.Update-in-progress;");
+					this.showTextMessage("${trans:m.uixul.bo.doceditor.update-in-progress,ucf,js}");
 					this.documentEditor.executeServerAction('editableblocks', 'Update');
 				]]></body>
 			</method>
@@ -223,9 +221,9 @@
 				</xul:columns>
 				<xul:rows>
 					<xul:row class="head" anonid="head-row">
-						<xul:label name="editname" value="Identifiant" />
-						<xul:label name="ct" value="bloc type" />
-						<xul:label name="actionrow" value="${transui:m.uixul.bo.doceditor.actions,ucf,attr}" />
+						<xul:label name="editname" value="${trans:m.theme.bo.general.editname,ucf,attr}" />
+						<xul:label name="ct" value="${trans:m.theme.bo.general.block-type,ucf,attr}" />
+						<xul:label name="actionrow" value="${trans:m.uixul.bo.doceditor.actions,ucf,attr}" />
 					</xul:row>
 				</xul:rows>
 			</xul:grid>
@@ -234,11 +232,11 @@
 				<xul:label value="" />				
 				<xul:label value="" />
 				<xul:toolbar class="actions">
-					<xul:toolbarbutton action="info" image="{IconsBase}/small/help.png" tooltiptext="${transui:m.theme.bo.general.info,ucf,attr}" />
-					<xul:toolbarbutton action="edit" image="{IconsBase}/small/edit.png" tooltiptext="${transui:m.theme.bo.general.edit,ucf,attr}" />
-					<xul:toolbarbutton action="add" image="{IconsBase}/small/add.png" tooltiptext="${transui:m.theme.bo.general.add,ucf,attr}" />
-					<xul:toolbarbutton action="empty" image="{IconsBase}/small/document.png" tooltiptext="${transui:m.theme.bo.general.empty,ucf,attr}" />
-					<xul:toolbarbutton action="reset" image="{IconsBase}/small/delete.png" tooltiptext="${transui:m.theme.bo.general.reset,ucf,attr}" />
+					<xul:toolbarbutton action="info" image="{IconsBase}/small/help.png" tooltiptext="${trans:m.theme.bo.general.info,ucf,attr}" />
+					<xul:toolbarbutton action="edit" image="{IconsBase}/small/edit.png" tooltiptext="${trans:m.theme.bo.general.edit,ucf,attr}" />
+					<xul:toolbarbutton action="add" image="{IconsBase}/small/add.png" tooltiptext="${trans:m.theme.bo.general.add,ucf,attr}" />
+					<xul:toolbarbutton action="empty" image="{IconsBase}/small/document.png" tooltiptext="${trans:m.theme.bo.general.empty,ucf,attr}" />
+					<xul:toolbarbutton action="reset" image="{IconsBase}/small/delete.png" tooltiptext="${trans:m.theme.bo.general.reset,ucf,attr}" />
 				</xul:toolbar>
 			</xul:row>
 		</content>

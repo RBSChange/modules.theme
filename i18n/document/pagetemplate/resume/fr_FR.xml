@@ -3,4 +3,5 @@
   <key id="codename">code</key>
   <key id="layoutids">Zones de contenu</key>
   <key id="requiredmodules">Modules utilisé</key>
+  <key id="usagecount">nombre d'utilisations</key>
 </i18n>

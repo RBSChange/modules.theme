@@ -5,6 +5,7 @@
     <property name="author" labeli18n="m.uixul.bo.doceditor.property.author"/>
     <property name="creationdate" labeli18n="m.uixul.bo.doceditor.property.creationdate"/>
     <property name="codename" labeli18n="m.theme.document.pagetemplate.resume.codename" />
+    <property name="usageCount" labeli18n="modules.theme.document.pagetemplate.resume.Usagecount" />
     <property name="layoutids" labeli18n="m.theme.document.pagetemplate.resume.layoutids" />
     <property name="requiredmodules" labeli18n="m.theme.document.pagetemplate.resume.requiredmodules" />
   </section>
@@ -12,7 +13,8 @@
     <property name="status" labeli18n="m.uixul.bo.doceditor.property.status"/>
     <property name="workflow" labeli18n="m.uixul.bo.doceditor.property.workflow"/>
   </section>
-  <section name="history" linkedtab="history" actiontexti18n="m.uixul.bo.doceditor.section.action.view" labeli18n="m.uixul.bo.doceditor.section.history" image="{IconsBase}/small/history.png">
-    <property name="modificationdate" labeli18n="m.uixul.bo.doceditor.property.modificationdate"/>
+  <section name="history" linkedtab="history" actiontexti18n="modules.uixul.bo.doceditor.section.action.View" labeli18n="modules.uixul.bo.doceditor.section.History"
+		image="{IconsBase}/small/history.png">
+		<property name="modificationdate" labeli18n="modules.uixul.bo.doceditor.property.Modificationdate" />
   </section>
 </panel>

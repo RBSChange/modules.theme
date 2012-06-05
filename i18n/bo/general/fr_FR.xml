@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.theme.bo.general" lcid="fr_FR">
-  <key id="module-name">theme</key>
-  <key id="tree-root-name">theme</key>
-  <key id="system-folder-name">theme</key>
-  <key id="uninstall-succes">le thème {codeName} à été desinstallé avec succès.</key>
-  <key id="import-title">installer un thème</key>
-  <key id="import-file">sélectionner votre fichier zip à installer</key>
-  <key id="import-import">installer !</key>
-  <key id="importing">installation en cours...</key>
-  <key id="import-succes">le thème {label} ({codename}) à été installé avec succès.</key>
-  
-  <key id="editableblocks-tab">Blocs editables</key>
-  <key id="info">informations</key>
-  <key id="edit">editer</key>
-  <key id="add">changer de bloc</key>
-  <key id="empty">vider</key>
-  <key id="reset">valeur par défaut</key>
+	<key id="module-name">thèmes</key>
+	<key id="tree-root-name">thèmes</key>
+	<key id="system-folder-name">thèmes</key>
+	<key id="uninstall-succes">le thème {codeName} a été désinstallé avec succès.</key>
+	<key id="import-title">installer un thème</key>
+	<key id="import-file">sélectionner votre fichier zip à installer</key>
+	<key id="import-import">installé !</key>
+	<key id="importing">installation en cours...</key>
+	<key id="import-succes">le thème {label} ({codename}) a été installé avec succès.</key>
+	<key id="editableblocks-tab">blocs éditables</key>
+	<key id="info">informations</key>
+	<key id="edit">éditer</key>
+	<key id="add">changer de bloc</key>
+	<key id="empty">vider</key>
+	<key id="editname">identifiant</key>
+	<key id="block-type">type du bloc</key>
+	<key id="pagetemplate-replacement-planned">Le gabrit va être remplacé dans les minutes qui viennent dans toutes les pages qui l'utilisent.</key>
+	<key id="planning-pagetemplate-replacement">Création de la tâche de remplacement...</key>
+	<key id="select-pagetemplate">Sélectionnez le gabarit de remplacement.</key>
+	<key id="replace">remplacer</key>
+	<key id="replace-pagetemplate-title">remplacement d'un gabarit de page</key>
 </i18n>

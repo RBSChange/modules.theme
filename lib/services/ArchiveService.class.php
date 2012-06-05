@@ -28,11 +28,6 @@ class theme_ArchiveService extends BaseService
 		if (is_null(self::$instance))
 		{
 			self::$instance = new self();
-			if (!defined("PCLZIP_TEMPORARY_DIR"))
-			{
-				$tmpDir = TMP_PATH;			
-				define("PCLZIP_TEMPORARY_DIR", $tmpDir."/".uniqid("pclzip"));
-			}
 		}
 		return self::$instance;
 	}
@@ -43,13 +38,25 @@ class theme_ArchiveService extends BaseService
 	 */
 	public function archive($themeCodeName)
 	{
-		$zipFile = 	$this->getZipName($themeCodeName);
+		$zipFile = 	TMP_PATH . DIRECTORY_SEPARATOR . uniqid($themeCodeName) .'.zip';
 		if (file_exists($zipFile)) {unlink($zipFile);}
+		$archive = new ZipArchive();
+		$archive->open($zipFile, ZipArchive::CREATE);
 		
-		$path = f_util_FileUtils::buildWebeditPath('themes', $themeCodeName);
-		$localPath = $themeCodeName;
-		$zip = new PclZip($zipFile);
-		$zip->add($path, PCLZIP_OPT_REMOVE_PATH, $path, PCLZIP_OPT_ADD_PATH, $localPath);
+		$path = realpath(f_util_FileUtils::buildProjectPath('themes', $themeCodeName));	
+		$basePathLength = strlen($path) + 1;
+		
+		foreach (new RecursiveIteratorIterator(
+			new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::KEY_AS_PATHNAME), RecursiveIteratorIterator::SELF_FIRST)
+			as $file => $info)
+		{
+			if ($info->isFile())
+			{
+				$newPath = $themeCodeName . DIRECTORY_SEPARATOR . substr($file, $basePathLength);
+				$archive->addFile($file, $newPath);
+			}
+		}
+		$archive->close();		
 		return $zipFile;
 	}
 	
@@ -60,38 +67,39 @@ class theme_ArchiveService extends BaseService
 	public function restore($zipPath)
 	{
 		$themeCodeName = null;
-		$zip = new PclZip($zipPath);
+
 		$tmpPath = TMP_PATH . DIRECTORY_SEPARATOR . uniqid('restoreTheme');
 		f_util_FileUtils::rmdir($tmpPath);
-		$zip->extract(PCLZIP_OPT_PATH, $tmpPath);
+		f_util_FileUtils::mkdir($tmpPath);
+		$tmpPath = realpath($tmpPath);
 		
-		$result = glob($tmpPath . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'install.xml');
-		if (is_array($result) && count($result) == 1)
+		$archive = new ZipArchive();
+		
+		if ($archive->open($zipPath))
 		{
-			$installPath = $result[0];
-			$themeCodeName = basename(dirname($installPath));
-			$doc = f_util_DOMUtils::fromPath($installPath);
-			$theme = $doc->findUnique('//theme');
-			if ($theme && $theme->getAttribute('id') == $themeCodeName)
+			$archive->extractTo($tmpPath);
+			$archive->close();
+					
+			$result = glob($tmpPath . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'install.xml');
+			if (is_array($result) && count($result) == 1)
 			{
-				$path = f_util_FileUtils::buildWebeditPath('themes', $themeCodeName);			
-				f_util_FileUtils::cp($tmpPath . DIRECTORY_SEPARATOR . $themeCodeName, $path, f_util_FileUtils::OVERRIDE);
-				if (!file_exists($path . DIRECTORY_SEPARATOR . 'install.xml'))
+				$installPath = $result[0];
+				$themeCodeName = basename(dirname($installPath));
+				$doc = f_util_DOMUtils::fromPath($installPath);
+				$theme = $doc->findUnique('//install');
+				if ($theme && $theme->getAttribute('name') == $themeCodeName)
 				{
-					$themeCodeName = null;
+					$path = f_util_FileUtils::buildWebeditPath('themes', $themeCodeName);			
+					f_util_FileUtils::cp($tmpPath . DIRECTORY_SEPARATOR . $themeCodeName, $path, f_util_FileUtils::OVERRIDE);
+					if (!file_exists($path . DIRECTORY_SEPARATOR . 'install.xml'))
+					{
+						$themeCodeName = null;
+					}
 				}
 			}
 		}
+		
 		f_util_FileUtils::rmdir($tmpPath);
 		return $themeCodeName;
-	}
-	
-	/**
-	 * @param string $themeCodeName
-	 * @return string
-	 */
-	private function getZipName($themeCodeName)
-	{
-		return f_util_FileUtils::buildWebeditPath('themes', $themeCodeName . '.zip');	
 	}
 }

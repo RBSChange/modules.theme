@@ -6,7 +6,12 @@
 			this.createDocumentEditor('modules_theme_folder', listWidget.getSelectedItems()[0].id);
 		]]></body>
 	</action>
-	
+	<action name="createPagetemplatedeclination">
+		<parameter name="listWidget" />
+		<body><![CDATA[
+			this.createDocumentEditor('modules_theme_pagetemplatedeclination', listWidget.getSelectedItems()[0].id);
+		]]></body>
+	</action>	
 	<action name="importTheme">
 		<parameter name="listWidget" />
 		<body><![CDATA[
@@ -26,6 +31,20 @@
 		<body><![CDATA[
 			this.executeJSON('UninstallTheme', 
 				{cmpref: listWidget.getSelectedItems()[0].id, lang: this.getContextLang(null)});
+		]]></body>
+	</action>
+	
+	<action name="replacePagetemplate">
+		<parameter name="listWidget" />
+		<body><![CDATA[
+			try
+			{
+				this.getController().openModalDialog(this, 'theme_ReplacePagetemplate', {module: this, toReplaceId: listWidget.getSelectedItems()[0].id});
+			}
+			catch (e)
+			{
+				wCore.error('importTheme', [], e);
+			}
 		]]></body>
 	</action>
 </actions>

@@ -16,28 +16,29 @@ class theme_UninstallThemeAction extends change_JSONAction
 			$theme = $this->getThemeFromRequest($request);
 			$codename = $theme->getCodename();
 			
+			$tms = theme_ModuleService::getInstance();
 			$result = website_PageService::getInstance()->createQuery()
 				->setProjection(Projections::count('id', 'pagecount'))
-				->add(Restrictions::published())
+				->add(Restrictions::notin('publicationstatus', $tms->getDeadPageStatuses()))
 				->add(Restrictions::like('template', $codename.'/', MatchMode::START()))
 				->find();
 			if ($result[0]['pagecount'] > 0)
 			{
-				$msg = f_Locale::translate('&modules.theme.bo.errors.Uninstall-used-theme;', array('pageCount' => $result[0]['pagecount']));
+				$msg = LocaleService::getInstance()->trans('m.theme.bo.errors.uninstall-used-theme', array('ucf'), array('pageCount' => $result[0]['pagecount']));
 				return $this->sendJSONError($msg , true);
 			}
 			
 			$theme->delete();
 			theme_ModuleService::getInstance()->removeThemePaths($codename);
 			
-			$msg = f_Locale::translate('&modules.theme.bo.general.Uninstall-succes;', array('codeName' => $codename));
+			$msg = LocaleService::getInstance()->trans('m.theme.bo.general.uninstall-succes', array('ucf'), array('codeName' => $codename));
 			return $this->sendJSON(array('text' => $msg));
 		}
 		catch (Exception $e)
 		{
 			Framework::exception($e);
 		}
-		return $this->sendJSONError(f_Locale::translate('&modules.theme.bo.errors.Uninstall-error;', true));		
+		return $this->sendJSONError(LocaleService::getInstance()->trans('m.theme.bo.errors.uninstall-error', array('ucf')));		
 	}
 	
 	public function isSecure()
@@ -51,6 +52,6 @@ class theme_UninstallThemeAction extends change_JSONAction
 	 */
 	private function getThemeFromRequest($request)
 	{
-		return $this->getDocumentInstanceFromRequest($request);
+		return DocumentHelper::getDocumentInstance($this->getDocumentIdFromRequest($request), 'modules_theme/theme');
 	}
 }

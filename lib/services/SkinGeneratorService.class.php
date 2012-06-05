@@ -71,8 +71,7 @@ class theme_SkinGeneratorService extends BaseService
 				$varNode = $undefinedSection->appendChild($skinDoc->createElement('field'));
 				$varNode->setAttribute('name', $varName);
 				$varNode->setAttribute('type', 'text');
-				$varNode->setAttribute('initialvalue', $initialvalue);
-				$varNode->setAttribute('hidehelp', 'true');			
+				$varNode->setAttribute('initialvalue', $initialvalue);	
 			}
 			else
 			{
@@ -100,7 +99,7 @@ class theme_SkinGeneratorService extends BaseService
 		
 		$lcid = $ls->getLCID('fr');
 		$baseKey = strtolower('t.'.$codeName.'.skin');
-		Framework::fatal(__METHOD__ . ' ' . var_export($keysInfos, true));
+
 		$ls->updatePackage($baseKey, array($lcid => $keysInfos), false, true);
 		
 		if ($modified)

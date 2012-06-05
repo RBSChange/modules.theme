@@ -75,7 +75,7 @@ class commands_theme_Init extends c_ChangescriptCommand
   <rootfolder module="theme">
     <theme id="'.$themeName.'" byCodename="'.$themeName.'" label="'.$themeName.'" description="'.$themeName.'">
       <!-- 
-      <pagetemplate byCodename="'.$themeName.'/fileNameWithoutExtension" doctype="XHTML-1.0-Strict|XHTML-1.0-Transitional" js="themes.'.$themeName.'.js..." useprojectcss="false|true" cssscreen="themes.'.$themeName.'..." />
+      <pagetemplate byCodename="'.$themeName.'/fileNameWithoutExtension" doctype="HTML-5|XHTML-1.0-Strict|XHTML-1.0-Transitional" js="themes.'.$themeName.'.js..." useprojectcss="false|true" cssscreen="themes.'.$themeName.'..." />
       -->
     </theme>
     </rootfolder>

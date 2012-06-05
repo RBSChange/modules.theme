@@ -82,7 +82,11 @@ class theme_persistentdocument_pagetemplate extends theme_persistentdocument_pag
 	 */
 	public function getDocTypeDeclaration()
 	{
-		if ($this->getDoctype() == 'XHMTL-1.0-Transitional')
+		if ($this->getDoctype() == 'HTML-5')
+		{
+			return '<!DOCTYPE html>';
+		}
+		elseif ($this->getDoctype() == 'XHMTL-1.0-Transitional')
 		{
 			return '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
 		}

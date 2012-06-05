@@ -8,6 +8,7 @@
 			label="Doctype des pages">
 				<staticitem label="XHMTL 1.0 Transitional" value="XHMTL-1.0-Transitional"/>
 				<staticitem label="XHTML 1.0 Strict" value="XHTML-1.0-Strict"/>
+				<staticitem label="HTML 5" value="HTML-5"/>
 		</staticlist>
 	</systemfolder>
 </script>

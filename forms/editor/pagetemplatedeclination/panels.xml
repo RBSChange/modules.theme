@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<panels>
+	<panel name="resume" />
+	<panel name="properties" />
+	<panel name="editableblocks" icon="list-block" labeli18n="m.theme.bo.general.editableblocks-tab" />
+	<panel name="publication" />
+	<panel name="history" />
+	<panel name="create" />
+</panels>

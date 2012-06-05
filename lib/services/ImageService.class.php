@@ -75,18 +75,7 @@ class theme_ImageService extends f_persistentdocument_DocumentService
 		{
 			foreach ($paths as $path) 
 			{
-				$dir = new DirectoryIterator($path);
-				foreach ($dir as $fileinfo) 
-				{
-				    if ($fileinfo->isFile()) 
-				    {
-				    	$ext = f_util_FileUtils::getFileExtension($fileinfo->getFilename());
-				    	if (in_array($ext, array('gif', 'png', 'jpg', 'jpeg')))
-				    	{
-				        	$imagesPath[$fileinfo->getFilename()] = $fileinfo->getPathname();
-				    	}
-				    }
-				}
+				$this->walkThemeDirectory($path, '', $imagesPath);
 			}
 		}
 		
@@ -99,8 +88,7 @@ class theme_ImageService extends f_persistentdocument_DocumentService
 			{
 				$image = $this->getNewDocumentInstance();		
 				$image->setCodename($codeName);
-				$label = str_replace(f_util_FileUtils::getFileExtension($baseName, true), '', $baseName);
-				$image->setLabel($label);
+				$image->setLabel($baseName);
 				$image->setThemeid($theme->getId());
 				$image->setProjectpath('themes/' . $theme->getCodename() . '/image/' . $baseName);
 				$image->save();
@@ -127,25 +115,65 @@ class theme_ImageService extends f_persistentdocument_DocumentService
 		}
 	}
 	
+	/**
+	 * @param string $path
+	 * @param string $labelPrefix
+	 * @param string[] $imagesPath
+	 */
+	protected function walkThemeDirectory($path, $labelPrefix, &$imagesPath)
+	{
+		$dir = new DirectoryIterator($path);
+		foreach ($dir as $fileinfo)
+		{
+			if ($fileinfo->isFile())
+			{
+				$ext = f_util_FileUtils::getFileExtension($fileinfo->getFilename());
+				if (in_array($ext, array('gif', 'png', 'jpg', 'jpeg')))
+				{
+					$imagesPath[$labelPrefix . $fileinfo->getFilename()] = $fileinfo->getPathname();
+				}
+			}
+			elseif ($fileinfo->isDir() && !f_util_StringUtils::beginsWith($fileinfo->getFilename(), '.'))
+			{
+				$this->walkThemeDirectory($path . $fileinfo->getFilename() . DIRECTORY_SEPARATOR, $labelPrefix . $fileinfo->getFilename() . '/', $imagesPath);
+			}
+		}
+	}
+	
 	public function getDefaultStaticList()
 	{
 		$result = array();
 		$prefix = 'frontoffice/';
-		
-		$path = f_util_FileUtils::buildWebeditPath('media', 'frontoffice');
-		$dir = new DirectoryIterator($path);
-		foreach ($dir as $fileinfo) 
-		{
-		    if ($fileinfo->isFile()) 
-		    {
-		    	$ext = f_util_FileUtils::getFileExtension($fileinfo->getFilename());
-		    	if (in_array($ext, array('gif', 'png', 'jpg', 'jpeg')))
-		    	{
-		    		$result[] = array('label' => $prefix. $fileinfo->getFilename(),
-		    			'value' => 'url(/' . implode('/', array('media', 'frontoffice', $fileinfo->getFilename())) . ')');
-		    	}
-		    }
-		}
+		$urlPrefix = 'media/frontoffice';		
+		$this->walkStaticDirectory(f_util_FileUtils::buildProjectPath('media', 'frontoffice'), $urlPrefix, $prefix, $result);
 		return $result;
+	}
+	
+	/**
+	 * 
+	 * @param string $path
+	 * @param string $urlPrefix
+	 * @param string $labelPrefix
+	 * @param string[] $result
+	 */
+	protected function walkStaticDirectory($path, $urlPrefix, $labelPrefix, &$result)
+	{
+		$dir = new DirectoryIterator($path);
+		foreach ($dir as $fileinfo)
+		{
+			if ($fileinfo->isFile())
+			{
+				$ext = f_util_FileUtils::getFileExtension($fileinfo->getFilename());
+				if (in_array($ext, array('gif', 'png', 'jpg', 'jpeg')))
+				{
+					$result[] = array('label' => $labelPrefix . $fileinfo->getFilename(),
+						'value' => 'url(/' . implode('/', array($urlPrefix, $fileinfo->getFilename())) . ')');
+				}
+			}
+			elseif ($fileinfo->isDir() && !f_util_StringUtils::beginsWith($fileinfo->getFilename(), '.'))
+			{
+				$this->walkStaticDirectory($path . DIRECTORY_SEPARATOR . $fileinfo->getFilename(), $urlPrefix . '/' . $fileinfo->getFilename(), $labelPrefix . $fileinfo->getFilename() . '/', $result);
+			}
+		}
 	}
 }

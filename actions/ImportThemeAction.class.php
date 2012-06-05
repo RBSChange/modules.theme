@@ -13,12 +13,12 @@ class theme_ImportThemeAction extends change_JSONAction
 	{
 		if (!count($_FILES))
 		{
-			return $this->sendJSONError(f_Locale::translateUI('&modules.theme.bo.errors.Import-file;', true));
+			return $this->sendJSONError(LocaleService::getInstance()->trans('m.theme.bo.errors.import-file', array('ucf')));
 		}
 		
 		if ($_FILES['filename']['error'] != UPLOAD_ERR_OK || substr($_FILES['filename']['name'], - strlen('.zip')) != '.zip')
 		{
-			return $this->sendJSONError(f_Locale::translateUI('&modules.theme.bo.errors.Import-file-type;', true));
+			return $this->sendJSONError(LocaleService::getInstance()->trans('m.theme.bo.errors.import-file-type', array('ucf')));
 		}
 		
 		$zipPath = $_FILES['filename']['tmp_name'];
@@ -32,7 +32,7 @@ class theme_ImportThemeAction extends change_JSONAction
 				$theme = theme_ModuleService::getInstance()->installTheme($themeCodename, $folder);
 				if ($theme)
 				{
-					$msg = f_Locale::translate('&modules.theme.bo.general.Import-succes;', 
+					$msg = LocaleService::getInstance()->trans('m.theme.bo.general.import-succes', array('ucf'),
 						array('codename' => $theme->getCodename(), 'label' => $theme->getLabel()));
 					return $this->sendJSON(array('theme' => $msg));
 				}
@@ -42,7 +42,7 @@ class theme_ImportThemeAction extends change_JSONAction
 		{
 			Framework::exception($e);
 		}
-		return $this->sendJSONError(f_Locale::translateUI('&modules.theme.bo.errors.Import-error;', true));		
+		return $this->sendJSONError(LocaleService::getInstance()->trans('m.theme.bo.errors.import-error', array('ucf')));		
 	}
 	
 	public function isSecure()

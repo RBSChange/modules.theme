@@ -150,7 +150,14 @@ class theme_CssService extends f_persistentdocument_DocumentService
 			{
 				if ($CSSDeclaration->getSkinRef())
 				{
-					$skinRefs[$CSSDeclaration->getSkinRef()] = $CSSDeclaration->getPropertyValue();
+					if ($CSSDeclaration instanceof website_CSSVarDeclaration)
+					{
+						$skinRefs[$CSSDeclaration->getSkinRef()] = $CSSDeclaration->getPropertyValue();
+					}
+					else
+					{
+						Framework::warn(__METHOD__ . ' Invalid skin var declaration: ' . $CSSDeclaration->getSkinRef());
+					}
 				}
 			}
 		}

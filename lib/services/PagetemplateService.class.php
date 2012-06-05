@@ -293,6 +293,21 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param theme_persistentdocument_pagetemplate $document
+	 * @return integer
+	 */
+	public function getUsageCount($document)
+	{
+		$tms = theme_ModuleService::getInstance();
+		$result = website_PageService::getInstance()->createQuery()
+		->setProjection(Projections::count('id', 'pagecount'))
+		->add(Restrictions::notin('publicationstatus', $tms->getDeadPageStatuses()))
+		->add(Restrictions::eq('template', $document->getCodeName()))
+		->find();
+		return $result[0]['pagecount'];
+	}
+	
+	/**
+	 * @param theme_persistentdocument_pagetemplate $document
 	 * @param string $forModuleName
 	 * @param array $allowedSections
 	 * @return array
@@ -301,6 +316,7 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	{
 		$resume = parent::getResume($document, $forModuleName, $allowedSections);
 		$resume['properties']['codename'] = $document->getCodename();
+		$resume['properties']['usageCount'] = $document->getDocumentService()->getUsageCount($document);
 		$infos = $this->getCompatibilityInfo($document);
 		$resume['properties']['layoutids'] = implode(', ', $infos['layout']);
 		$resume['properties']['requiredmodules'] = implode(', ', $infos['modules']);
@@ -325,6 +341,7 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 			if ($mode & DocumentHelper::MODE_CUSTOM)
 			{
 	    		$attributes['thumbnailsrc'] = $thumbnail->getUISrc();
+	    		$attributes['usageCount'] = $document->getDocumentService()->getUsageCount($document);
 			}
 		}
 	}
@@ -371,5 +388,79 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 			}
 		}
 		return $result;
+	}
+	
+
+	/**
+	 * @param theme_persistentdocument_pagetemplate $document
+	 * @param integer $parentNodeId
+	 */
+	protected function preUpdate($document, $parentNodeId)
+	{
+		$this->syncroniseDeclinations($document);
+	}
+	
+	/**
+	 * @param theme_persistentdocument_pagetemplate $document
+	 */
+	protected function syncroniseDeclinations($document)
+	{
+		$array = array_intersect($document->getModifiedPropertyNames(), $this->getSynchronizedPropertiesName());
+		if (count($array))
+		{
+			if (Framework::isInfoEnabled())
+			{
+				Framework::info(__METHOD__ . " Synchronize properties :" . implode(', ', $array));
+			}
+			$this->touchAllDeclinations($document);
+		}
+	}
+	
+	/**
+	 * @param theme_persistentdocument_pagetemplate $pagetemplate
+	 */
+	protected function touchAllDeclinations($pagetemplate)
+	{
+		$declinations = $pagetemplate->getPagetemplatedeclinationArrayInverse();
+		foreach ($declinations as $declination)
+		{
+			$declination->setModificationdate(null);
+			$declination->save();
+		}
+	}
+	
+	/**
+	 * @return string[]
+	 */
+	public function getSynchronizedPropertiesName()
+	{
+		return array('thumbnail', 'projectpath', 'doctype', 'useprojectcss', 'cssscreen', 'cssprint', 'useprojectjs', 'js');
+	}
+	
+	/**
+	 * @param theme_persistentdocument_pagetemplate $document
+	 */
+	protected function preDelete($document)
+	{
+		// Check that no page is using it.
+		$count = $this->getUsageCount($document);
+		if ($count > 0)
+		{
+			throw new BaseException('This template can\'t be deleted, it is used by ' . $count . ' pages.', 'm.theme.bo.errors.uninstall-used-template', array('pageCount' => $count));
+		}
+	}
+	
+	/**
+	 * @param theme_persistentdocument_pagetemplate $toReplace
+	 * @param theme_persistentdocument_pagetemplate $replaceBy
+	 */
+	public function replacePagetemplate($toReplace, $replaceBy)
+	{
+		$refreshListTask = task_PlannedtaskService::getInstance()->getNewDocumentInstance();
+		$refreshListTask->setSystemtaskclassname('theme_PagetemplateReplacementTask');
+		$refreshListTask->setLabel(__METHOD__);
+		$refreshListTask->setParameters(serialize(array('toReplaceId' => $toReplace->getId(), 'replaceById' => $replaceBy->getId())));
+		$refreshListTask->setUniqueExecutiondate(date_Calendar::getInstance());
+		$refreshListTask->save(ModuleService::getInstance()->getSystemFolderId('task', 'theme'));
 	}
 }

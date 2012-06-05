@@ -37,10 +37,14 @@ class theme_PagetemplateScriptDocumentElement extends import_ScriptDocumentEleme
 	 */
 	private function getTheme()
 	{
-		$doc = $this->getParentDocument();
-		if ($doc && $doc->getPersistentDocument() instanceof theme_persistentdocument_theme)
+		$doc = $this;
+		while ($doc instanceof import_ScriptDocumentElement)
 		{
-			return $doc->getPersistentDocument();
+			if ($doc->getPersistentDocument() instanceof theme_persistentdocument_theme)
+			{
+				return $doc->getPersistentDocument();
+			}
+			$doc = $doc->getParentDocument();
 		}
 		return null;
 	}
@@ -54,18 +58,8 @@ class theme_PagetemplateScriptDocumentElement extends import_ScriptDocumentEleme
 	{
 		$properties = parent::getDocumentProperties();
 		$theme = $this->getTheme();
-		if (isset($properties['byCodename']))
-		{
-			$codename = $properties['byCodename'];
-		}
-		else
-		{
-			$codename = $this->getPersistentDocument()->getCodename();
-			if ($codename)
-			{
-				list(, $codename) = explode('/', $codename);
-			}
-		}
+		$codename = (isset($properties['codename'])) ? $properties['codename'] : $this->getPersistentDocument()->getCodename();
+		list(, $codename) = explode('/', $codename);
 		
 		if ($theme && !isset($properties['label']) && $codename)
 		{

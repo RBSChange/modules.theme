@@ -6,4 +6,6 @@
   <binding name="css" className="theme_CssScriptDocumentElement"/>
   <binding name="image" className="theme_ImageScriptDocumentElement"/>
   <binding name="javascript" className="theme_JavascriptScriptDocumentElement"/>
+  <binding name="pagetemplatedeclination" className="theme_PagetemplatedeclinationScriptDocumentElement" />
+  <binding name="templateblock" className="theme_ScriptTemplateblockElement" />
 </script>

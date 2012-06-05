@@ -39,16 +39,39 @@
 			<children>	
 				<child model="modules_theme/pagetemplate" from="pagetemplate"/>
 			</children>
+			<columns>
+				<column name="usageCount" labeli18n="m.theme.document.pagetemplate.resume.usagecount" />
+			</columns>
 			<contextactions>
 				<contextaction name="edit" />
 				<contextaction name="uninstallTheme" />
+				<contextaction name="openTreeNodeOrder" />
+				<contextaction name="openFolder" />				
 			</contextactions>
 		</model>
 		<model name="modules_theme/pagetemplate">
+			<children>
+				<child model="modules_theme/pagetemplatedeclination" from="pagetemplatedeclination" />
+			</children>
+			<columns>
+				<column name="usageCount" labeli18n="m.theme.document.pagetemplate.resume.usagecount" />
+			</columns>
 			<contextactions>
 				<contextaction name="edit" />
+				<contextaction name="replacePagetemplate" />
+				<contextaction name="createPagetemplatedeclination" />
+				<contextaction name="openTreeNodeOrder" />
+				<contextaction name="openFolder" />
 			</contextactions>
-		</model>	
+		</model>
+		<model name="modules_theme/pagetemplatedeclination">
+			<contextactions>
+				<contextaction name="edit" />
+				<contextaction name="duplicate" />
+				<contextaction name="replacePagetemplate" />
+				<contextaction name="delete" />
+			</contextactions>
+		</model>
 	</models>
 	<toolbar>
 		<toolbarbutton name="edit" />
@@ -70,7 +93,9 @@
 		<action name="reactivate" permission="ReActivate" icon="reactivate" labeli18n="m.uixul.bo.actions.reactivate" />
 		<action name="openTreeNodeOrder" single="true" permission="Order" icon="sort" labeli18n="m.uixul.bo.actions.set-children-order" />
 		<action name="createFolder" single="true" permission="Insert_folder" icon="create-folder" labeli18n="m.uixul.bo.actions.create-folder" />
+		<action name="createPagetemplatedeclination" single="true" permission="Insert_pagetemplatedeclination" icon="add" />
 		<action name="importTheme" single="true" permission="ImportTheme" icon="upload" />
 		<action name="uninstallTheme" single="true" permission="UninstallTheme" icon="delete" />
+		<action name="replacePagetemplate" single="true" permission="ReplacePagetemplate" icon="richtext/search-replace" />
 	</actions>
 </perspective>

@@ -5,4 +5,7 @@
 		<icon>theme</icon>
 		<category>admin</category>
 	</module>
+	<project>
+		<entry name="pagetemplateReplacementChunkSize">100</entry>
+	</project>
 </config>

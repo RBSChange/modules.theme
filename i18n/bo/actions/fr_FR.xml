@@ -3,4 +3,6 @@
   <key id="create_">créer</key>
   <key id="importtheme">Importer un thème</key>
   <key id="uninstalltheme">desinstaller un thème</key>
+  <key id="createpagetemplatedeclination">décliner ce gabarit</key>
+  <key id="replacepagetemplate">remplacer ce gabarit dans les pages</key>
 </i18n>

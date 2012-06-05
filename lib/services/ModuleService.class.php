@@ -112,11 +112,11 @@ class theme_ModuleService extends ModuleBaseService
 		{
 			throw new Exception('Invalid theme: ' .$codeName);
 		}
-
 		$theme = $this->regenerateTheme($codeName, $folder);
 		
 		$scriptReader = import_ScriptReader::getInstance();
 		$scriptReader->execute($script);
+
 		return $theme;
 	}
 	
@@ -227,5 +227,17 @@ class theme_ModuleService extends ModuleBaseService
 		$xslt->setParameter('', 'theme', $codeName);
 		$panelDoc = $xslt->transformToDoc($skinDefDoc);
 		return $panelDoc;
+	}
+	
+	/**
+	 * @return string[]
+	 */
+	public function getDeadPageStatuses()
+	{
+		return array(
+			f_persistentdocument_PersistentDocument::STATUS_DEPRECATED,
+			f_persistentdocument_PersistentDocument::STATUS_FILED,
+			f_persistentdocument_PersistentDocument::STATUS_TRASH,
+		);
 	}
 }
