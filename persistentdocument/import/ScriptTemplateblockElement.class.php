@@ -20,6 +20,14 @@ class theme_ScriptTemplateblockElement extends import_ScriptBaseElement
 		{
 			if (f_util_StringUtils::beginsWith($name, '__'))
 			{
+				if ($value instanceof f_persistentdocument_PersistentDocument)
+				{
+					$value = $value->getId();
+				}
+				elseif (is_array($value))
+				{
+					$value = implode(',', DocumentHelper::getIdArrayFromDocumentArray($value));
+				}
 				$blockInfos['parameters'][substr($name, 2)] = $value;
 			}
 			elseif ($name != 'editname' && $name != 'type')
