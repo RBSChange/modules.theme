@@ -8,7 +8,7 @@ if (!class_exists('PclZip', false))
  * theme_ArchiveService
  * @package modules.theme
  */
-class theme_ArchiveService extends BaseService 
+class theme_ArchiveService extends change_BaseService 
 {
 	/**
 	 * theme_ArchiveService instance.

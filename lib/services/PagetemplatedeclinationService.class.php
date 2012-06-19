@@ -2,26 +2,10 @@
 /**
  * theme_PagetemplatedeclinationService
  * @package modules.theme
+ * @method theme_PagetemplatedeclinationService getInstance()
  */
 class theme_PagetemplatedeclinationService extends theme_PagetemplateService
 {
-	/**
-	 * @var theme_PagetemplatedeclinationService
-	 */
-	private static $instance;
-
-	/**
-	 * @return theme_PagetemplatedeclinationService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = self::getServiceClassInstance(get_class());
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return theme_persistentdocument_pagetemplatedeclination
 	 */

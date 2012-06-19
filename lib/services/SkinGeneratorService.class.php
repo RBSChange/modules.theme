@@ -3,7 +3,7 @@
  * theme_SkinGeneratorService
  * @package modules.theme
  */
-class theme_SkinGeneratorService extends BaseService
+class theme_SkinGeneratorService extends change_BaseService
 {
 	/**
 	 * theme_SkinGeneratorService instance.
