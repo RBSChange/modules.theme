@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rights>
-  <actions>
-    <document name="rootfolder"/>
-    <document name="folder"/>
-    <document name="theme"/>
-    <document name="pagetemplate"/>
-    <document name="pagetemplatedeclination" />
-    <document name="css"/>
-    <document name="csstheme"/>
-    <document name="cssproject"/>
-    <document name="image"/>
-    <document name="javascript"/>
-    
-    <action name="ImportTheme" />
-    <action name="UninstallTheme" />
-    <action name="ReplacePagetemplate" />
-  </actions>
-  <roles>
-    <role name="Admin">
-      <permission name="*"/>
-      <permission name="LoadPermissions.*"/>
-      <permission name="SavePermissions.*"/>
-      <permission name="GetPreferencesDocument"/>
-      <permission name="ImportTheme"/>
-      <permission name="UninstallTheme"/>
-      <permission name="ReplacePagetemplate" />
-      <permission name="Delete.*"/>
-      <permission name="Update.*"/>
-      <permission name="Load.*"/>
-      <permission name="Move.*"/>
-      <permission name="Order"/>
-      <permission name="Activate.*"/>
-      <permission name="Cancel.*"/>
-      <permission name="Deactivated.*"/>
-      <permission name="ReActivate.*"/>
-    </role>
-    <role name="Guest" extend="User">
-      <permission name="Enabled"/>
-    </role>
-    <role name="User">
-      <permission name="List.*"/>
-    </role>
-  </roles>
+	<actions>
+		<document name="rootfolder" />
+		<document name="folder" />
+		<document name="theme" />
+		<document name="pagetemplate" />
+		<document name="pagetemplatedeclination" />
+		<document name="css" />
+		<document name="csstheme" />
+		<document name="cssproject" />
+		<document name="image" />
+		<document name="javascript" />
+		<action name="ImportTheme" />
+		<action name="UninstallTheme" />
+		<action name="ReplacePagetemplate" />
+	</actions>
+	<roles>
+		<role name="Admin">
+			<permission name="*" />
+			<permission name="LoadPermissions.*" />
+			<permission name="SavePermissions.*" />
+			<permission name="GetPreferencesDocument" />
+			<permission name="ImportTheme" />
+			<permission name="UninstallTheme" />
+			<permission name="ReplacePagetemplate" />
+			<permission name="Delete.*" />
+			<permission name="Update.*" />
+			<permission name="Load.*" />
+			<permission name="Move.*" />
+			<permission name="Order" />
+			<permission name="Activate.*" />
+			<permission name="Cancel.*" />
+			<permission name="Deactivated.*" />
+			<permission name="ReActivate.*" />
+		</role>
+		<role name="Guest" extend="User">
+			<permission name="Enabled" />
+		</role>
+		<role name="User">
+			<permission name="List.*" />
+		</role>
+	</roles>
 </rights>

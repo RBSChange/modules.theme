@@ -1,6 +1,5 @@
 <?php
 /**
- * theme_PagetemplatedeclinationService
  * @package modules.theme
  * @method theme_PagetemplatedeclinationService getInstance()
  */
@@ -22,7 +21,7 @@ class theme_PagetemplatedeclinationService extends theme_PagetemplateService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_theme/pagetemplatedeclination');
+		return $this->getPersistentProvider()->createQuery('modules_theme/pagetemplatedeclination');
 	}
 	
 	/**
@@ -33,12 +32,12 @@ class theme_PagetemplatedeclinationService extends theme_PagetemplateService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_theme/pagetemplatedeclination', false);
+		return $this->getPersistentProvider()->createQuery('modules_theme/pagetemplatedeclination', false);
 	}
 	
 	/**
 	 * @param theme_persistentdocument_pagetemplatedeclination $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function preInsert($document, $parentNodeId)
@@ -82,7 +81,7 @@ class theme_PagetemplatedeclinationService extends theme_PagetemplateService
 
 	/**
 	 * @param theme_persistentdocument_pagetemplatedeclination $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function preUpdate($document, $parentNodeId)
@@ -95,7 +94,7 @@ class theme_PagetemplatedeclinationService extends theme_PagetemplateService
 	 * this method is call before saving the duplicate document.
 	 * @param theme_persistentdocument_pagetemplatedeclination $newDocument
 	 * @param theme_persistentdocument_pagetemplatedeclination $originalDocument
-	 * @param Integer $parentNodeId
+	 * @param integer $parentNodeId
 	 */
 	protected function preDuplicate($newDocument, $originalDocument, $parentNodeId)
 	{

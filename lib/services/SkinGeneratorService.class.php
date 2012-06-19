@@ -1,32 +1,10 @@
 <?php
 /**
- * theme_SkinGeneratorService
  * @package modules.theme
+ * @method theme_SkinGeneratorService getInstance()
  */
 class theme_SkinGeneratorService extends change_BaseService
 {
-	/**
-	 * theme_SkinGeneratorService instance.
-	 *
-	 * @var theme_SkinGeneratorService
-	 */
-	private static $instance = null;
-
-
-	/**
-	 * Gets a theme_SkinGeneratorService instance.
-	 *
-	 * @return theme_SkinGeneratorService
-	 */
-	public static function getInstance()
-	{
-		if (is_null(self::$instance))
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}	
-	
 	/**
 	 * @param theme_persistentdocument_theme $theme
 	 */

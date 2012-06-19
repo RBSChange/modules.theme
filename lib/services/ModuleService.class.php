@@ -1,38 +1,12 @@
 <?php
 /**
- * @package modules.theme.lib.services
+ * @package modules.theme
+ * @method theme_ModuleService getInstance()
  */
 class theme_ModuleService extends ModuleBaseService
 {
 	/**
-	 * Singleton
-	 * @var theme_ModuleService
-	 */
-	private static $instance = null;
-
-	/**
-	 * @return theme_ModuleService
-	 */
-	public static function getInstance()
-	{
-		if (is_null(self::$instance))
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-	
-	/**
-	 * @param Integer $documentId
-	 * @return f_persistentdocument_PersistentTreeNode
-	 */
-//	public function getParentNodeForPermissions($documentId)
-//	{
-//		// Define this method to handle permissions on a virtual tree node. Example available in list module.
-//	}
-
-	/**
-	 * @param Integer $documentId
+	 * @param integer $documentId
 	 * @return theme_persistentdocument_pagetemplate[]
 	 */
 	public function getAllowedTemplateForDocumentId($documentId)
@@ -81,6 +55,9 @@ class theme_ModuleService extends ModuleBaseService
 		f_util_FileUtils::rmdir(f_util_FileUtils::buildWebeditPath('media', 'themes', $codeName));		
 	}
 	
+	/**
+	 * @param string $codeName
+	 */
 	public function initThemePaths($codeName)
 	{
 		$paths = array(

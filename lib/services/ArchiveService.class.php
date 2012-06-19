@@ -1,37 +1,10 @@
 <?php
-if (!class_exists('PclZip', false))
-{
-	require_once PROJECT_HOME . '/modules/theme/tools/pclzip.lib.php';
-}
-
 /**
- * theme_ArchiveService
  * @package modules.theme
+ * @method theme_ArchiveService getInstance()
  */
 class theme_ArchiveService extends change_BaseService 
 {
-	/**
-	 * theme_ArchiveService instance.
-	 *
-	 * @var theme_ArchiveService
-	 */
-	private static $instance = null;
-
-
-	/**
-	 * Gets a theme_ArchiveService instance.
-	 *
-	 * @return theme_ArchiveService
-	 */
-	public static function getInstance()
-	{
-		if (is_null(self::$instance))
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-	
 	/**
 	 * @param string $themeCodeName
 	 * @return string

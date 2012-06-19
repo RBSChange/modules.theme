@@ -5,15 +5,15 @@
  */
 class theme_CssScriptDocumentElement extends import_ScriptDocumentElement
 {
-    /**
-     * @return theme_persistentdocument_css
-     */
-    protected function initPersistentDocument()
-    {
-    	return theme_CssService::getInstance()->getNewDocumentInstance();
-    }
-    
-    /**
+	/**
+	 * @return theme_persistentdocument_css
+	 */
+	protected function initPersistentDocument()
+	{
+		return theme_CssService::getInstance()->getNewDocumentInstance();
+	}
+	
+	/**
 	 * @return f_persistentdocument_PersistentDocumentModel
 	 */
 	protected function getDocumentModel()

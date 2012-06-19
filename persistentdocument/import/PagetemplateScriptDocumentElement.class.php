@@ -5,15 +5,15 @@
  */
 class theme_PagetemplateScriptDocumentElement extends import_ScriptDocumentElement
 {
-    /**
-     * @return theme_persistentdocument_pagetemplate
-     */
-    protected function initPersistentDocument()
-    {
-    	return theme_PagetemplateService::getInstance()->getNewDocumentInstance();
-    }
-    
-    /**
+	/**
+	 * @return theme_persistentdocument_pagetemplate
+	 */
+	protected function initPersistentDocument()
+	{
+		return theme_PagetemplateService::getInstance()->getNewDocumentInstance();
+	}
+	
+	/**
 	 * @return f_persistentdocument_PersistentDocumentModel
 	 */
 	protected function getDocumentModel()

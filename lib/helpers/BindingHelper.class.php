@@ -40,7 +40,7 @@ abstract class theme_BindingHelper
 		if ($element->hasAttribute('labeli18n'))
 		{
 			$key = $element->getAttribute('labeli18n');
-			return LocaleService::getInstance()->transBO(strtolower($key), array('ucf'));
+			return LocaleService::getInstance()->trans(strtolower($key), array('ucf'));
 		}
 		else if ($element->hasAttribute('label'))
 		{
@@ -49,7 +49,7 @@ abstract class theme_BindingHelper
 		else if ($element->hasAttribute('name'))
 		{
 			$key = "t." . self::$codename .".skin." . $element->getAttribute('name');
-			return LocaleService::getInstance()->transBO(strtolower($key), array('ucf'));
+			return LocaleService::getInstance()->trans(strtolower($key), array('ucf'));
 		}
 		return '';
 	}

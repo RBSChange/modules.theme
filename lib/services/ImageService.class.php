@@ -1,27 +1,10 @@
 <?php
 /**
- * theme_ImageService
  * @package modules.theme
+ * @method theme_ImageService getInstance()
  */
 class theme_ImageService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var theme_ImageService
-	 */
-	private static $instance;
-
-	/**
-	 * @return theme_ImageService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return theme_persistentdocument_image
 	 */
@@ -38,7 +21,7 @@ class theme_ImageService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_theme/image');
+		return $this->getPersistentProvider()->createQuery('modules_theme/image');
 	}
 	
 	/**
@@ -49,7 +32,7 @@ class theme_ImageService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_theme/image', false);
+		return $this->getPersistentProvider()->createQuery('modules_theme/image', false);
 	}
 	
 	/**

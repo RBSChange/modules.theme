@@ -1,27 +1,10 @@
 <?php
 /**
- * theme_JavascriptService
  * @package modules.theme
+ * @method theme_JavascriptService getInstance()
  */
 class theme_JavascriptService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var theme_JavascriptService
-	 */
-	private static $instance;
-
-	/**
-	 * @return theme_JavascriptService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return theme_persistentdocument_javascript
 	 */
@@ -38,7 +21,7 @@ class theme_JavascriptService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_theme/javascript');
+		return $this->getPersistentProvider()->createQuery('modules_theme/javascript');
 	}
 	
 	/**
@@ -49,7 +32,7 @@ class theme_JavascriptService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_theme/javascript', false);
+		return $this->getPersistentProvider()->createQuery('modules_theme/javascript', false);
 	}
 	
 	/**
@@ -79,14 +62,14 @@ class theme_JavascriptService extends f_persistentdocument_DocumentService
 				$dir = new DirectoryIterator($path);
 				foreach ($dir as $fileinfo) 
 				{
-				    if ($fileinfo->isFile()) 
-				    {
-				    	$jsParts = explode('.', $fileinfo->getFilename());
-				    	if (count($jsParts) == 2 && $jsParts[1] == 'js')
-				    	{
-				    		$jsPaths[$jsParts[0]] = $fileinfo->getPathname();
-				    	}
-				    }
+					if ($fileinfo->isFile()) 
+					{
+						$jsParts = explode('.', $fileinfo->getFilename());
+						if (count($jsParts) == 2 && $jsParts[1] == 'js')
+						{
+							$jsPaths[$jsParts[0]] = $fileinfo->getPathname();
+						}
+					}
 				}
 			}
 		}

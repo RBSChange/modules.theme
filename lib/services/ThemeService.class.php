@@ -1,27 +1,10 @@
 <?php
 /**
- * theme_ThemeService
  * @package modules.theme
+ * @method theme_ThemeService getInstance()
  */
 class theme_ThemeService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var theme_ThemeService
-	 */
-	private static $instance;
-
-	/**
-	 * @return theme_ThemeService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return theme_persistentdocument_theme
 	 */
@@ -38,7 +21,7 @@ class theme_ThemeService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_theme/theme');
+		return $this->getPersistentProvider()->createQuery('modules_theme/theme');
 	}
 	
 	/**
@@ -49,7 +32,7 @@ class theme_ThemeService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_theme/theme', false);
+		return $this->getPersistentProvider()->createQuery('modules_theme/theme', false);
 	}
 	
 	/**
@@ -120,7 +103,7 @@ class theme_ThemeService extends f_persistentdocument_DocumentService
 			}
 			if ($mode & DocumentHelper::MODE_CUSTOM)
 			{
-	    		$attributes['thumbnailsrc'] = $thumbnail->getUISrc();
+				$attributes['thumbnailsrc'] = $thumbnail->getUISrc();
 			}
 		}
 	}

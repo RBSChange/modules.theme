@@ -1,27 +1,10 @@
 <?php
 /**
- * theme_CssService
  * @package modules.theme
+ * @method theme_CssService getInstance()
  */
 class theme_CssService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var theme_CssService
-	 */
-	private static $instance;
-
-	/**
-	 * @return theme_CssService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return theme_persistentdocument_css
 	 */
@@ -38,7 +21,7 @@ class theme_CssService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_theme/css');
+		return $this->getPersistentProvider()->createQuery('modules_theme/css');
 	}
 	
 	/**
@@ -49,7 +32,7 @@ class theme_CssService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_theme/css', false);
+		return $this->getPersistentProvider()->createQuery('modules_theme/css', false);
 	}
 	
 	/**
@@ -79,14 +62,14 @@ class theme_CssService extends f_persistentdocument_DocumentService
 				$dir = new DirectoryIterator($path);
 				foreach ($dir as $fileinfo) 
 				{
-				    if ($fileinfo->isFile()) 
-				    {
-				    	$styleParts = explode('.', $fileinfo->getFilename());
-				    	if (count($styleParts) == 2 && $styleParts[1] == 'css')
-				    	{
-				    		$stylesPath[$styleParts[0]] = $fileinfo->getPathname();
-				    	}
-				    }
+					if ($fileinfo->isFile()) 
+					{
+						$styleParts = explode('.', $fileinfo->getFilename());
+						if (count($styleParts) == 2 && $styleParts[1] == 'css')
+						{
+							$stylesPath[$styleParts[0]] = $fileinfo->getPathname();
+						}
+					}
 				}
 			}
 		}

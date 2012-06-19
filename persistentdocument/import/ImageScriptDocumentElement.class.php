@@ -5,15 +5,15 @@
  */
 class theme_ImageScriptDocumentElement extends import_ScriptDocumentElement
 {
-    /**
-     * @return theme_persistentdocument_image
-     */
-    protected function initPersistentDocument()
-    {
-    	return theme_ImageService::getInstance()->getNewDocumentInstance();
-    }
-    
-    /**
+	/**
+	 * @return theme_persistentdocument_image
+	 */
+	protected function initPersistentDocument()
+	{
+		return theme_ImageService::getInstance()->getNewDocumentInstance();
+	}
+	
+	/**
 	 * @return f_persistentdocument_PersistentDocumentModel
 	 */
 	protected function getDocumentModel()

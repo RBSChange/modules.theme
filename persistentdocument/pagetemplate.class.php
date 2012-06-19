@@ -5,7 +5,7 @@
 class theme_persistentdocument_pagetemplate extends theme_persistentdocument_pagetemplatebase 
 {
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getLabel()
 	{

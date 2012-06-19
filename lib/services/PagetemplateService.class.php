@@ -1,27 +1,10 @@
 <?php
 /**
- * theme_PagetemplateService
  * @package modules.theme
+ * @method theme_PagetemplateService getInstance()
  */
 class theme_PagetemplateService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var theme_PagetemplateService
-	 */
-	private static $instance;
-
-	/**
-	 * @return theme_PagetemplateService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return theme_persistentdocument_pagetemplate
 	 */
@@ -38,7 +21,7 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_theme/pagetemplate');
+		return $this->getPersistentProvider()->createQuery('modules_theme/pagetemplate');
 	}
 	
 	/**
@@ -49,7 +32,7 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_theme/pagetemplate', false);
+		return $this->getPersistentProvider()->createQuery('modules_theme/pagetemplate', false);
 	}
 	
 	
@@ -216,14 +199,14 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 				$dir = new DirectoryIterator($path);
 				foreach ($dir as $fileinfo) 
 				{
-				    if ($fileinfo->isFile()) 
-				    {
-				    	$ext = f_util_FileUtils::getFileExtension($fileinfo->getFilename());
-				    	if ($ext == 'xul' || $ext == 'xml')
-				    	{
-				    		$pageTemplatesPaths[$fileinfo->getFilename()] = $fileinfo->getPathname();
-				    	}
-				    }
+					if ($fileinfo->isFile()) 
+					{
+						$ext = f_util_FileUtils::getFileExtension($fileinfo->getFilename());
+						if ($ext == 'xul' || $ext == 'xml')
+						{
+							$pageTemplatesPaths[$fileinfo->getFilename()] = $fileinfo->getPathname();
+						}
+					}
 				}
 			}
 		}
@@ -340,15 +323,15 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 			}
 			if ($mode & DocumentHelper::MODE_CUSTOM)
 			{
-	    		$attributes['thumbnailsrc'] = $thumbnail->getUISrc();
-	    		$attributes['usageCount'] = $document->getDocumentService()->getUsageCount($document);
+				$attributes['thumbnailsrc'] = $thumbnail->getUISrc();
+				$attributes['usageCount'] = $document->getDocumentService()->getUsageCount($document);
 			}
 		}
 	}
 	
 	/**
 	 * @param theme_persistentdocument_pagetemplate $document
-	 * @param String[] $propertiesName
+	 * @param string[] $propertiesName
 	 * @param array $datas
 	 */
 	public function addFormProperties($document, $propertiesName, &$datas)

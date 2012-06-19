@@ -2,7 +2,7 @@
 <perspective>
 	<models>
 		<model name="modules_generic/rootfolder">
-			<children>	
+			<children>
 				<child model="modules_generic/folder" />
 				<child model="modules_theme/theme" />
 			</children>
@@ -15,7 +15,7 @@
 				<contextaction name="importTheme" />
 				<contextaction name="createFolder" />
 				<contextaction name="openTreeNodeOrder" />
-			</contextactions>	
+			</contextactions>
 		</model>
 		<model name="modules_generic/folder">
 			<children>
@@ -29,15 +29,15 @@
 			<contextactions>
 				<contextaction name="edit" />
 				<contextaction name="importTheme" />
-				<contextaction name="delete" />				
+				<contextaction name="delete" />
 				<contextaction name="createFolder" />
 				<contextaction name="openTreeNodeOrder" />
 				<contextaction name="openFolder" />
 			</contextactions>
 		</model>
 		<model name="modules_theme/theme">
-			<children>	
-				<child model="modules_theme/pagetemplate" from="pagetemplate"/>
+			<children>
+				<child model="modules_theme/pagetemplate" from="pagetemplate" />
 			</children>
 			<columns>
 				<column name="usageCount" labeli18n="m.theme.document.pagetemplate.resume.usagecount" />
@@ -46,7 +46,7 @@
 				<contextaction name="edit" />
 				<contextaction name="uninstallTheme" />
 				<contextaction name="openTreeNodeOrder" />
-				<contextaction name="openFolder" />				
+				<contextaction name="openFolder" />
 			</contextactions>
 		</model>
 		<model name="modules_theme/pagetemplate">

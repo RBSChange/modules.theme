@@ -6,8 +6,8 @@
 class commands_theme_CompileTheme extends c_ChangescriptCommand
 {
 	/**
-	 * @return String
-	 * @example "<moduleName> <name>"
+	 * @return string
+	 * For exemple "<moduleName> <name>"
 	 */
 	function getUsage()
 	{
@@ -15,8 +15,8 @@ class commands_theme_CompileTheme extends c_ChangescriptCommand
 	}
 
 	/**
-	 * @return String
-	 * @example "initialize a document"
+	 * @return string
+	 * For exemple "initialize a document"
 	 */
 	function getDescription()
 	{
@@ -36,11 +36,11 @@ class commands_theme_CompileTheme extends c_ChangescriptCommand
 	/**
 	 * @see c_ChangescriptCommand::getParameters()
 	 *
-	 * @param Integer $completeParamCount
-	 * @param String[] $params
+	 * @param integer $completeParamCount
+	 * @param string[] $params
 	 * @param unknown_type $options
-	 * @param String $current
-	 * @return String[]
+	 * @param string $current
+	 * @return string[]
 	 */
 	function getParameters($completeParamCount, $params, $options, $current)
 	{	
@@ -57,22 +57,7 @@ class commands_theme_CompileTheme extends c_ChangescriptCommand
 	}
 
 	/**
-	 * @param String[] $params
-	 * @param array<String, String> $options where the option array key is the option name, the potential option value or true
-	 */
-//	protected function validateArgs($params, $options)
-//	{
-//	}
-
-	/**
-	 * @return String[]
-	 */
-//	function getOptions()
-//	{
-//	}
-
-	/**
-	 * @param String[] $params
+	 * @param string[] $params
 	 * @param array<String, String> $options where the option array key is the option name, the potential option value or true
 	 * @see c_ChangescriptCommand::parseArgs($args)
 	 */
