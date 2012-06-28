@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd" model-version="4.0" extend="modules_theme/pagetemplate">
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/schema/persistentdocument-4.0.xsd" model-version="4.0" extend="modules_theme/pagetemplate">
 	<properties>
-		<property name="reference" type="modules_theme/pagetemplate" inverse="true" />
+		<property name="reference" type="Document" inverse="true" document-type="modules_theme/pagetemplate" />
 	</properties>
 </document>
