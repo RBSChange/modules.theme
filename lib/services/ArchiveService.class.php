@@ -62,7 +62,7 @@ class theme_ArchiveService extends change_BaseService
 				$theme = $doc->findUnique('//install');
 				if ($theme && $theme->getAttribute('name') == $themeCodeName)
 				{
-					$path = f_util_FileUtils::buildWebeditPath('themes', $themeCodeName);			
+					$path = f_util_FileUtils::buildProjectPath('themes', $themeCodeName);			
 					f_util_FileUtils::cp($tmpPath . DIRECTORY_SEPARATOR . $themeCodeName, $path, f_util_FileUtils::OVERRIDE);
 					if (!file_exists($path . DIRECTORY_SEPARATOR . 'install.xml'))
 					{

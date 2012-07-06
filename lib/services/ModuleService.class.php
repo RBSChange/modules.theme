@@ -40,8 +40,8 @@ class theme_ModuleService extends ModuleBaseService
 	public function initPaths()
 	{
 		$paths = array(
-			f_util_FileUtils::buildWebeditPath('themes'),
-			f_util_FileUtils::buildWebeditPath('media', 'themes')
+			f_util_FileUtils::buildProjectPath('themes'),
+			f_util_FileUtils::buildProjectPath('media', 'themes')
 		);
 		foreach ($paths as $path) 
 		{
@@ -51,8 +51,8 @@ class theme_ModuleService extends ModuleBaseService
 	
 	public function removeThemePaths($codeName)
 	{
-		f_util_FileUtils::rmdir(f_util_FileUtils::buildWebeditPath('themes', $codeName));
-		f_util_FileUtils::rmdir(f_util_FileUtils::buildWebeditPath('media', 'themes', $codeName));		
+		f_util_FileUtils::rmdir(f_util_FileUtils::buildProjectPath('themes', $codeName));
+		f_util_FileUtils::rmdir(f_util_FileUtils::buildProjectPath('media', 'themes', $codeName));		
 	}
 	
 	/**
@@ -61,12 +61,12 @@ class theme_ModuleService extends ModuleBaseService
 	public function initThemePaths($codeName)
 	{
 		$paths = array(
-			f_util_FileUtils::buildWebeditPath('themes', $codeName, 'templates'),
-			f_util_FileUtils::buildWebeditPath('themes', $codeName, 'style'),
-			f_util_FileUtils::buildWebeditPath('themes', $codeName, 'js'),
-			f_util_FileUtils::buildWebeditPath('themes', $codeName, 'locale'),
-			f_util_FileUtils::buildWebeditPath('themes', $codeName, 'image'),
-			f_util_FileUtils::buildWebeditPath('media', 'themes', $codeName)
+			f_util_FileUtils::buildProjectPath('themes', $codeName, 'templates'),
+			f_util_FileUtils::buildProjectPath('themes', $codeName, 'style'),
+			f_util_FileUtils::buildProjectPath('themes', $codeName, 'js'),
+			f_util_FileUtils::buildProjectPath('themes', $codeName, 'locale'),
+			f_util_FileUtils::buildProjectPath('themes', $codeName, 'image'),
+			f_util_FileUtils::buildProjectPath('media', 'themes', $codeName)
 		);
 		foreach ($paths as $path) 
 		{
@@ -81,10 +81,7 @@ class theme_ModuleService extends ModuleBaseService
 	 */
 	public function installTheme($codeName, $folder = null)
 	{
-		$script = FileResolver::getInstance()
-			->setPackageName('themes_' . $codeName)
-			->setDirectory('setup')->getPath('init.xml');
-			
+		$script = change_FileResolver::getNewInstance()->getPath('themes', $codeName, 'setup', 'init.xml');		
 		if (!file_exists($script))
 		{
 			throw new Exception('Invalid theme: ' .$codeName);
@@ -102,7 +99,7 @@ class theme_ModuleService extends ModuleBaseService
 	 */
 	public function regenerateAllThemes($doEcho = false)
 	{
-		$path = f_util_FileUtils::buildWebeditPath('themes', '*');
+		$path = f_util_FileUtils::buildProjectPath('themes', '*');
 		$themes = glob($path, GLOB_ONLYDIR);
 		if (is_array($themes))
 		{
@@ -150,11 +147,8 @@ class theme_ModuleService extends ModuleBaseService
 	 */
 	private function buildSkinVars($theme, $doEcho = false)
 	{
-		$skinVarsPath = FileResolver::getInstance()
-			->setPackageName('themes_' . $theme->getCodename())
-			->setDirectory('skin')->getPath('skin.xml');
-		$skinVars = array();
-		
+		$skinVarsPath = change_FileResolver::getNewInstance()->getPath('themes', $theme->getCodename(), 'skin', 'skin.xml');
+		$skinVars = array();	
 		if ($skinVarsPath)
 		{
 			$skinDoc = f_util_DOMUtils::fromPath($skinVarsPath);
@@ -187,11 +181,8 @@ class theme_ModuleService extends ModuleBaseService
 		
 		theme_BindingHelper::setCurrentTheme($theme);
 		
-		$xslPath = FileResolver::getInstance()->setPackageName('modules_theme')
-			->setDirectory('templates')->getPath('variables.xsl');
-
-		$skinDefPath = FileResolver::getInstance()->setPackageName('themes_' . $codeName)
-			->setDirectory('skin')->getPath('skin.xml');
+		$xslPath = change_FileResolver::getNewInstance()->getPath('modules', 'theme', 'templates', 'variables.xsl');
+		$skinDefPath = change_FileResolver::getNewInstance()->getPath('themes', $codeName, 'skin', 'skin.xml');
 
 		$skinDefDoc = new DOMDocument('1.0', 'UTF-8');
 		$skinDefDoc->load($skinDefPath);

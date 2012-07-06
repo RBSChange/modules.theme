@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.theme.bo.useractionlogger" lcid="fr_FR">
-  <key id="update-pagetemplate">update.pagetemplate {documentlabel}</key>
-  <key id="log-update-pagetemplate">log update pagetemplate</key>
-  <key id="move-theme">move.theme {destinationlabel} {documentlabel}</key>
-  <key id="log-move-theme">log move theme</key>
-  <key id="replacedby-pagetemplate">remplacement du gabarit de page "{documentlabel}" par le gabarit "{replacedByLabel}"</key>
-  <key id="log-replacedby-pagetemplate">remplacé par un autre gabarit de page</key>
-  <key id="replace-pagetemplate">le gabarit de page "{documentlabel}" replace le gabarit "{replaceLabel}"</key>
-  <key id="log-replace-pagetemplate">remplace un autre gabarit de page</key>
+	<key id="update-pagetemplate">update.pagetemplate {documentlabel}</key>
+	<key id="log-update-pagetemplate">log update pagetemplate</key>
+	<key id="move-theme">move.theme {destinationlabel} {documentlabel}</key>
+	<key id="log-move-theme">log move theme</key>
+	<key id="replacedby-pagetemplate">remplacement du gabarit de page "{documentlabel}" par le gabarit "{replacedByLabel}"</key>
+	<key id="log-replacedby-pagetemplate">remplacé par un autre gabarit de page</key>
+	<key id="replace-pagetemplate">le gabarit de page "{documentlabel}" replace le gabarit "{replaceLabel}"</key>
+	<key id="log-replace-pagetemplate">remplace un autre gabarit de page</key>
 </i18n>

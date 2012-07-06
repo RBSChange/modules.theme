@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.theme.document.theme.resume" lcid="en_GB">
-  <key id="codename">code</key>
-  <key id="nbtemplate">Number of templates</key>
+	<key id="codename">code</key>
+	<key id="nbtemplate">Number of templates</key>
 </i18n>

@@ -75,7 +75,7 @@ class commands_theme_CompileTheme extends c_ChangescriptCommand
 
 		foreach ($params as $theme)
 		{
-			$themeBasePath = f_util_FileUtils::buildWebeditPath('themes', $theme);
+			$themeBasePath = f_util_FileUtils::buildProjectPath('themes', $theme);
 			if (!is_dir($themeBasePath))
 			{
 				$this->errorMessage("Theme $theme does not exist.");

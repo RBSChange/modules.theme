@@ -22,7 +22,7 @@ class theme_SkinGeneratorService extends change_BaseService
 			$skinVars = array_merge($skinVars, $this->getStandardVars());
 		}
 		
-		$skinVarsPath = f_util_FileUtils::buildWebeditPath('themes', $codeName, 'skin', 'skin.xml');		
+		$skinVarsPath = f_util_FileUtils::buildProjectPath('themes', $codeName, 'skin', 'skin.xml');		
 		if (!file_exists($skinVarsPath))
 		{
 			$content = '<?xml version="1.0" encoding="UTF-8"?><sections />';

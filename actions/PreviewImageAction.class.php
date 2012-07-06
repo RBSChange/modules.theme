@@ -17,8 +17,7 @@ class theme_PreviewImageAction extends change_Action
 				if ($thumbnail)
 				{
 					$pathParts = explode('/', $thumbnail->getProjectpath());
-					$imagePath = FileResolver::getInstance()->setPackageName($pathParts[0] . '_' . $pathParts[1])
-						->setDirectory($pathParts[2])->getPath(implode(DIRECTORY_SEPARATOR, array_slice($pathParts, 3)));
+					$imagePath = change_FileResolver::getNewInstance()->getPath($pathParts[0], $pathParts[1], $pathParts[2], array_slice($pathParts, 3));
 					
 					// Handle thumbnail formating.
 					$formatSizeInfo = array();

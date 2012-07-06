@@ -49,12 +49,9 @@ class theme_ImageService extends f_persistentdocument_DocumentService
 	 */
 	public function refreshByFiles($theme)
 	{
-		$paths = FileResolver::getInstance()
-				->setPackageName('themes_' . $theme->getCodename())
-				->setDirectory('image')->getPaths('');	
-
+		$paths = change_FileResolver::getNewInstance()->getPaths('themes', $theme->getCodename(), 'image');	
 		$imagesPath = array();
-		if (is_array($paths) && count($paths))
+		if (count($paths))
 		{
 			foreach ($paths as $path) 
 			{

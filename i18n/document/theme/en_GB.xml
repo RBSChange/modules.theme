@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.theme.document.theme" lcid="en_GB">
-  <key id="document-name">theme</key>
-  <key id="label">label</key>
-  <key id="label-help">label</key>
-  <key id="description">description</key>
-  <key id="description-help">description</key>
-  <key id="css"/>
-  <key id="image"/>
-  <key id="javascript"/>
+	<key id="document-name">theme</key>
+	<key id="label">label</key>
+	<key id="label-help">label</key>
+	<key id="description">description</key>
+	<key id="description-help">description</key>
+	<key id="css" />
+	<key id="image" />
+	<key id="javascript" />
 </i18n>

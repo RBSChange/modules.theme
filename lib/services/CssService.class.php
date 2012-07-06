@@ -49,13 +49,10 @@ class theme_CssService extends f_persistentdocument_DocumentService
 	 */
 	public function refreshByFiles($theme)
 	{
-		$paths = FileResolver::getInstance()
-				->setPackageName('themes_' . $theme->getCodename())
-				->setDirectory('style')
-				->getPaths('');	
+		$paths = change_FileResolver::getNewInstance()->getPaths('themes',  $theme->getCodename(), 'style');	
 
 		$stylesPath = array();
-		if (is_array($paths) && count($paths))
+		if (count($paths))
 		{
 			foreach ($paths as $path) 
 			{

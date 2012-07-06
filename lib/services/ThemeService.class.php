@@ -51,10 +51,7 @@ class theme_ThemeService extends f_persistentdocument_DocumentService
 	 */
 	public function refreshByFiles($codeName, $folder = null)
 	{
-		$installPath = FileResolver::getInstance()
-				->setPackageName('themes_' . $codeName)
-				->getPath('install.xml');
-
+		$installPath = change_FileResolver::getNewInstance()->getPath('themes', $codeName, 'install.xml');
 		if (!$installPath)
 		{
 			return null;

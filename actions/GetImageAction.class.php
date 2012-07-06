@@ -23,13 +23,10 @@ class theme_GetImageAction extends change_Action
 				if (count($pathParts) > 1)
 				{
 					$theme = $pathParts[0];					
-					$imagePath = FileResolver::getInstance()
-						->setPackageName('themes_' .$theme)
-						->setDirectory('image')
-						->getPath(implode(DIRECTORY_SEPARATOR, array_slice($pathParts, 1)));
+					$imagePath = change_FileResolver::getNewInstance()->getPath('themes', $theme, 'image', array_slice($pathParts, 1));
 					if ($imagePath != null)
 					{
-						$link = f_util_FileUtils::buildWebeditPath('media', 'themes', $path);
+						$link = f_util_FileUtils::buildProjectPath('media', 'themes', $path);
 						f_util_FileUtils::mkdir(dirname($link));
 						f_util_FileUtils::symlink($imagePath, $link, f_util_FileUtils::OVERRIDE);		 			
 						MediaHelper::outputHeader($link, null, false);

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.theme.document.pagetemplatedeclination" lcid="fr_FR">
 	<include id="m.theme.document.pagetemplate" />
 	<key id="document-name">déclinaison de gabarit de page</key>

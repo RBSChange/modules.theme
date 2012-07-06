@@ -117,9 +117,8 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 			
 			foreach (ModuleService::getInstance()->getModulesObj() as $module)
 			{
-				$scriptPath = FileResolver::getInstance()->setPackageName($module->getFullName())
-					->setDirectory('lib')
-					->getPath('frontoffice.js');
+				/* @var $module c_Module */
+				$scriptPath = change_FileResolver::getNewInstance()->getPath('modules', $module->getName(), 'lib', 'frontoffice.js');
 				if ($scriptPath)
 				{
 					$this->standardScriptIds[] = 'modules.'.$module->getName().'.lib.frontoffice';
@@ -186,13 +185,10 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	 */
 	public function refreshByFiles($theme)
 	{
-		$paths = FileResolver::getInstance()
-				->setPackageName('themes_' . $theme->getCodename())
-				->setDirectory('templates')
-				->getPaths('');	
+		$paths = change_FileResolver::getNewInstance()->getPaths('themes', $theme->getCodename(), 'templates');	
 
 		$pageTemplatesPaths = array();
-		if (is_array($paths) && count($paths))
+		if (count($paths))
 		{
 			foreach ($paths as $path) 
 			{

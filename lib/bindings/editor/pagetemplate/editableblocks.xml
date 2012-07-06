@@ -89,7 +89,7 @@
 					{
 						panel = panel.parentNode;
 					}
-                	return panel 
+					return panel 
 				]]></body>
 			</method>
 			
@@ -110,7 +110,7 @@
 				<parameter name="rowData" />
 				<body><![CDATA[
 					var infos = {type: rowData.ct};
-                	infos.configuration = rowData.cp;  
+					infos.configuration = rowData.cp;  
 					getController().openModalDialog(this, 'blockInfos', infos);	
 				]]></body>
 			</method>	
@@ -260,7 +260,7 @@
 					{
 						panel = panel.parentNode;
 					}
-                	return panel 
+					return panel 
 				]]></body>
 			</method>
 						
@@ -283,26 +283,26 @@
 					this.currentData = rowData;
 					this.currentGrid = grid;
 					var proppanel = this;					
-					var propertyGrid = this.createPropertyGrid(rowData.ct);               
-	                wCore.executeOnPredicate(function(){
-	               		if ("isReady" in propertyGrid && "setBlock" in propertyGrid)
+					var propertyGrid = this.createPropertyGrid(rowData.ct);			   
+					wCore.executeOnPredicate(function(){
+				   		if ("isReady" in propertyGrid && "setBlock" in propertyGrid)
 						{
 							return (propertyGrid.isReady);
 						}
-	                },
-	                function(){
-	                	try
-	                	{
-	                		wCore.debug('openPropertyGrid:executeOnPredicate');
-	                		propertyGrid.setBlock(proppanel);
-                			proppanel.show();
-                			wCore.debug('openPropertyGrid:OK');
-                		}
-                		catch (e)
-                		{
-                			wCore.debug('openPropertyGrid:ERR');
-                		}
-	                });
+					},
+					function(){
+						try
+						{
+							wCore.debug('openPropertyGrid:executeOnPredicate');
+							propertyGrid.setBlock(proppanel);
+							proppanel.show();
+							wCore.debug('openPropertyGrid:OK');
+						}
+						catch (e)
+						{
+							wCore.debug('openPropertyGrid:ERR');
+						}
+					});
 				]]></body>
 			</method>	
 			
@@ -363,14 +363,14 @@
 							return true;
 						}
 					}
-                    return false;
-                ]]></getter>
+					return false;
+				]]></getter>
 			</property>
 			
 			<property name="type">
 				<getter><![CDATA[
-                    return this.currentData.ct;
-                ]]></getter>
+					return this.currentData.ct;
+				]]></getter>
 			</property>
 			
 			<method name="refreshContent">

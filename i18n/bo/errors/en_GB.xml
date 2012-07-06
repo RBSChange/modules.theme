@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.theme.bo.errors" lcid="en_GB">
-  <key id="import-error">Error during installation</key>
-  <key id="import-file">Missing file</key>
-  <key id="import-file-type">bad file type (.zip was expected)</key>
-  <key id="uninstall-error">Error while uninstalling</key>
-  <key id="uninstall-used-theme">This theme cannot be uninstalled, it is still being used by {pageCount} page(s).</key>
+	<key id="import-error">Error during installation</key>
+	<key id="import-file">Missing file</key>
+	<key id="import-file-type">bad file type (.zip was expected)</key>
+	<key id="uninstall-error">Error while uninstalling</key>
+	<key id="uninstall-used-theme">This theme cannot be uninstalled, it is still being used by {pageCount} page(s).</key>
 </i18n>

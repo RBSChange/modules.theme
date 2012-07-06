@@ -89,7 +89,7 @@ class commands_theme_Install extends c_ChangescriptCommand
 		
 		foreach ($themes as $theme)
 		{
-			$path = f_util_FileUtils::buildWebeditPath('themes', $theme, 'install.xml');
+			$path = f_util_FileUtils::buildProjectPath('themes', $theme, 'install.xml');
 			if (is_readable($path))
 			{
 				theme_ModuleService::getInstance()->installTheme($theme);

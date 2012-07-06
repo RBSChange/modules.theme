@@ -112,22 +112,22 @@
 		<xbl:content>
 			<xul:vbox flex="1">
 				<xul:hbox class="dialog-header">
-					<xul:label value="${trans:m.theme.bo.general.Import-title,ucf,attr}" class="dialog-title" />
+					<xul:label value="${trans:m.theme.bo.general.import-title,ucf,attr}" class="dialog-title" />
 					<xul:spacer flex="1" />
 					<xul:vbox pack="center">
-						<xul:toolbarbutton height="16" width="16" image="{IconsBase}/small/delete.png" oncommand="onCancel();" tooltiptexts="${trans:m.uixul.bo.dialog.Cancel,ucf,attr}" />
+						<xul:toolbarbutton height="16" width="16" image="{IconsBase}/small/delete.png" oncommand="onCancel();" tooltiptexts="${trans:m.uixul.bo.dialog.cancel,ucf,attr}" />
 					</xul:vbox>
 				</xul:hbox>
 				<xul:deck anonid="deck">
 					<xul:vbox anonid="form-panel" flex="1">
 						<xul:hbox align="center" pack="start" style="margin-top: 5px">
-							<xul:label value="${trans:m.theme.bo.general.Import-file,lab,ucf,attr}" />
+							<xul:label value="${trans:m.theme.bo.general.import-file,lab,ucf,attr}" />
 							<xul:textbox readonly="true" anonid="file" size="30" />
-							<xul:toolbarbutton anonid="uploadbutton" image="{IconsBase}/small/upload.png" oncommand="openFilePicker()" tooltiptext="${trans:m.uixul.bo.doceditor.Upload-file-from-disk,ucf,attr}" />
+							<xul:toolbarbutton anonid="uploadbutton" image="{IconsBase}/small/upload.png" oncommand="openFilePicker()" tooltiptext="${trans:m.uixul.bo.doceditor.upload-file-from-disk,ucf,attr}" />
 						</xul:hbox>
 						<xul:hbox flex="1" align="start" pack="center" style="margin-top: 20px">
-							<xul:button image="{IconsBase}/small/check.png" disabled="true" anonid="ok" oncommand="onOk()"	label="${trans:m.theme.bo.general.Import-import,ucf,attr}" />
-							<xul:button image="{IconsBase}/small/delete.png" oncommand="onCancel()" label="${trans:m.uixul.bo.dialog.Cancel,ucf,attr}" />
+							<xul:button image="{IconsBase}/small/check.png" disabled="true" anonid="ok" oncommand="onOk()"	label="${trans:m.theme.bo.general.import-import,ucf,attr}" />
+							<xul:button image="{IconsBase}/small/delete.png" oncommand="onCancel()" label="${trans:m.uixul.bo.dialog.cancel,ucf,attr}" />
 						</xul:hbox>
 					</xul:vbox>
 					<xul:vbox anonid="importing-panel" flex="1" style="opacity:0.7">
@@ -137,13 +137,13 @@
 						</xul:hbox>
 						<xul:spacer height="16px" />
 						<xul:hbox pack="center">
-							<xul:description style="font-size:18px" value="${trans:m.theme.bo.general.Importing,ucf,attr}" />
+							<xul:description style="font-size:18px" value="${trans:m.theme.bo.general.importing,ucf,attr}" />
 						</xul:hbox>
 					</xul:vbox>
 					<xul:vbox anonid="message-panel" flex="1">
 						<xul:vbox anonid="messageBox" style="min-height: 90px"/>
 						<xul:hbox>
-							<xul:button image="{IconsBase}/small/delete.png" oncommand="onCancel()" label="${trans:m.uixul.bo.dialog.Cancel,ucf,attr}" />
+							<xul:button image="{IconsBase}/small/delete.png" oncommand="onCancel()" label="${trans:m.uixul.bo.dialog.cancel,ucf,attr}" />
 						</xul:hbox>
 					</xul:vbox>
 				</xul:deck>
