@@ -55,7 +55,7 @@ class theme_ImageService extends f_persistentdocument_DocumentService
 		{
 			foreach ($paths as $path) 
 			{
-				$this->walkThemeDirectory($path, '', $imagesPath);
+				$this->walkThemeDirectory($path . DIRECTORY_SEPARATOR, '', $imagesPath);
 			}
 		}
 		

@@ -1,9 +1,8 @@
 <?php
 /**
- * commands_theme_CompileTheme
- * @package modules.theme.command
+ * @package modules.theme
  */
-class commands_theme_CompileTheme extends c_ChangescriptCommand
+class commands_theme_Compile extends c_ChangescriptCommand
 {
 	/**
 	 * @return string
