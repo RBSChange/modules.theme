@@ -23,7 +23,7 @@ class theme_GetImageAction extends change_Action
 				if (count($pathParts) > 1)
 				{
 					$theme = $pathParts[0];					
-					$imagePath = change_FileResolver::getNewInstance()->getPath('themes', $theme, 'image', array_slice($pathParts, 1));
+					$imagePath = change_FileResolver::getNewInstance()->getPath('themes', $theme, 'image', implode(DIRECTORY_SEPARATOR, array_slice($pathParts, 1)));
 					if ($imagePath != null)
 					{
 						$link = f_util_FileUtils::buildProjectPath('media', 'themes', $path);
