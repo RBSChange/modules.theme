@@ -347,10 +347,11 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param theme_persistentdocument_pagetemplate $document
-	 * @param String[] $propertiesName
+	 * @param string[] $propertiesName
 	 * @param array $datas
+	 * @param integer $parentId
 	 */
-	public function addFormProperties($document, $propertiesName, &$datas)
+	public function addFormProperties($document, $propertiesName, &$datas, $parentId = null)
 	{
 		if (in_array('editableblocksJSON', $propertiesName))
 		{
