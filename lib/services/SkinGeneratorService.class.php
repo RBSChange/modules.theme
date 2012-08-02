@@ -99,7 +99,7 @@ class theme_SkinGeneratorService extends BaseService
 		
 		$lcid = $ls->getLCID('fr');
 		$baseKey = strtolower('t.'.$codeName.'.skin');
-		//Framework::fatal(__METHOD__ . ' ' . var_export($keysInfos, true));
+		
 		$ls->updatePackage($baseKey, array($lcid => $keysInfos), false, true);
 		
 		if ($modified)

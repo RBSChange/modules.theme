@@ -21,15 +21,6 @@ class theme_ModuleService extends ModuleBaseService
 		}
 		return self::$instance;
 	}
-	
-	/**
-	 * @param Integer $documentId
-	 * @return f_persistentdocument_PersistentTreeNode
-	 */
-//	public function getParentNodeForPermissions($documentId)
-//	{
-//		// Define this method to handle permissions on a virtual tree node. Example available in list module.
-//	}
 
 	/**
 	 * @param Integer $documentId
