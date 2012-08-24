@@ -10,4 +10,8 @@
   <key id="log-insert-pagetemplatedeclination">log insert pagetemplatedeclination</key>
   <key id="update-pagetemplatedeclination">update.pagetemplatedeclination {documentlabel}</key>
   <key id="log-update-pagetemplatedeclination">log update pagetemplatedeclination</key>
+  <key id="duplicate-pagetemplatedeclination">duplicate.pagetemplatedeclination {documentlabel}</key>
+  <key id="log-duplicate-pagetemplatedeclination">log duplicate pagetemplatedeclination</key>
+  <key id="delete-pagetemplatedeclination">delete.pagetemplatedeclination {documentlabel}</key>
+  <key id="log-delete-pagetemplatedeclination">log delete pagetemplatedeclination</key>
 </i18n>
