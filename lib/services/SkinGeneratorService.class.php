@@ -121,5 +121,4 @@ class theme_SkinGeneratorService extends change_BaseService
 		}
 		return 	$allGenericSkin;
 	}
-	
 }

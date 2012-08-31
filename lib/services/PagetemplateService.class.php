@@ -329,8 +329,9 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 	 * @param theme_persistentdocument_pagetemplate $document
 	 * @param string[] $propertiesName
 	 * @param array $datas
+	 * @param integer $parentId
 	 */
-	public function addFormProperties($document, $propertiesName, &$datas)
+	public function addFormProperties($document, $propertiesName, &$datas, $parentId = null)
 	{
 		if (in_array('editableblocksJSON', $propertiesName))
 		{
@@ -427,6 +428,9 @@ class theme_PagetemplateService extends f_persistentdocument_DocumentService
 		{
 			throw new BaseException('This template can\'t be deleted, it is used by ' . $count . ' pages.', 'm.theme.bo.errors.uninstall-used-template', array('pageCount' => $count));
 		}
+		
+		// Delete template declinations before.
+		theme_PagetemplatedeclinationService::getInstance()->createQuery()->add(Restrictions::eq('reference', $document))->delete();
 	}
 	
 	/**

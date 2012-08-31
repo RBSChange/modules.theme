@@ -7,4 +7,6 @@
 	<actiondef modulename="theme" actionname="replace.pagetemplate" label="m.theme.bo.useractionlogger.replace-pagetemplate" />
 	<actiondef modulename="theme" actionname="insert.pagetemplatedeclination" label="m.theme.bo.useractionlogger.insert-pagetemplatedeclination" />
 	<actiondef modulename="theme" actionname="update.pagetemplatedeclination" label="m.theme.bo.useractionlogger.update-pagetemplatedeclination" />
+	<actiondef modulename="theme" actionname="duplicate.pagetemplatedeclination" label="m.theme.bo.useractionlogger.duplicate-pagetemplatedeclination" />
+	<actiondef modulename="theme" actionname="delete.pagetemplatedeclination" label="m.theme.bo.useractionlogger.delete-pagetemplatedeclination" />
 </script>

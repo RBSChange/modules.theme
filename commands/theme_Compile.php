@@ -8,7 +8,7 @@ class commands_theme_Compile extends c_ChangescriptCommand
 	 * @return string
 	 * For exemple "<moduleName> <name>"
 	 */
-	function getUsage()
+	public function getUsage()
 	{
 		return "<theme>[ <theme2>][ <theme3>]";
 	}
@@ -17,7 +17,7 @@ class commands_theme_Compile extends c_ChangescriptCommand
 	 * @return string
 	 * For exemple "initialize a document"
 	 */
-	function getDescription()
+	public function getDescription()
 	{
 		return "Compile theme data";
 	}
@@ -33,15 +33,13 @@ class commands_theme_Compile extends c_ChangescriptCommand
 	}
 	
 	/**
-	 * @see c_ChangescriptCommand::getParameters()
-	 *
 	 * @param integer $completeParamCount
 	 * @param string[] $params
 	 * @param unknown_type $options
 	 * @param string $current
 	 * @return string[]
 	 */
-	function getParameters($completeParamCount, $params, $options, $current)
+	public function getParameters($completeParamCount, $params, $options, $current)
 	{	
 		$components = array();		
 		$themes = glob("themes/*/install.xml");
@@ -60,7 +58,7 @@ class commands_theme_Compile extends c_ChangescriptCommand
 	 * @param array<String, String> $options where the option array key is the option name, the potential option value or true
 	 * @see c_ChangescriptCommand::parseArgs($args)
 	 */
-	function _execute($params, $options)
+	public function _execute($params, $options)
 	{
 		$this->message("== Compile theme ==");
 		$this->loadFramework();

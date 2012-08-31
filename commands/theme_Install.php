@@ -8,7 +8,7 @@ class commands_theme_Install extends c_ChangescriptCommand
 	/**
 	 * @return string
 	 */
-	function getUsage()
+	public function getUsage()
 	{
 		return "<theme>";
 	}
@@ -17,7 +17,7 @@ class commands_theme_Install extends c_ChangescriptCommand
 	 * @return string
 	 * For exemple "initialize a document"
 	 */
-	function getDescription()
+	public function getDescription()
 	{
 		return "Install theme";
 	}
@@ -41,7 +41,7 @@ class commands_theme_Install extends c_ChangescriptCommand
 	 * @param string $current
 	 * @return string[]
 	 */
-	function getParameters($completeParamCount, $params, $options, $current)
+	public function getParameters($completeParamCount, $params, $options, $current)
 	{
 		if ($completeParamCount == 0)
 		{
@@ -63,7 +63,7 @@ class commands_theme_Install extends c_ChangescriptCommand
 	 * @param array<String, String> $options where the option array key is the option name, the potential option value or true
 	 * @see c_ChangescriptCommand::parseArgs($args)
 	 */
-	function _execute($params, $options)
+	public function _execute($params, $options)
 	{
 		$this->message("== Install ==");
 
