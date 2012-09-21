@@ -33,7 +33,7 @@ class theme_ImportThemeAction extends change_JSONAction
 				if ($theme)
 				{
 					$msg = LocaleService::getInstance()->trans('m.theme.bo.general.import-succes', array('ucf'),
-						array('codename' => $theme->getCodename(), 'label' => $theme->getLabel()));
+						array('codename' => $theme->getCodename(), 'label' => $theme->getTreeNodeLabel()));
 					return $this->sendJSON(array('theme' => $msg));
 				}
 			}

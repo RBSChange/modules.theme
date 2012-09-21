@@ -19,7 +19,7 @@ class theme_LoadReplacePagetemplateInfosAction extends change_JSONAction
 		foreach ($query->addOrder(Order::asc('theme.label'))->find() as $template)
 		{
 			$item = array(
-				'label' => $template->getLabel(),
+				'label' => $template->getTreeNodeLabel(),
 				'codename' => $template->getCodename(),
 				'id' => $template->getId(),
 				'disabled' => ($template->getId() == $excludeId),
@@ -29,7 +29,7 @@ class theme_LoadReplacePagetemplateInfosAction extends change_JSONAction
 			foreach ($template->getPagetemplatedeclinationArrayInverse() as $declination)
 			{
 				$item = array(
-					'label' => '  ' . $declination->getLabel(),
+					'label' => '  ' . $declination->getTreeNodeLabel(),
 					'codename' => $declination->getCodename(),
 					'id' => $declination->getId(),
 					'disabled' => ($declination->getId() == $excludeId),

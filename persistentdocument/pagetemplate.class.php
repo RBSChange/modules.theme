@@ -7,14 +7,6 @@ class theme_persistentdocument_pagetemplate extends theme_persistentdocument_pag
 	/**
 	 * @return string
 	 */
-	public function getLabel()
-	{
-		return LocaleService::getInstance()->trans(parent::getLabel() /* @TODO CHECK */);
-	}
-	
-	/**
-	 * @return string
-	 */
 	private function getContentFilePath()
 	{
 		$path = f_util_FileUtils::buildProjectPath($this->getProjectpath());

@@ -102,9 +102,9 @@ class theme_PagetemplatedeclinationService extends theme_PagetemplateService
 		
 		// This doc is not in the tree, so we need to update label manually.
 		$reference = $newDocument->getReference();
-		$label = $newDocument->getLabel();
+		$label = $originalDocument->getTreeNodeLabel();
 		$defaultPrefix = LocaleService::getInstance()->trans('m.generic.backoffice.duplicate-prefix', array('ucf')) . ' ';
-		$number = -1;
+		$number = 0;
 		while ($reference)
 		{
 			$prefix = ($number < 0) ? '' : str_replace('{number}', $number == 0 ? '' : ' ('.$number.')', $defaultPrefix);
@@ -119,6 +119,7 @@ class theme_PagetemplatedeclinationService extends theme_PagetemplateService
 			$number += 1;
 		}
 		$maxSize = $newDocument->getPersistentModel()->getProperty('label')->getMaxSize();
+		$maxSize = $maxSize < 1 ? 250 : $maxSize;
 		$newLabel = f_util_StringUtils::shortenString($prefix . $label, $maxSize);
 		$newDocument->setLabel($newLabel);
 	}

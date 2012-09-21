@@ -63,7 +63,7 @@ class theme_PagetemplateScriptDocumentElement extends import_ScriptDocumentEleme
 		
 		if ($theme && !isset($properties['label']) && $codename)
 		{
-			$properties['label'] = '&themes.'.$theme->getCodename().'.templates.'.ucfirst($codename).';';
+			$properties['label'] = 't.'.$theme->getCodename().'.templates.'.ucfirst($codename);
 		}
 		return $properties;
 	}	

@@ -18,10 +18,10 @@ class theme_ReplacePagetemplateAction extends change_JSONAction
 		theme_PagetemplateService::getInstance()->replacePagetemplate($toReplace, $replaceBy);
 		
 		$actionName = 'replacedBy.pagetemplate';
-		$info = array('replacedById' => $replaceBy->getId(), 'replacedByCodename' => $replaceBy->getCodename(), 'replacedByLabel' => $replaceBy->getLabel());
+		$info = array('replacedById' => $replaceBy->getId(), 'replacedByCodename' => $replaceBy->getCodename(), 'replacedByLabel' => $replaceBy->getTreeNodeLabel());
 		UserActionLoggerService::getInstance()->addCurrentUserDocumentEntry($actionName, $toReplace, $info, 'theme');
 		$actionName = 'replace.pagetemplate';
-		$info = array('replacedId' => $toReplace->getId(), 'replacedCodename' => $toReplace->getCodename(), 'replaceLabel' => $toReplace->getLabel());
+		$info = array('replacedId' => $toReplace->getId(), 'replacedCodename' => $toReplace->getCodename(), 'replaceLabel' => $toReplace->getTreeNodeLabel());
 		UserActionLoggerService::getInstance()->addCurrentUserDocumentEntry($actionName, $replaceBy, $info, 'theme');
 
 		return $this->sendJSON($result);
