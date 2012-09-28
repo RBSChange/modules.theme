@@ -1,0 +1,6 @@
+{
+	"name": "rbschange/theme",
+	"description": "RBS Change Theme module",
+	"type": "rbschange-compatibility-module",
+	"license":"AGPL-3.0"
+}
