@@ -3,8 +3,5 @@
   <section labeli18n="modules.uixul.bo.doceditor.fieldsgroup.Title">
     <field name="label"/>
     <field name="description"/>
-    <field name="css" hidedelete="true" hideselector="true" hideorder="true" />
-    <field name="image" hidedelete="true" hideselector="true" hideorder="true" />
-    <field name="javascript" hidedelete="true" hideselector="true" hideorder="true" />
   </section>
 </panel>
