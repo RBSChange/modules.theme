@@ -13,7 +13,7 @@ class theme_GetImageAction extends f_action_BaseAction
         $path = $request->getParameter('path');   
         try 
         {  
-        	if (f_util_StringUtils::isNotEmpty($path))
+        	if (f_util_StringUtils::isNotEmpty($path) && strtolower(substr($path, -4)) != '.php')
         	{
 	        	if (Framework::isInfoEnabled())
 	        	{
@@ -29,12 +29,17 @@ class theme_GetImageAction extends f_action_BaseAction
 	        			->getPath(implode(DIRECTORY_SEPARATOR, array_slice($pathParts, 1)));
 	        		if ($imagePath != null)
 	        		{
-	        			$link = f_util_FileUtils::buildWebeditPath('media', 'themes', $path);
-	        			f_util_FileUtils::mkdir(dirname($link));
-	        			f_util_FileUtils::symlink($imagePath, $link, f_util_FileUtils::OVERRIDE);	     			
-	        			MediaHelper::outputHeader($link, null, false);
-						readfile($link);
-						return View::NONE;
+						// Validate that the image is really in themes/$theme/image.
+						$needle = DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $theme . DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR;
+						if (false !== strpos(realpath($imagePath), $needle))
+						{
+							$link = f_util_FileUtils::buildWebeditPath('media', 'themes', $path);
+							f_util_FileUtils::mkdir(dirname($link));
+							f_util_FileUtils::symlink($imagePath, $link, f_util_FileUtils::OVERRIDE);
+							MediaHelper::outputHeader($link, null, false);
+							readfile($link);
+							return View::NONE;
+						}
 	        		}
 	        	}
         	}
