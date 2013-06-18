@@ -29,9 +29,14 @@ class theme_GetImageAction extends f_action_BaseAction
 						->getPath(implode(DIRECTORY_SEPARATOR, array_slice($pathParts, 1)));
 					if ($imagePath != null)
 					{
-						// Validate that the image is really in themes/$theme/image.
-						$needle = DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $theme . DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR;
-						if (false !== strpos(realpath($imagePath), $needle))
+						// Validate that the image is really in themes/<theme>/image.
+						// The theme is supposed to be really in the themes folder (no symlink) or in a standard
+						// Change repository (<repository>/themes/<theme>/<theme>-<version>).
+						$needle1 = DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . $theme . DIRECTORY_SEPARATOR;
+						$pos1 = strpos(realpath($imagePath), $needle1);
+						$needle2 = DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR;
+						$pos2 = strpos(realpath($imagePath), $needle2);
+						if ($pos1 !== false && $pos2 !== false && $pos1 < $pos2)
 						{
 							$link = f_util_FileUtils::buildWebeditPath('media', 'themes', $path);
 							f_util_FileUtils::mkdir(dirname($link));
