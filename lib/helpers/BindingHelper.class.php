@@ -58,8 +58,7 @@ abstract class theme_BindingHelper
 	{
 		return uixul_lib_BindingObject::getUrl('modules.skin.cEditor#cVariableSections');
 	}
-	
-	
+
 	public static function XSLSetDefaultVarInfo($elementArray)
 	{
 		$element = $elementArray[0];
@@ -79,7 +78,7 @@ abstract class theme_BindingHelper
 			else
 			{
 				$element->setAttribute('type', 'text');
-			}			
+			}
 		}
 		
 		if ($element->getAttribute('type') == 'imagecss')
@@ -106,8 +105,8 @@ abstract class theme_BindingHelper
 				$element->setAttribute('hidehelp', 'true');
 			}
 		}
-		return '';
-	}	
+		return $element;
+	}
 	
 	public static function XSLVariables()
 	{
